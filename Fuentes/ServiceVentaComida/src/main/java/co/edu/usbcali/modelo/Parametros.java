@@ -1,5 +1,5 @@
 package co.edu.usbcali.modelo;
-// Generated 10-mar-2018 20:23:35 by Hibernate Tools 5.2.3.Final
+// Generated 11-mar-2018 9:56:50 by Hibernate Tools 5.2.3.Final
 
 import java.util.Date;
 
@@ -8,7 +8,7 @@ import java.util.Date;
  */
 public class Parametros implements java.io.Serializable {
 
-	private int id;
+	private long id;
 	private String nombre;
 	private String valor;
 	private String usuarioCreacion;
@@ -19,11 +19,11 @@ public class Parametros implements java.io.Serializable {
 	public Parametros() {
 	}
 
-	public Parametros(int id) {
+	public Parametros(long id) {
 		this.id = id;
 	}
 
-	public Parametros(int id, String nombre, String valor, String usuarioCreacion, Date fechaCreacion,
+	public Parametros(long id, String nombre, String valor, String usuarioCreacion, Date fechaCreacion,
 			String usuarioModifica, Date fechaModifica) {
 		this.id = id;
 		this.nombre = nombre;
@@ -34,11 +34,11 @@ public class Parametros implements java.io.Serializable {
 		this.fechaModifica = fechaModifica;
 	}
 
-	public int getId() {
+	public long getId() {
 		return this.id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

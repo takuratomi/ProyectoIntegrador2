@@ -32,7 +32,7 @@ public class UsuarioDAO implements IUsuarioDAO{
 	}
 
 	@Override
-	public Usuario consultarPorId(int usuId) {
+	public Usuario consultarPorId(long usuId) {
 		return (Usuario)sessionFactory.getCurrentSession().get(Usuario.class, usuId);
 	}
 

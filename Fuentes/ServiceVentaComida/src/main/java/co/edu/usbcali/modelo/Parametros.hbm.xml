@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Generated 10-mar-2018 20:23:35 by Hibernate Tools 5.2.3.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 11-mar-2018 9:56:50 by Hibernate Tools 5.2.3.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
     <class dynamic-insert="false" dynamic-update="false" mutable="true" name="co.edu.usbcali.modelo.Parametros" optimistic-lock="version" polymorphism="implicit" schema="public" select-before-update="false" table="parametros">
-        <id name="id" type="int">
-            <column name="id"/>
+        <id name="id" type="long">
+            <column name="id" precision="10" scale="0"/>
             <generator class="assigned"/>
         </id>
         <property generated="never" lazy="false" name="nombre" optimistic-lock="true" type="string" unique="false">

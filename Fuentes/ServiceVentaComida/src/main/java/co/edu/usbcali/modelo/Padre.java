@@ -1,5 +1,5 @@
 package co.edu.usbcali.modelo;
-// Generated 10-mar-2018 20:23:35 by Hibernate Tools 5.2.3.Final
+// Generated 11-mar-2018 9:56:50 by Hibernate Tools 5.2.3.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -10,7 +10,7 @@ import java.util.Set;
  */
 public class Padre implements java.io.Serializable {
 
-	private int id;
+	private long id;
 	private Usuario usuario;
 	private String telefono;
 	private String direccion;
@@ -24,13 +24,13 @@ public class Padre implements java.io.Serializable {
 	public Padre() {
 	}
 
-	public Padre(int id, Usuario usuario) {
+	public Padre(long id, Usuario usuario) {
 		this.id = id;
 		this.usuario = usuario;
 	}
 
-	public Padre(int id, Usuario usuario, String telefono, String direccion, String usuarioCreacion, Date fechaCreacion,
-			String usuarioModifica, Date fechaModifica, Set<Hijo> hijos, Set<Pedido> pedidos) {
+	public Padre(long id, Usuario usuario, String telefono, String direccion, String usuarioCreacion,
+			Date fechaCreacion, String usuarioModifica, Date fechaModifica, Set<Hijo> hijos, Set<Pedido> pedidos) {
 		this.id = id;
 		this.usuario = usuario;
 		this.telefono = telefono;
@@ -43,11 +43,11 @@ public class Padre implements java.io.Serializable {
 		this.pedidos = pedidos;
 	}
 
-	public int getId() {
+	public long getId() {
 		return this.id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

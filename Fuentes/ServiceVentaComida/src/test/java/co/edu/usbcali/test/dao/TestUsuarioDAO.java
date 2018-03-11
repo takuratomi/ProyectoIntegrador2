@@ -29,7 +29,7 @@ public class TestUsuarioDAO {
 	@Autowired
 	private IUsuarioDAO usuarioDAO;
 
-	int id = 2;
+	Long id = 2L;
 	
 	@Test
 	@Transactional(readOnly=false,propagation=Propagation.REQUIRED,rollbackFor=Exception.class)
@@ -40,7 +40,21 @@ public class TestUsuarioDAO {
 		
 		usuario = usuarioDAO.consultarPorId(id);
 		
-		assertNotNull("El usuario no existe", usuario);
+		assertNull("El usuario existe", usuario);
+		
+		// creacion del usuario
+		usuario = new Usuario();
+		usuario.setId(id);
+		usuario.setPrimerNombre("Camilo");
+		usuario.setSegundoNombre("fernando");
+		usuario.setPrimerApellido("Duarte");
+		usuario.setSegundoApellido("Duarte");
+		usuario.setTipoIdentificacion(1);
+		usuario.setNumIdentificacion(123422L);
+		usuario.setRol(2);
+		
+		usuarioDAO.crear(usuario);
+		
 		
 		log.info("id "+usuario.getId());
 		log.info("nombre1 "+usuario.getPrimerNombre());
@@ -71,7 +85,7 @@ public class TestUsuarioDAO {
 		usuario.setPrimerApellido("Duarte");
 		usuario.setSegundoApellido("Duarte");
 		usuario.setTipoIdentificacion(1);
-		usuario.setNumIdentificacion(new Integer("123445"));
+		usuario.setNumIdentificacion(3422L);
 		usuario.setRol(2);
 		
 		usuarioDAO.crear(usuario);
@@ -90,7 +104,7 @@ public class TestUsuarioDAO {
 		
 		usuario.setSegundoApellido("Gutierrez");
 		usuario.setTipoIdentificacion(1);
-		usuario.setNumIdentificacion(new Integer("09010123445"));
+		usuario.setNumIdentificacion(22L);
 		usuario.setRol(2);
 		
 		usuarioDAO.modificar(usuario);

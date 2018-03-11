@@ -1,5 +1,5 @@
 package co.edu.usbcali.modelo;
-// Generated 10-mar-2018 20:23:35 by Hibernate Tools 5.2.3.Final
+// Generated 11-mar-2018 9:56:50 by Hibernate Tools 5.2.3.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -10,58 +10,64 @@ import java.util.Set;
  */
 public class MenuSemana implements java.io.Serializable {
 
-	private int id;
-	private Bebida bebida;
+	private long id;
+	private Bebida sopa;
 	private Principio principio;
 	private Proteina proteina;
-	private Sopa sopa;
 	private String dia;
 	private Integer idBebida;
 	private String estado;
 	private Date fechaInicio;
 	private Date fechaFin;
+	private String usuarioCreacion;
+	private Date fechaCreacion;
+	private String usuarioModifica;
+	private Date fechaModifica;
 	private Set<Almuerzo> almuerzos = new HashSet<Almuerzo>(0);
 
 	public MenuSemana() {
 	}
 
-	public MenuSemana(int id, Bebida bebida, Principio principio, Proteina proteina, Sopa sopa) {
+	public MenuSemana(long id, Bebida sopa, Principio principio, Proteina proteina) {
 		this.id = id;
-		this.bebida = bebida;
+		this.sopa = sopa;
 		this.principio = principio;
 		this.proteina = proteina;
-		this.sopa = sopa;
 	}
 
-	public MenuSemana(int id, Bebida bebida, Principio principio, Proteina proteina, Sopa sopa, String dia,
-			Integer idBebida, String estado, Date fechaInicio, Date fechaFin, Set<Almuerzo> almuerzos) {
+	public MenuSemana(long id, Bebida sopa, Principio principio, Proteina proteina, String dia, Integer idBebida,
+			String estado, Date fechaInicio, Date fechaFin, String usuarioCreacion, Date fechaCreacion,
+			String usuarioModifica, Date fechaModifica, Set<Almuerzo> almuerzos) {
 		this.id = id;
-		this.bebida = bebida;
+		this.sopa = sopa;
 		this.principio = principio;
 		this.proteina = proteina;
-		this.sopa = sopa;
 		this.dia = dia;
 		this.idBebida = idBebida;
 		this.estado = estado;
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
+		this.usuarioCreacion = usuarioCreacion;
+		this.fechaCreacion = fechaCreacion;
+		this.usuarioModifica = usuarioModifica;
+		this.fechaModifica = fechaModifica;
 		this.almuerzos = almuerzos;
 	}
 
-	public int getId() {
+	public long getId() {
 		return this.id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
-	public Bebida getBebida() {
-		return this.bebida;
+	public Bebida getSopa() {
+		return this.sopa;
 	}
 
-	public void setBebida(Bebida bebida) {
-		this.bebida = bebida;
+	public void setSopa(Bebida sopa) {
+		this.sopa = sopa;
 	}
 
 	public Principio getPrincipio() {
@@ -78,14 +84,6 @@ public class MenuSemana implements java.io.Serializable {
 
 	public void setProteina(Proteina proteina) {
 		this.proteina = proteina;
-	}
-
-	public Sopa getSopa() {
-		return this.sopa;
-	}
-
-	public void setSopa(Sopa sopa) {
-		this.sopa = sopa;
 	}
 
 	public String getDia() {
@@ -126,6 +124,38 @@ public class MenuSemana implements java.io.Serializable {
 
 	public void setFechaFin(Date fechaFin) {
 		this.fechaFin = fechaFin;
+	}
+
+	public String getUsuarioCreacion() {
+		return this.usuarioCreacion;
+	}
+
+	public void setUsuarioCreacion(String usuarioCreacion) {
+		this.usuarioCreacion = usuarioCreacion;
+	}
+
+	public Date getFechaCreacion() {
+		return this.fechaCreacion;
+	}
+
+	public void setFechaCreacion(Date fechaCreacion) {
+		this.fechaCreacion = fechaCreacion;
+	}
+
+	public String getUsuarioModifica() {
+		return this.usuarioModifica;
+	}
+
+	public void setUsuarioModifica(String usuarioModifica) {
+		this.usuarioModifica = usuarioModifica;
+	}
+
+	public Date getFechaModifica() {
+		return this.fechaModifica;
+	}
+
+	public void setFechaModifica(Date fechaModifica) {
+		this.fechaModifica = fechaModifica;
 	}
 
 	public Set<Almuerzo> getAlmuerzos() {

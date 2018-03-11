@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Generated 10-mar-2018 20:23:35 by Hibernate Tools 5.2.3.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 11-mar-2018 9:56:50 by Hibernate Tools 5.2.3.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
     <class dynamic-insert="false" dynamic-update="false" mutable="true" name="co.edu.usbcali.modelo.Bebida" optimistic-lock="version" polymorphism="implicit" schema="public" select-before-update="false" table="bebida">
         <comment>identificador de la bebida</comment>
-        <id name="id" type="int">
-            <column name="id"/>
+        <id name="id" type="big_decimal">
+            <column name="id" scale="0"/>
             <generator class="assigned"/>
         </id>
         <property generated="never" lazy="false" name="nombre" optimistic-lock="true" type="string" unique="false">
@@ -39,7 +39,7 @@
         </property>
         <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="menuSemanas" optimistic-lock="true" sort="unsorted" table="menu_semana">
             <key on-delete="noaction">
-                <column name="id_sopa" not-null="true">
+                <column name="id_sopa" not-null="true" scale="0">
                     <comment>identificador de sopa</comment>
                 </column>
             </key>

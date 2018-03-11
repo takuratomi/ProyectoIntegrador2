@@ -1,5 +1,5 @@
 package co.edu.usbcali.modelo;
-// Generated 10-mar-2018 20:23:35 by Hibernate Tools 5.2.3.Final
+// Generated 11-mar-2018 9:56:50 by Hibernate Tools 5.2.3.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -10,12 +10,12 @@ import java.util.Set;
  */
 public class Usuario implements java.io.Serializable {
 
-	private int id;
+	private long id;
 	private String primerNombre;
 	private String segundoNombre;
 	private String primerApellido;
 	private String segundoApellido;
-	private Integer numIdentificacion;
+	private Long numIdentificacion;
 	private Integer tipoIdentificacion;
 	private Integer rol;
 	private String usuarioCreacion;
@@ -28,13 +28,13 @@ public class Usuario implements java.io.Serializable {
 	public Usuario() {
 	}
 
-	public Usuario(int id) {
+	public Usuario(long id) {
 		this.id = id;
 	}
 
-	public Usuario(int id, String primerNombre, String segundoNombre, String primerApellido, String segundoApellido,
-			Integer numIdentificacion, Integer tipoIdentificacion, Integer rol, String usuarioCreacion,
-			Date fechaCreacion, String usuarioModifica, Date fechaModifica, Set<Hijo> hijos, Set<Padre> padres) {
+	public Usuario(long id, String primerNombre, String segundoNombre, String primerApellido, String segundoApellido,
+			Long numIdentificacion, Integer tipoIdentificacion, Integer rol, String usuarioCreacion, Date fechaCreacion,
+			String usuarioModifica, Date fechaModifica, Set<Hijo> hijos, Set<Padre> padres) {
 		this.id = id;
 		this.primerNombre = primerNombre;
 		this.segundoNombre = segundoNombre;
@@ -51,11 +51,11 @@ public class Usuario implements java.io.Serializable {
 		this.padres = padres;
 	}
 
-	public int getId() {
+	public long getId() {
 		return this.id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -91,11 +91,11 @@ public class Usuario implements java.io.Serializable {
 		this.segundoApellido = segundoApellido;
 	}
 
-	public Integer getNumIdentificacion() {
+	public Long getNumIdentificacion() {
 		return this.numIdentificacion;
 	}
 
-	public void setNumIdentificacion(Integer numIdentificacion) {
+	public void setNumIdentificacion(Long numIdentificacion) {
 		this.numIdentificacion = numIdentificacion;
 	}
 

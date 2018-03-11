@@ -1,6 +1,7 @@
 package co.edu.usbcali.modelo;
-// Generated 10-mar-2018 20:23:35 by Hibernate Tools 5.2.3.Final
+// Generated 11-mar-2018 9:56:50 by Hibernate Tools 5.2.3.Final
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -10,7 +11,7 @@ import java.util.Set;
  */
 public class Sopa implements java.io.Serializable {
 
-	private int idsopa;
+	private BigDecimal id;
 	private String nombre;
 	private byte[] descripcion;
 	private String usuarioCreacion;
@@ -22,13 +23,13 @@ public class Sopa implements java.io.Serializable {
 	public Sopa() {
 	}
 
-	public Sopa(int idsopa) {
-		this.idsopa = idsopa;
+	public Sopa(BigDecimal id) {
+		this.id = id;
 	}
 
-	public Sopa(int idsopa, String nombre, byte[] descripcion, String usuarioCreacion, Date fechaCreacion,
+	public Sopa(BigDecimal id, String nombre, byte[] descripcion, String usuarioCreacion, Date fechaCreacion,
 			String usuarioModifica, Date fechaModifica, Set<MenuSemana> menuSemanas) {
-		this.idsopa = idsopa;
+		this.id = id;
 		this.nombre = nombre;
 		this.descripcion = descripcion;
 		this.usuarioCreacion = usuarioCreacion;
@@ -38,12 +39,12 @@ public class Sopa implements java.io.Serializable {
 		this.menuSemanas = menuSemanas;
 	}
 
-	public int getIdsopa() {
-		return this.idsopa;
+	public BigDecimal getId() {
+		return this.id;
 	}
 
-	public void setIdsopa(int idsopa) {
-		this.idsopa = idsopa;
+	public void setId(BigDecimal id) {
+		this.id = id;
 	}
 
 	public String getNombre() {

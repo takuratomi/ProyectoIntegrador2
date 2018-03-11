@@ -1,5 +1,5 @@
 package co.edu.usbcali.modelo;
-// Generated 10-mar-2018 20:23:35 by Hibernate Tools 5.2.3.Final
+// Generated 11-mar-2018 9:56:50 by Hibernate Tools 5.2.3.Final
 
 import java.util.Date;
 import java.util.HashSet;
@@ -10,12 +10,11 @@ import java.util.Set;
  */
 public class Hijo implements java.io.Serializable {
 
-	private int id;
+	private long id;
 	private Padre padre;
 	private Usuario usuario;
 	private Date fechaNacimiento;
 	private String curso;
-	private int usuarioid;
 	private String usuarioCreacion;
 	private Date fechaCreacion;
 	private String usuarioModifica;
@@ -25,21 +24,18 @@ public class Hijo implements java.io.Serializable {
 	public Hijo() {
 	}
 
-	public Hijo(int id, Usuario usuario, int usuarioid) {
+	public Hijo(long id, Usuario usuario) {
 		this.id = id;
 		this.usuario = usuario;
-		this.usuarioid = usuarioid;
 	}
 
-	public Hijo(int id, Padre padre, Usuario usuario, Date fechaNacimiento, String curso, int usuarioid,
-			String usuarioCreacion, Date fechaCreacion, String usuarioModifica, Date fechaModifica,
-			Set<Almuerzo> almuerzos) {
+	public Hijo(long id, Padre padre, Usuario usuario, Date fechaNacimiento, String curso, String usuarioCreacion,
+			Date fechaCreacion, String usuarioModifica, Date fechaModifica, Set<Almuerzo> almuerzos) {
 		this.id = id;
 		this.padre = padre;
 		this.usuario = usuario;
 		this.fechaNacimiento = fechaNacimiento;
 		this.curso = curso;
-		this.usuarioid = usuarioid;
 		this.usuarioCreacion = usuarioCreacion;
 		this.fechaCreacion = fechaCreacion;
 		this.usuarioModifica = usuarioModifica;
@@ -47,11 +43,11 @@ public class Hijo implements java.io.Serializable {
 		this.almuerzos = almuerzos;
 	}
 
-	public int getId() {
+	public long getId() {
 		return this.id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -85,14 +81,6 @@ public class Hijo implements java.io.Serializable {
 
 	public void setCurso(String curso) {
 		this.curso = curso;
-	}
-
-	public int getUsuarioid() {
-		return this.usuarioid;
-	}
-
-	public void setUsuarioid(int usuarioid) {
-		this.usuarioid = usuarioid;
 	}
 
 	public String getUsuarioCreacion() {

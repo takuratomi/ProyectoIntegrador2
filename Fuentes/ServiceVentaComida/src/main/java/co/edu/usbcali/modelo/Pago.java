@@ -1,5 +1,5 @@
 package co.edu.usbcali.modelo;
-// Generated 10-mar-2018 20:23:35 by Hibernate Tools 5.2.3.Final
+// Generated 11-mar-2018 9:56:50 by Hibernate Tools 5.2.3.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -13,7 +13,7 @@ public class Pago implements java.io.Serializable {
 
 	private BigDecimal id;
 	private String detalle;
-	private Integer valor;
+	private Long valor;
 	private Integer estado;
 	private String usuarioCreacion;
 	private Date fechaCreacion;
@@ -28,8 +28,8 @@ public class Pago implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public Pago(BigDecimal id, String detalle, Integer valor, Integer estado, String usuarioCreacion,
-			Date fechaCreacion, String usuarioModifica, Date fechaModifica, Set<Pedido> pedidos) {
+	public Pago(BigDecimal id, String detalle, Long valor, Integer estado, String usuarioCreacion, Date fechaCreacion,
+			String usuarioModifica, Date fechaModifica, Set<Pedido> pedidos) {
 		this.id = id;
 		this.detalle = detalle;
 		this.valor = valor;
@@ -57,11 +57,11 @@ public class Pago implements java.io.Serializable {
 		this.detalle = detalle;
 	}
 
-	public Integer getValor() {
+	public Long getValor() {
 		return this.valor;
 	}
 
-	public void setValor(Integer valor) {
+	public void setValor(Long valor) {
 		this.valor = valor;
 	}
 

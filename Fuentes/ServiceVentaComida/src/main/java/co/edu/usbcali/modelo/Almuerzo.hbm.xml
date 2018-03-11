@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Generated 10-mar-2018 20:23:35 by Hibernate Tools 5.2.3.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 11-mar-2018 9:56:50 by Hibernate Tools 5.2.3.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
     <class dynamic-insert="false" dynamic-update="false" mutable="true" name="co.edu.usbcali.modelo.Almuerzo" optimistic-lock="version" polymorphism="implicit" schema="public" select-before-update="false" table="almuerzo">
         <id name="id" type="big_decimal">
@@ -7,12 +7,12 @@
             <generator class="assigned"/>
         </id>
         <many-to-one class="co.edu.usbcali.modelo.Hijo" embed-xml="true" fetch="select" insert="true" name="hijo" not-found="exception" optimistic-lock="true" unique="false" update="true">
-            <column name="id_hijo" not-null="true">
+            <column name="id_hijo" not-null="true" precision="10" scale="0">
                 <comment>identificador del hijo</comment>
             </column>
         </many-to-one>
         <many-to-one class="co.edu.usbcali.modelo.MenuSemana" embed-xml="true" fetch="select" insert="true" name="menuSemana" not-found="exception" optimistic-lock="true" unique="false" update="true">
-            <column name="id_menusemana" not-null="true">
+            <column name="id_menusemana" not-null="true" precision="10" scale="0">
                 <comment>identificador unico del menu de la semana</comment>
             </column>
         </many-to-one>

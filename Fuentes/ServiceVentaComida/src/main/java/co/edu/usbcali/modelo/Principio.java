@@ -1,6 +1,7 @@
 package co.edu.usbcali.modelo;
-// Generated 10-mar-2018 20:23:35 by Hibernate Tools 5.2.3.Final
+// Generated 11-mar-2018 9:56:50 by Hibernate Tools 5.2.3.Final
 
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -10,7 +11,7 @@ import java.util.Set;
  */
 public class Principio implements java.io.Serializable {
 
-	private int id;
+	private BigDecimal id;
 	private String nombre;
 	private String descripcion;
 	private String usuarioCreacion;
@@ -22,11 +23,11 @@ public class Principio implements java.io.Serializable {
 	public Principio() {
 	}
 
-	public Principio(int id) {
+	public Principio(BigDecimal id) {
 		this.id = id;
 	}
 
-	public Principio(int id, String nombre, String descripcion, String usuarioCreacion, Date fechaCreacion,
+	public Principio(BigDecimal id, String nombre, String descripcion, String usuarioCreacion, Date fechaCreacion,
 			String usuarioModifica, Date fechaModifica, Set<MenuSemana> menuSemanas) {
 		this.id = id;
 		this.nombre = nombre;
@@ -38,11 +39,11 @@ public class Principio implements java.io.Serializable {
 		this.menuSemanas = menuSemanas;
 	}
 
-	public int getId() {
+	public BigDecimal getId() {
 		return this.id;
 	}
 
-	public void setId(int id) {
+	public void setId(BigDecimal id) {
 		this.id = id;
 	}
 

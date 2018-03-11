@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Generated 10-mar-2018 20:23:35 by Hibernate Tools 5.2.3.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 11-mar-2018 9:56:50 by Hibernate Tools 5.2.3.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <hibernate-mapping auto-import="true" default-access="property" default-cascade="none" default-lazy="true">
     <class dynamic-insert="false" dynamic-update="false" mutable="true" name="co.edu.usbcali.modelo.Hijo" optimistic-lock="version" polymorphism="implicit" schema="public" select-before-update="false" table="hijo">
-        <id name="id" type="int">
-            <column name="id"/>
+        <id name="id" type="long">
+            <column name="id" precision="10" scale="0"/>
             <generator class="assigned"/>
         </id>
         <many-to-one class="co.edu.usbcali.modelo.Padre" embed-xml="true" fetch="select" insert="true" name="padre" not-found="exception" optimistic-lock="true" unique="false" update="true">
-            <column name="id_padre">
+            <column name="id_padre" precision="10" scale="0">
                 <comment>Identificador del padre</comment>
             </column>
         </many-to-one>
         <many-to-one class="co.edu.usbcali.modelo.Usuario" embed-xml="true" fetch="select" insert="true" name="usuario" not-found="exception" optimistic-lock="true" unique="false" update="true">
-            <column name="id_usuario" not-null="true">
+            <column name="id_usuario" not-null="true" precision="10" scale="0">
                 <comment>identificador de usuario</comment>
             </column>
         </many-to-one>
@@ -25,9 +25,6 @@
             <column length="300" name="curso">
                 <comment>curso en el que se encuentra el niño</comment>
             </column>
-        </property>
-        <property generated="never" lazy="false" name="usuarioid" optimistic-lock="true" type="int" unique="false">
-            <column name="usuarioid" not-null="true"/>
         </property>
         <property generated="never" lazy="false" name="usuarioCreacion" optimistic-lock="true" type="string" unique="false">
             <column length="100" name="usuario_creacion">
@@ -51,7 +48,7 @@
         </property>
         <set embed-xml="true" fetch="select" inverse="true" lazy="true" mutable="true" name="almuerzos" optimistic-lock="true" sort="unsorted" table="almuerzo">
             <key on-delete="noaction">
-                <column name="id_hijo" not-null="true">
+                <column name="id_hijo" not-null="true" precision="10" scale="0">
                     <comment>identificador del hijo</comment>
                 </column>
             </key>

@@ -9,7 +9,7 @@ public interface IUsuarioDAO {
 	public void crear(Usuario entity);
 	public void modificar(Usuario entity);
 	public void borrar(Usuario entity);
-	public Usuario consultarPorId(int usuId);
+	public Usuario consultarPorId(long usuId);
 	public Usuario consultarPorIdentificacion(Integer numIdentificacion, Integer tipoIdentificacion);
 	public List<Usuario> consultarTodos();
 	

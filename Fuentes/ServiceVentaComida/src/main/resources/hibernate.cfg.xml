@@ -24,6 +24,7 @@
 		<mapping resource="co/edu/usbcali/modelo/Padre.hbm.xml" />
 		<mapping resource="co/edu/usbcali/modelo/Almuerzo.hbm.xml" />
 		<mapping resource="co/edu/usbcali/modelo/Pago.hbm.xml" />
-
+		
+		<mapping resource="co/edu/usbcali/modelo/Consultas.hbm.xml" />
 	</session-factory>
 </hibernate-configuration>
