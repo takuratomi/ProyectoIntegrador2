@@ -32,13 +32,13 @@ public class PagoDAO implements IPagoDAO{
 	}
 
 	@Override
-	public Almuerzo consultarPorId(int usuId) {
+	public Pago consultarPorId(int usuId) {
 		return (Pago)sessionFactory.getCurrentSession().get(Pago.class, usuId);
 	}
 
 	@Override
 	public Pago consultarPorIdentificacion(Integer idPago) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
