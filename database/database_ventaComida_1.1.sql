@@ -206,7 +206,7 @@ comment on column proteina.fecha_modifica is 'fecha en que se modifica el regist
 create table sopa (
   id               numeric(19, 0) not null, 
   nombre           varchar(200), 
-  descripcion      bytea, 
+  descripcion      varchar(400), 
   usuario_creacion varchar(100), 
   fecha_creacion   date, 
   usuario_modifica varchar(100), 
@@ -264,7 +264,8 @@ alter table pedido add constraint realiza foreign key (id_padre) references padr
 alter table hijo add constraint tiene foreign key (id_padre) references padre (id);
 
 
--- DROP
+
+--Drop
 /*
 alter table hijo drop constraint FKhijo129434;
 alter table almuerzo drop constraint FKalmuerzo524568;
@@ -292,4 +293,3 @@ drop table if exists sopa cascade;
 drop table if exists usuario cascade;
 
 */
-
