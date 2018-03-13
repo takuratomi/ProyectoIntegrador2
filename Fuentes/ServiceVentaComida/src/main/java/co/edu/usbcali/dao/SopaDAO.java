@@ -1,5 +1,6 @@
 package co.edu.usbcali.dao;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
@@ -32,8 +33,8 @@ public class SopaDAO implements ISopaDAO{
 	}
 
 	@Override
-	public Sopa consultarPorId(int usuId) {
-		return (Sopa)sessionFactory.getCurrentSession().get(Sopa.class, usuId);
+	public Sopa consultarPorId(BigDecimal idSopa) {
+		return (Sopa)sessionFactory.getCurrentSession().get(Sopa.class, idSopa);
 	}
 
 	@Override

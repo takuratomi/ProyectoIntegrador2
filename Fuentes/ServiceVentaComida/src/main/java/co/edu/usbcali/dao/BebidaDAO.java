@@ -1,5 +1,6 @@
 package co.edu.usbcali.dao;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
@@ -32,8 +33,8 @@ public class BebidaDAO implements IBebidaDAO{
 	}
 
 	@Override
-	public Bebida consultarPorId(int usuId) {
-		return (Bebida)sessionFactory.getCurrentSession().get(Bebida.class, usuId);
+	public Bebida consultarPorId(BigDecimal idBebida) {
+		return (Bebida)sessionFactory.getCurrentSession().get(Bebida.class, idBebida);
 	}
 
 	@Override

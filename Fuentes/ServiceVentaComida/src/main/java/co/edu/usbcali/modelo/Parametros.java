@@ -1,5 +1,5 @@
 package co.edu.usbcali.modelo;
-// Generated 11-mar-2018 9:56:50 by Hibernate Tools 5.2.3.Final
+// Generated 12-mar-2018 23:23:38 by Hibernate Tools 5.2.3.Final
 
 import java.util.Date;
 

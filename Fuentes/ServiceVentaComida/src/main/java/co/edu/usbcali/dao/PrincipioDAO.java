@@ -1,5 +1,6 @@
 package co.edu.usbcali.dao;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
@@ -32,8 +33,8 @@ public class PrincipioDAO implements IPrincipioDAO{
 	}
 
 	@Override
-	public Principio consultarPorId(int usuId) {
-		return (Principio)sessionFactory.getCurrentSession().get(Principio.class, usuId);
+	public Principio consultarPorId(BigDecimal idPrincipio) {
+		return (Principio)sessionFactory.getCurrentSession().get(Principio.class, idPrincipio);
 	}
 
 	@Override

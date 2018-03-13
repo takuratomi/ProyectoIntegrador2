@@ -1,5 +1,6 @@
 package co.edu.usbcali.dao;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.hibernate.SessionFactory;
@@ -32,8 +33,8 @@ public class ProteinaDAO implements IProteinaDAO{
 	}
 
 	@Override
-	public Proteina consultarPorId(int usuId) {
-		return (Proteina)sessionFactory.getCurrentSession().get(Proteina.class, usuId);
+	public Proteina consultarPorId(BigDecimal idProteina) {
+		return (Proteina)sessionFactory.getCurrentSession().get(Proteina.class, idProteina);
 	}
 
 	@Override

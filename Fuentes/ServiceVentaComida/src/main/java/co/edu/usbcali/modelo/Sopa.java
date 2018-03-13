@@ -1,5 +1,5 @@
 package co.edu.usbcali.modelo;
-// Generated 11-mar-2018 9:56:50 by Hibernate Tools 5.2.3.Final
+// Generated 12-mar-2018 23:23:38 by Hibernate Tools 5.2.3.Final
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -13,7 +13,7 @@ public class Sopa implements java.io.Serializable {
 
 	private BigDecimal id;
 	private String nombre;
-	private byte[] descripcion;
+	private String descripcion;
 	private String usuarioCreacion;
 	private Date fechaCreacion;
 	private String usuarioModifica;
@@ -27,7 +27,7 @@ public class Sopa implements java.io.Serializable {
 		this.id = id;
 	}
 
-	public Sopa(BigDecimal id, String nombre, byte[] descripcion, String usuarioCreacion, Date fechaCreacion,
+	public Sopa(BigDecimal id, String nombre, String descripcion, String usuarioCreacion, Date fechaCreacion,
 			String usuarioModifica, Date fechaModifica, Set<MenuSemana> menuSemanas) {
 		this.id = id;
 		this.nombre = nombre;
@@ -55,11 +55,11 @@ public class Sopa implements java.io.Serializable {
 		this.nombre = nombre;
 	}
 
-	public byte[] getDescripcion() {
+	public String getDescripcion() {
 		return this.descripcion;
 	}
 
-	public void setDescripcion(byte[] descripcion) {
+	public void setDescripcion(String descripcion) {
 		this.descripcion = descripcion;
 	}
 
