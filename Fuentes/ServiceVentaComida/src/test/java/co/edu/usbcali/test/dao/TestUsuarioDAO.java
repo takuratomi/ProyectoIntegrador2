@@ -120,14 +120,14 @@ public class TestUsuarioDAO {
 		assertNotNull("El usuario no existe", usuario);				
 		usuarioDAO.borrar(usuario);
 	}
-	
+	/*
 	@Test
 	@Transactional(readOnly=false,propagation=Propagation.REQUIRED,rollbackFor=Exception.class)
 	@Rollback(false)
 	public void etest() {
 				
 	}
-	
+	*/
 	@Test
 	@Transactional(readOnly=false,propagation=Propagation.REQUIRED,rollbackFor=Exception.class)
 	@Rollback(false)
