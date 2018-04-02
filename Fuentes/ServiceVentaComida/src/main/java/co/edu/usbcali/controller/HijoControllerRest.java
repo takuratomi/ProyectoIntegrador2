@@ -28,7 +28,7 @@ public class HijoControllerRest {
 	private IDelegadoDeNegocio delegadoDeNegocio;
 	
 	@RequestMapping(value="/consultarHijoPorId/{id}",method=RequestMethod.GET)
-	public HijoDTO consultarBebidaPorId(@PathVariable("hijoId") Long hijoId) {
+	public HijoDTO consultarHijoPorId(@PathVariable("hijoId") Long hijoId) {
 		
 		log.info("Ingreso a consultar hijo por hijoId");
 		
