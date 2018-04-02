@@ -1,5 +1,6 @@
 package co.edu.usbcali.logica;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class PrincipioLogica implements IPrincipioLogica {
 			if(entity==null){
 				throw new Exception("El principio no puede ser nulo");
 			}	
-			if(entity.getId()==0) {
+			if(entity.getId()==BigDecimal.ZERO) {
 				throw new Exception("El id del principio no puede ser 0");
 			}
 			if(entity.getNombre()==null || entity.getNombre().trim().equals("")==true) {
@@ -56,7 +57,7 @@ public class PrincipioLogica implements IPrincipioLogica {
 			if(entity==null){
 				throw new Exception("El principio no puede ser nulo");
 			}	
-			if(entity.getId()==0) {
+			if(entity.getId()==BigDecimal.ZERO) {
 				throw new Exception("El id del principio no puede ser 0");
 			}
 			if(entity.getNombre()==null || entity.getNombre().trim().equals("")==true) {
@@ -83,7 +84,7 @@ public class PrincipioLogica implements IPrincipioLogica {
 			if(entity==null){
 				throw new Exception("El principio no puede ser nula");
 			}	
-			if(entity.getId()==0) {
+			if(entity.getId()==BigDecimal.ZERO) {
 				throw new Exception("El id del principio no puede ser 0");
 			}
 			
@@ -98,7 +99,7 @@ public class PrincipioLogica implements IPrincipioLogica {
 
 		@Override
 		@Transactional(readOnly=true)
-		public Principio consultarPorId(int principioId) {
+		public Principio consultarPorId(BigDecimal principioId) {
 			return principiosDAO.consultarPorId(principioId);
 		}
 

@@ -10,7 +10,7 @@ public interface IAlmuerzoLogica {
 	public void crear(Almuerzo entity) throws Exception;
 	public void modificar(Almuerzo entity) throws Exception;
 	public void borrar(Almuerzo entity) throws Exception;
-	public Almuerzo consultarPorId(BigDecimal almuerzoId);
-	public List<Almuerzo> consultarTodos();
+	public Almuerzo consultarPorId(BigDecimal almuerzoId) throws Exception;
+	public List<Almuerzo> consultarTodos() throws Exception;
 	
 }

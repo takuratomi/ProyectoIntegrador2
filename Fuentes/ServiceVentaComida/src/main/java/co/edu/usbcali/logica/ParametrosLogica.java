@@ -97,7 +97,7 @@ public class ParametrosLogica implements IParametrosLogica {
 
 		@Override
 		@Transactional(readOnly=true)
-		public Parametros consultarPorId(int parametrosId) {
+		public Parametros consultarPorId(Long parametrosId) {
 			return parametrosDAO.consultarPorId(parametrosId);
 		}
 

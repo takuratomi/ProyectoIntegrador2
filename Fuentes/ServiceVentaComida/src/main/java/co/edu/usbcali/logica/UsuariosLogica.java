@@ -109,7 +109,7 @@ public class UsuariosLogica implements IUsuariosLogica {
 
 		@Override
 		@Transactional(readOnly=true)
-		public Usuario consultarPorId(int usuId) {
+		public Usuario consultarPorId(Long usuId) {
 			return usuariosDAO.consultarPorId(usuId);
 		}
 

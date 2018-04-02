@@ -1,5 +1,6 @@
 package co.edu.usbcali.logica;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,7 @@ public class ProteinaLogica implements IProteinaLogica {
 			if(entity==null){
 				throw new Exception("La proteina no puede ser nula");
 			}	
-			if(entity.getId()==0) {
+			if(entity.getId()==BigDecimal.ZERO) {
 				throw new Exception("El id de la proteina no puede ser 0");
 			}
 			if(entity.getNombre()==null || entity.getNombre().trim().equals("")==true) {
@@ -58,7 +59,7 @@ public class ProteinaLogica implements IProteinaLogica {
 			if(entity==null){
 				throw new Exception("La proteina no puede ser nula");
 			}	
-			if(entity.getId()==0) {
+			if(entity.getId()==BigDecimal.ZERO) {
 				throw new Exception("El id de la proteina no puede ser 0");
 			}
 			if(entity.getNombre()==null || entity.getNombre().trim().equals("")==true) {
@@ -85,7 +86,7 @@ public class ProteinaLogica implements IProteinaLogica {
 			if(entity==null){
 				throw new Exception("La proteina no puede ser nula");
 			}	
-			if(entity.getId()==0) {
+			if(entity.getId()==BigDecimal.ZERO) {
 				throw new Exception("El id de la proteina no puede ser 0");
 			}
 			
@@ -100,7 +101,7 @@ public class ProteinaLogica implements IProteinaLogica {
 
 		@Override
 		@Transactional(readOnly=true)
-		public Proteina consultarPorId(int proteinaId) {
+		public Proteina consultarPorId(BigDecimal proteinaId) {
 			return proteinasDAO.consultarPorId(proteinaId);
 		}
 

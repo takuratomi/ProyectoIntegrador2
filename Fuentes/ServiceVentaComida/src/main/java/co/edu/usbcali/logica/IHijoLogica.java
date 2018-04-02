@@ -9,7 +9,7 @@ public interface IHijoLogica {
 	public void crear(Hijo entity) throws Exception;
 	public void modificar(Hijo entity) throws Exception;
 	public void borrar(Hijo entity) throws Exception;
-	public Hijo consultarPorId(int hijoId);
-	public List<Hijo> consultarTodos();
+	public Hijo consultarPorId(Long hijoId) throws Exception;
+	public List<Hijo> consultarTodos() throws Exception;
 	
 }

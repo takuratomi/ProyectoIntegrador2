@@ -1,5 +1,6 @@
 package co.edu.usbcali.logica;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class BebidaLogica implements IBebidaLogica {
 			if(entity==null){
 				throw new Exception("La bebida no puede ser nula");
 			}	
-			if(entity.getId()==0) {
+			if(entity.getId()==BigDecimal.ZERO) {
 				throw new Exception("El id de la bebida no puede ser 0");
 			}
 			if(entity.getNombre()==null || entity.getNombre().trim().equals("")==true) {
@@ -56,7 +57,7 @@ public class BebidaLogica implements IBebidaLogica {
 			if(entity==null){
 				throw new Exception("La bebida no puede ser nula");
 			}	
-			if(entity.getId()==0) {
+			if(entity.getId()==BigDecimal.ZERO) {
 				throw new Exception("El id de la bebida no puede ser 0");
 			}
 			if(entity.getNombre()==null || entity.getNombre().trim().equals("")==true) {
@@ -83,7 +84,7 @@ public class BebidaLogica implements IBebidaLogica {
 			if(entity==null){
 				throw new Exception("La bebida no puede ser nula");
 			}	
-			if(entity.getId()==0) {
+			if(entity.getId()==BigDecimal.ZERO) {
 				throw new Exception("El id de la bebida no puede ser 0");
 			}
 			
@@ -98,7 +99,7 @@ public class BebidaLogica implements IBebidaLogica {
 
 		@Override
 		@Transactional(readOnly=true)
-		public Bebida consultarPorId(int bebidaId) {
+		public Bebida consultarPorId(BigDecimal bebidaId) {
 			return bebidasDAO.consultarPorId(bebidaId);
 		}
 

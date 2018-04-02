@@ -10,7 +10,7 @@ public interface IPedidoLogica {
 	public void crear(Pedido entity) throws Exception;
 	public void modificar(Pedido entity) throws Exception;
 	public void borrar(Pedido entity) throws Exception;
-	public Pedido consultarPorId(BigDecimal pedidoId);
-	public List<Pedido> consultarTodos();
+	public Pedido consultarPorId(BigDecimal pedidoId) throws Exception;
+	public List<Pedido> consultarTodos() throws Exception;
 	
 }

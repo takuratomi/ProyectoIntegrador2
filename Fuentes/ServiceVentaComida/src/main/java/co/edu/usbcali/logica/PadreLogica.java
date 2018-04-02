@@ -112,7 +112,7 @@ public class PadreLogica implements IPadreLogica {
 
 		@Override
 		@Transactional(readOnly=true)
-		public Padre consultarPorId(int padreId) {
+		public Padre consultarPorId(Long padreId) {
 			return padresDAO.consultarPorId(padreId);
 		}
 

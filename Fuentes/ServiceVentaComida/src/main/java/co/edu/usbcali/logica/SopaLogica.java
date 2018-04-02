@@ -1,5 +1,6 @@
 package co.edu.usbcali.logica;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class SopaLogica implements ISopaLogica {
 			if(entity==null){
 				throw new Exception("La sopa no puede ser nula");
 			}	
-			if(entity.getIdsopa()==0) {
+			if(entity.getId()==BigDecimal.ZERO) {
 				throw new Exception("El id de la sopa no puede ser 0");
 			}
 			if(entity.getNombre()==null || entity.getNombre().trim().equals("")==true) {
@@ -55,7 +56,7 @@ public class SopaLogica implements ISopaLogica {
 			if(entity==null){
 				throw new Exception("La sopa no puede ser nula");
 			}	
-			if(entity.getIdsopa()==0) {
+			if(entity.getId()==BigDecimal.ZERO) {
 				throw new Exception("El id de la sopa no puede ser 0");
 			}
 			if(entity.getNombre()==null || entity.getNombre().trim().equals("")==true) {
@@ -82,13 +83,13 @@ public class SopaLogica implements ISopaLogica {
 			if(entity==null){
 				throw new Exception("La sopa no puede ser nula");
 			}	
-			if(entity.getIdsopa()==0) {
+			if(entity.getId()==BigDecimal.ZERO) {
 				throw new Exception("El id de la sopa no puede ser 0");
 			}
 			
-			Sopa sopas=sopasDAO.consultarPorId(entity.getIdsopa());
+			Sopa sopas=sopasDAO.consultarPorId(entity.getId());
 			if(sopas==null) {
-				throw new Exception("la sopa con id: " + entity.getIdsopa() + " no existe");
+				throw new Exception("la sopa con id: " + entity.getId() + " no existe");
 			}
 			
 			sopasDAO.borrar(entity);
@@ -97,7 +98,7 @@ public class SopaLogica implements ISopaLogica {
 
 		@Override
 		@Transactional(readOnly=true)
-		public Sopa consultarPorId(int sopaId) {
+		public Sopa consultarPorId(BigDecimal sopaId) {
 			return sopasDAO.consultarPorId(sopaId);
 		}
 

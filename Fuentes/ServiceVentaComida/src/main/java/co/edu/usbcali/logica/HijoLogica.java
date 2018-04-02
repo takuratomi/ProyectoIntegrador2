@@ -44,7 +44,7 @@ public class HijoLogica implements IHijoLogica {
 			if(entity.getCurso()==null || entity.getCurso().trim().equals("")==true) {
 				throw new Exception("El curso del hijo no puede ser nulo o estar vacio");
 			}
-			if(entity.getUsuarioid()==0) {
+			if(entity.getUsuario().getId()==0) {
 				throw new Exception("El id del usuario no puede ser 0");
 			}
 			
@@ -87,7 +87,7 @@ public class HijoLogica implements IHijoLogica {
 			if(entity.getCurso()==null || entity.getCurso().trim().equals("")==true) {
 				throw new Exception("El curso del hijo no puede ser nulo o estar vacio");
 			}
-			if(entity.getUsuarioid()==0) {
+			if(entity.getUsuario().getId()==0) {
 				throw new Exception("El id del usuario no puede ser 0");
 			}
 			
@@ -135,7 +135,7 @@ public class HijoLogica implements IHijoLogica {
 
 		@Override
 		@Transactional(readOnly=true)
-		public Hijo consultarPorId(int hijoId) {
+		public Hijo consultarPorId(Long hijoId) {
 			return hijosDAO.consultarPorId(hijoId);
 		}
 
