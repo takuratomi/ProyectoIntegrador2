@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 11-abr-2018 21:14:45 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="co.edu.usbcali.modelo.Usuario" table="usuario" schema="public">
+        <id name="id" type="long">
+            <column name="id" precision="10" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <property name="primerNombre" type="string">
+            <column name="primer_nombre" length="200">
+                <comment>primer nombre</comment>
+            </column>
+        </property>
+        <property name="segundoNombre" type="string">
+            <column name="segundo_nombre" length="200">
+                <comment>segundo nombre</comment>
+            </column>
+        </property>
+        <property name="primerApellido" type="string">
+            <column name="primer_apellido" length="200">
+                <comment>primer apellido</comment>
+            </column>
+        </property>
+        <property name="segundoApellido" type="string">
+            <column name="segundo_apellido" length="200">
+                <comment>segundo apellido</comment>
+            </column>
+        </property>
+        <property name="numIdentificacion" type="java.lang.Long">
+            <column name="num_identificacion" precision="17" scale="0">
+                <comment>numero de identificacion</comment>
+            </column>
+        </property>
+        <property name="tipoIdentificacion" type="java.lang.Integer">
+            <column name="tipo_identificacion">
+                <comment>tipo de identificacion 1 = tarjeta de identidad 2 = registro civil 3 = cedula de ciudania</comment>
+            </column>
+        </property>
+        <property name="password" type="string">
+            <column name="password" length="18" />
+        </property>
+        <property name="rol" type="java.lang.Integer">
+            <column name="rol">
+                <comment>rol que tiene el usuario en el sistema 1-&gt; administrador 2-&gt; cliente</comment>
+            </column>
+        </property>
+        <property name="usuarioCreacion" type="string">
+            <column name="usuario_creacion" length="100">
+                <comment>usuario que crea el registro</comment>
+            </column>
+        </property>
+        <property name="fechaCreacion" type="date">
+            <column name="fecha_creacion" length="13">
+                <comment>fecha en que se crea el registro</comment>
+            </column>
+        </property>
+        <property name="usuarioModifica" type="string">
+            <column name="usuario_modifica" length="100">
+                <comment>usuario que modifica el registro</comment>
+            </column>
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13">
+                <comment>fecha en que se modifica el registro</comment>
+            </column>
+        </property>
+        <set name="hijos" table="hijo" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_usuario" precision="10" scale="0" not-null="true">
+                    <comment>identificador de usuario</comment>
+                </column>
+            </key>
+            <one-to-many class="co.edu.usbcali.modelo.Hijo" />
+        </set>
+        <set name="padres" table="padre" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_usuario" precision="10" scale="0" not-null="true">
+                    <comment>identificador de usuario</comment>
+                </column>
+            </key>
+            <one-to-many class="co.edu.usbcali.modelo.Padre" />
+        </set>
+    </class>
+</hibernate-mapping>

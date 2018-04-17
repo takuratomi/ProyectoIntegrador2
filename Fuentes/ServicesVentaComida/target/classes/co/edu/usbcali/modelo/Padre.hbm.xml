@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 11-abr-2018 21:14:45 by Hibernate Tools 3.5.0.Final -->
+<hibernate-mapping>
+    <class name="co.edu.usbcali.modelo.Padre" table="padre" schema="public">
+        <id name="id" type="long">
+            <column name="id" precision="10" scale="0" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="usuario" class="co.edu.usbcali.modelo.Usuario" fetch="select">
+            <column name="id_usuario" precision="10" scale="0" not-null="true">
+                <comment>identificador de usuario</comment>
+            </column>
+        </many-to-one>
+        <property name="telefono" type="string">
+            <column name="telefono" length="15">
+                <comment>numero telefonocio o celular a donde se pueda localizar el padre</comment>
+            </column>
+        </property>
+        <property name="direccion" type="string">
+            <column name="direccion" length="400">
+                <comment>direccion donde recide</comment>
+            </column>
+        </property>
+        <property name="usuarioCreacion" type="string">
+            <column name="usuario_creacion" length="100">
+                <comment>usuario que crea el registro</comment>
+            </column>
+        </property>
+        <property name="fechaCreacion" type="date">
+            <column name="fecha_creacion" length="13">
+                <comment>fecha en que se crea el registro</comment>
+            </column>
+        </property>
+        <property name="usuarioModifica" type="string">
+            <column name="usuario_modifica" length="100">
+                <comment>usuario que modifica el registro</comment>
+            </column>
+        </property>
+        <property name="fechaModifica" type="date">
+            <column name="fecha_modifica" length="13">
+                <comment>fecha en que se modifica el registro</comment>
+            </column>
+        </property>
+        <set name="hijos" table="hijo" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_padre" precision="10" scale="0">
+                    <comment>Identificador del padre</comment>
+                </column>
+            </key>
+            <one-to-many class="co.edu.usbcali.modelo.Hijo" />
+        </set>
+        <set name="pedidos" table="pedido" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_padre" precision="10" scale="0" not-null="true">
+                    <comment>identificador del padre</comment>
+                </column>
+            </key>
+            <one-to-many class="co.edu.usbcali.modelo.Pedido" />
+        </set>
+    </class>
+</hibernate-mapping>
