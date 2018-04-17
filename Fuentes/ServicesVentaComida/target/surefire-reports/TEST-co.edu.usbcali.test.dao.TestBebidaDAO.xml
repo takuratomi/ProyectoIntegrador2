@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="5" failures="0" name="co.edu.usbcali.test.dao.TestBebidaDAO" time="1.251" errors="0" skipped="0">
+<testsuite tests="5" failures="0" name="co.edu.usbcali.test.dao.TestBebidaDAO" time="1.018" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_65.jdk/Contents/Home/jre/lib"/>
@@ -27,7 +27,7 @@
 "/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="os.name" value="Mac OS X"/>
-    <property name="classworlds.conf" value="/Users/takuratomi/Documents/Universidad/ProyectoIntegrador2/Fuentes/.metadata/.plugins/org.eclipse.m2e.launching/launches/m2conf1055299090863433166.tmp"/>
+    <property name="classworlds.conf" value="/Users/takuratomi/Documents/Universidad/ProyectoIntegrador2/Fuentes/.metadata/.plugins/org.eclipse.m2e.launching/launches/m2conf722456397369839815.tmp"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
     <property name="java.library.path" value="/Users/takuratomi/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:."/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
@@ -63,9 +63,9 @@
     <property name="ftp.nonProxyHosts" value="local|*.local|169.254/16|*.169.254/16"/>
     <property name="sun.cpu.isalist" value=""/>
   </properties>
-  <testcase classname="co.edu.usbcali.test.dao.TestBebidaDAO" name="atest" time="0.942"/>
-  <testcase classname="co.edu.usbcali.test.dao.TestBebidaDAO" name="ctest" time="0.116"/>
-  <testcase classname="co.edu.usbcali.test.dao.TestBebidaDAO" name="dtest" time="0.111"/>
-  <testcase classname="co.edu.usbcali.test.dao.TestBebidaDAO" name="especial_test" time="0.056"/>
-  <testcase classname="co.edu.usbcali.test.dao.TestBebidaDAO" name="etest" time="0.026"/>
+  <testcase classname="co.edu.usbcali.test.dao.TestBebidaDAO" name="atest" time="0.777"/>
+  <testcase classname="co.edu.usbcali.test.dao.TestBebidaDAO" name="ctest" time="0.117"/>
+  <testcase classname="co.edu.usbcali.test.dao.TestBebidaDAO" name="dtest" time="0.092"/>
+  <testcase classname="co.edu.usbcali.test.dao.TestBebidaDAO" name="especial_test" time="0.018"/>
+  <testcase classname="co.edu.usbcali.test.dao.TestBebidaDAO" name="etest" time="0.014"/>
 </testsuite>

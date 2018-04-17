@@ -31,7 +31,7 @@ public class TestPadreLogica {
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	@Rollback(false)
 	public void atest() {
-		
+
 		Usuario usuario = new Usuario();
 		usuario.setPrimerNombre("Juan");
 		usuario.setPrimerApellido("Dorado");
@@ -39,9 +39,10 @@ public class TestPadreLogica {
 		usuario.setNumIdentificacion(1012345L);
 		usuario.setTipoIdentificacion(3);
 		usuario.setRol(2);
-		
-		Padre padre = new Padre(0, usuario, "2751675", "parcelacion bonsques de belen", null, null, null, null, null, null);
-				
+
+		Padre padre = new Padre(0, usuario, "2751675", "parcelacion bonsques de belen", null, null, null, null, null,
+				null);
+
 		try {
 			padreLogica.crearPadre(padre);
 		} catch (Exception e) {
@@ -51,45 +52,67 @@ public class TestPadreLogica {
 
 	}
 
+	@Test
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	@Rollback(false)
+	public void btest() {
+
+		Long numIdentificacion = 2311234L;
+
+		try {
+			Usuario usuario = padreLogica.consultarUsuarioPorIdentificacion(numIdentificacion);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
 	/*
-	@Test
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	@Rollback(false)
-	public void ctest() {
-
-		Bebida bebida = bebidaDAO.consultarPorId(id);
-
-		assertNotNull("La bebida existe", bebida);
-		bebida.setNombre("Jugo de naranja");
-		
-		bebidaDAO.modificar(bebida);
-		
-	}
-
-	@Test
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	@Rollback(false)
-	public void dtest() {
-
-		Bebida bebida = bebidaDAO.consultarPorId(id);
-
-		assertNotNull("La bebida no existe", bebida);	
-		
-		bebidaDAO.borrar(bebida);
-	}
-
-	@Test
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	@Rollback(false)
-	public void etest() {
-
-	}
-
-	@Test
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	@Rollback(false)
-	public void especial_test() {
-
-	}
-	*/
+	 * @Test
+	 * 
+	 * @Transactional(readOnly = false, propagation = Propagation.REQUIRED,
+	 * rollbackFor = Exception.class)
+	 * 
+	 * @Rollback(false) public void ctest() {
+	 * 
+	 * Bebida bebida = bebidaDAO.consultarPorId(id);
+	 * 
+	 * assertNotNull("La bebida existe", bebida);
+	 * bebida.setNombre("Jugo de naranja");
+	 * 
+	 * bebidaDAO.modificar(bebida);
+	 * 
+	 * }
+	 * 
+	 * @Test
+	 * 
+	 * @Transactional(readOnly = false, propagation = Propagation.REQUIRED,
+	 * rollbackFor = Exception.class)
+	 * 
+	 * @Rollback(false) public void dtest() {
+	 * 
+	 * Bebida bebida = bebidaDAO.consultarPorId(id);
+	 * 
+	 * assertNotNull("La bebida no existe", bebida);
+	 * 
+	 * bebidaDAO.borrar(bebida); }
+	 * 
+	 * @Test
+	 * 
+	 * @Transactional(readOnly = false, propagation = Propagation.REQUIRED,
+	 * rollbackFor = Exception.class)
+	 * 
+	 * @Rollback(false) public void etest() {
+	 * 
+	 * }
+	 * 
+	 * @Test
+	 * 
+	 * @Transactional(readOnly = false, propagation = Propagation.REQUIRED,
+	 * rollbackFor = Exception.class)
+	 * 
+	 * @Rollback(false) public void especial_test() {
+	 * 
+	 * }
+	 */
 }

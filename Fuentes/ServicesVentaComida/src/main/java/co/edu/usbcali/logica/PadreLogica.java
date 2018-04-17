@@ -67,11 +67,14 @@ public class PadreLogica implements IPadreLogica {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
+	@Transactional(readOnly=true,rollbackFor=Exception.class)
 	@Override
 	public Usuario consultarUsuarioPorIdentificacion(Long numIdentificacion) throws Exception {
 		// TODO Auto-generated method stub
-		return usuarioDAO.consultarPorIdentificacion(numIdentificacion);
+		Usuario usuario = new Usuario();
+		usuario = usuarioDAO.consultarPorIdentificacion(numIdentificacion);
+		return usuario;
 	}
 
 }

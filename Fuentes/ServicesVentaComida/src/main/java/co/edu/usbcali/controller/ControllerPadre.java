@@ -65,17 +65,46 @@ public class ControllerPadre {
 		return null;
 	}
 
-	@RequestMapping(value = "/verificarDatosUsuario/{id}", method = RequestMethod.GET)
-	public UsuarioDTO verificarUsuario(@PathVariable("id") Long id) throws Exception {
+	@RequestMapping(value = "/verificarDatosUsuario1", method = RequestMethod.POST)
+	public UsuarioDTO verificarDatosUsuario(@RequestBody UsuarioDTO usuarioDTO) throws Exception {
 
-		UsuarioDTO usuarioDTO = new UsuarioDTO();
-		Long numIdentificacion = 0L;
-
-		numIdentificacion = id;
+		//UsuarioDTO usuarioDTO = new UsuarioDTO();;
+		Long numIdentificacion = usuarioDTO.getNumIdentificacion();	
 
 		try {
 			Usuario user = padreLogica.consultarUsuarioPorIdentificacion(numIdentificacion);
+			
+			usuarioDTO = new UsuarioDTO();
+			usuarioDTO.setPrimerNombre(user.getPrimerNombre());
+			usuarioDTO.setSegundoNombre(user.getSegundoNombre());
+			usuarioDTO.setPrimerApellido(user.getPrimerApellido());
+			usuarioDTO.setSegundoApellido(user.getSegundoApellido());
 
+			usuarioDTO.setCodigoError(0);
+			usuarioDTO.setMensajeError("Operación Exitosa");
+
+			return usuarioDTO;
+
+		} catch (Exception e) {
+
+			usuarioDTO.setCodigoError(90);
+			usuarioDTO.setMensajeError(e.getMessage());
+
+			return usuarioDTO;
+		}
+		
+	}
+	
+	@RequestMapping(value = "/verificarDatosUsuario/{id}", method = RequestMethod.GET)
+	public UsuarioDTO verificarUsuario(@PathVariable("id")Long id) throws Exception {
+
+		UsuarioDTO usuarioDTO = new UsuarioDTO();;
+		Long numIdentificacion = id;	
+
+		try {
+			Usuario user = padreLogica.consultarUsuarioPorIdentificacion(numIdentificacion);
+			
+			
 			usuarioDTO.setPrimerNombre(user.getPrimerNombre());
 			usuarioDTO.setSegundoNombre(user.getSegundoNombre());
 			usuarioDTO.setPrimerApellido(user.getPrimerApellido());
