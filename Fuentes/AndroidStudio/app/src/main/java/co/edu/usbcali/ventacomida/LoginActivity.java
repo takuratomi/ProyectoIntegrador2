@@ -3,36 +3,31 @@ package co.edu.usbcali.ventacomida;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.content.pm.PackageManager;
-import android.support.annotation.NonNull;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
 import android.app.LoaderManager.LoaderCallbacks;
-
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.Loader;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
-
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.inputmethod.EditorInfo;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
+
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static android.Manifest.permission.READ_CONTACTS;
+import co.edu.usbcali.dto.UsuarioDTO;
 
 /**
  * A login screen that offers login via email/password.
@@ -43,6 +38,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * Id to identity READ_CONTACTS permission request.
      */
     private static final int REQUEST_READ_CONTACTS = 0;
+    private static final String  ip= "192.168.1.16";
 
     /**
      * A dummy authentication store containing known user names and passwords.
@@ -51,14 +47,17 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private static final String[] DUMMY_CREDENTIALS = new String[]{
             "foo@example.com:hello", "bar@example.com:world"
     };
+
+    private UsuarioDTO usuarioDTO;
+
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
      */
     private UserLoginTask mAuthTask = null;
 
     // UI references.
-    private AutoCompleteTextView mEmailView;
-    private EditText mPasswordView;
+    private AutoCompleteTextView mIdentificacionlView;
+    //private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
 
@@ -67,23 +66,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         // Set up the login form.
-        mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
-        populateAutoComplete();
+        mIdentificacionlView = (AutoCompleteTextView) findViewById(R.id.identificacion);
+//        populateAutoComplete();
 
-        mPasswordView = (EditText) findViewById(R.id.password);
-        mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-                if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
-                    attemptLogin();
-                    return true;
-                }
-                return false;
-            }
-        });
-
-        Button mEmailSignInButton = (Button) findViewById(R.id.email_sign_in_button);
-        mEmailSignInButton.setOnClickListener(new OnClickListener() {
+        Button mIdentificacionlSignInButton = (Button) findViewById(R.id.identificacion_sign_in_button);
+        mIdentificacionlSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
                 attemptLogin();
@@ -94,49 +81,24 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         mProgressView = findViewById(R.id.login_progress);
     }
 
-    private void populateAutoComplete() {
-        if (!mayRequestContacts()) {
-            return;
+    /*
+    * cambio de activity
+    * */
+    public void gotoActivity(int rol )
+    {
+        // admi
+        if(rol == 1)
+        {
+            Intent intent = new Intent(LoginActivity.this,ConsultarProductosActivity.class);
+            startActivity(intent);
         }
-
-        getLoaderManager().initLoader(0, null, this);
-    }
-
-    private boolean mayRequestContacts() {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
-            return true;
-        }
-        if (checkSelfPermission(READ_CONTACTS) == PackageManager.PERMISSION_GRANTED) {
-            return true;
-        }
-        if (shouldShowRequestPermissionRationale(READ_CONTACTS)) {
-            Snackbar.make(mEmailView, R.string.permission_rationale, Snackbar.LENGTH_INDEFINITE)
-                    .setAction(android.R.string.ok, new View.OnClickListener() {
-                        @Override
-                        @TargetApi(Build.VERSION_CODES.M)
-                        public void onClick(View v) {
-                            requestPermissions(new String[]{READ_CONTACTS}, REQUEST_READ_CONTACTS);
-                        }
-                    });
-        } else {
-            requestPermissions(new String[]{READ_CONTACTS}, REQUEST_READ_CONTACTS);
-        }
-        return false;
-    }
-
-    /**
-     * Callback received when a permissions request has been completed.
-     */
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
-        if (requestCode == REQUEST_READ_CONTACTS) {
-            if (grantResults.length == 1 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                populateAutoComplete();
-            }
+        // cliente
+        else if(rol == 2)
+        {
+            Intent intent = new Intent(LoginActivity.this,ClienteActivity.class);
+            startActivity(intent);
         }
     }
-
 
     /**
      * Attempts to sign in or register the account specified by the login form.
@@ -144,38 +106,36 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
      * errors are presented and no actual login attempt is made.
      */
     private void attemptLogin() {
-        if (mAuthTask != null) {
-            return;
-        }
 
         // Reset errors.
-        mEmailView.setError(null);
-        mPasswordView.setError(null);
+        mIdentificacionlView.setError(null);
+//        mPasswordView.setError(null);
 
         // Store values at the time of the login attempt.
-        String email = mEmailView.getText().toString();
-        String password = mPasswordView.getText().toString();
+        String email = mIdentificacionlView.getText().toString();
+        //String password = mPasswordView.getText().toString();
 
         boolean cancel = false;
         View focusView = null;
 
         // Check for a valid password, if the user entered one.
-        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
+        /*if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
             mPasswordView.setError(getString(R.string.error_invalid_password));
             focusView = mPasswordView;
             cancel = true;
-        }
+        }*/
 
-        // Check for a valid email address.
+        //Check for a valid email address.
         if (TextUtils.isEmpty(email)) {
-            mEmailView.setError(getString(R.string.error_field_required));
-            focusView = mEmailView;
-            cancel = true;
-        } else if (!isEmailValid(email)) {
-            mEmailView.setError(getString(R.string.error_invalid_email));
-            focusView = mEmailView;
+            mIdentificacionlView.setError(getString(R.string.error_field_required));
+            focusView = mIdentificacionlView;
             cancel = true;
         }
+        /*else if (!isEmailValid(email)) {
+            mIdentificacionlView.setError(getString(R.string.error_invalid_email));
+            focusView = mIdentificacionlView;
+            cancel = true;
+        }*/
 
         if (cancel) {
             // There was an error; don't attempt login and focus the first
@@ -185,16 +145,34 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
             showProgress(true);
-            mAuthTask = new UserLoginTask(email, password);
-            mAuthTask.execute((Void) null);
+//            servicesFabrica = new ServiceFabrica(ip);
+            String url = "http://localhost:8080/ServicesVentaComida/controller/PadreRest/verificarDatosUsuario/".replace("localhost",ip);
+//            VerificarDatosGetUsuario verificarDatosGetUsuario = new VerificarDatosGetUsuario(url);
+//            Long id = Long.parseLong(email.toString().trim());
+//            verificarDatosGetUsuario.execute(id);
+//            UsuarioDTO usuarioDTO = verificarDatosGetUsuario.getResponse();
+//            String temporal = "";
+            mAuthTask = new UserLoginTask(email);
+            //mAuthTask.execute((Void) null);
+//            mAuthTask.doInBackground();
+//            usuarioDTO = mAuthTask.getUsuarioDTO();
+            if(usuarioDTO != null )
+            {
+                gotoActivity(usuarioDTO.getRol());
+            }
+            else
+            {
+                gotoActivity(1);
+            }
         }
     }
 
+    // validar si es correo
     private boolean isEmailValid(String email) {
         //TODO: Replace this with your own logic
         return email.contains("@");
     }
-
+    // validar si es password con mas de 4 caractres
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
         return password.length() > 4;
@@ -276,7 +254,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 new ArrayAdapter<>(LoginActivity.this,
                         android.R.layout.simple_dropdown_item_1line, emailAddressCollection);
 
-        mEmailView.setAdapter(adapter);
+        mIdentificacionlView.setAdapter(adapter);
     }
 
 
@@ -290,6 +268,55 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         int IS_PRIMARY = 1;
     }
 
+    // validacion del consumo de servicio
+//    public class VerificarDatosGetUsuario extends AsyncTask<Long,Integer,UsuarioDTO> {
+//
+//        String url;
+//        UsuarioDTO response;
+//
+//        public VerificarDatosGetUsuario(String url) {
+//            this.url = url;
+//        }
+//
+//        @Override
+//        protected UsuarioDTO doInBackground(Long... id) {
+//            try {
+//                String temporal = url+id[0].toString();
+//
+//                RestTemplate restTemplate = new RestTemplate();
+//                restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+//                response= restTemplate.getForObject(url+id.toString(), UsuarioDTO.class);
+//                return response;
+//            } catch (Exception e) {
+//                Log.e("MainActivity", e.getMessage(), e);
+//            }
+//            return null;
+//        }
+//
+//        @Override
+//        protected void onPostExecute(final Boolean success) {
+//             = null;
+//            showProgress(false);
+//
+//            if (success) {
+//                finish();
+//            } else {
+//                mPasswordView.setError(getString(R.string.error_incorrect_password));
+//                mPasswordView.requestFocus();
+//            }
+//        }
+//
+//
+//        public UsuarioDTO getResponse() {
+//            return response;
+//        }
+//
+//        public void setResponse(UsuarioDTO response) {
+//            this.response = response;
+//        }
+//    }
+
+
     /**
      * Represents an asynchronous login/registration task used to authenticate
      * the user.
@@ -297,16 +324,30 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
 
         private final String mEmail;
-        private final String mPassword;
+        private UsuarioDTO usuarioDTO;
 
-        UserLoginTask(String email, String password) {
+        UserLoginTask(String email) {
             mEmail = email;
-            mPassword = password;
+
+        }
+
+        public UsuarioDTO getUsuarioDTO() {
+            return usuarioDTO;
+        }
+
+        public void setUsuarioDTO(UsuarioDTO usuarioDTO) {
+            this.usuarioDTO = usuarioDTO;
         }
 
         @Override
         protected Boolean doInBackground(Void... params) {
             // TODO: attempt authentication against a network service.
+
+            String url = "http://192.168.1.16:8080/ServicesVentaComida/controller/PadreRest/verificarDatosUsuario/"+mEmail.trim();
+            int rol = 0;
+            RestTemplate restTemplate = new RestTemplate();
+            restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+            usuarioDTO = restTemplate.getForObject(url,UsuarioDTO.class);
 
             try {
                 // Simulate network access.
@@ -315,13 +356,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 return false;
             }
 
-            for (String credential : DUMMY_CREDENTIALS) {
+           /* for (String credential : DUMMY_CREDENTIALS) {
                 String[] pieces = credential.split(":");
                 if (pieces[0].equals(mEmail)) {
                     // Account exists, return true if the password matches.
                     return pieces[1].equals(mPassword);
                 }
-            }
+            }*/
 
             // TODO: register the new account here.
             return true;
@@ -329,14 +370,15 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         @Override
         protected void onPostExecute(final Boolean success) {
-            mAuthTask = null;
+            //mAuthTask = null;
             showProgress(false);
 
             if (success) {
-                finish();
+//               finish();
+                gotoActivity(usuarioDTO.getRol());
             } else {
-                mPasswordView.setError(getString(R.string.error_incorrect_password));
-                mPasswordView.requestFocus();
+                mIdentificacionlView.setError(getString(R.string.error_invalid_identificacion));
+                mIdentificacionlView.requestFocus();
             }
         }
 

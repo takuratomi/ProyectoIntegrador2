@@ -45,7 +45,9 @@ public class ServiceRest extends AsyncTask<Void, Void, UsuarioDTO>{
         services.put("host","http://$:8080/ServicesVentaComida/controller/");
         services.put("crearPadre","PadreRest/crear");
         services.put("verificarDatosUsuario","");
-        services.put("crearProducto","ProductoRest/crear");
+        services.put("crearProducto","ProductoRest/crearProducto");
+        services.put("verificarDatosUsuario","PadreRest/verificarDatosUsuario/");
+
         flagInit = true;
     }
 

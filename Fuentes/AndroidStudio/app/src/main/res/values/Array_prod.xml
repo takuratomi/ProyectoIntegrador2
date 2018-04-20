@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="lstProductos">
+        <item>JUGO DE ZANAHORIA</item>
+        <item>JUGO DE MANGO</item>
+        <item>JUGO DE LIMONADA</item>
+        <item>FRIJOLES RANCHEROS</item>
+        <item>SOPA DE PASTAS</item>
+        <item>SOPA DE POLLO</item>
+    </string-array>
+</resources>
