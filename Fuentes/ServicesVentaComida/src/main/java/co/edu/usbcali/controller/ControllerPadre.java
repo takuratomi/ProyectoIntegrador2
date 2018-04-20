@@ -22,7 +22,7 @@ public class ControllerPadre {
 	@Autowired
 	private IPadreLogica padreLogica;
 
-	@RequestMapping(value = "/crear", method = RequestMethod.POST)
+	@RequestMapping(value = "/crearProducto", method = RequestMethod.POST)
 	public PadreDTO crearPadreRest(@RequestBody PadreDTO padreDTO) throws Exception {
 
 		Usuario usuario = new Usuario();
@@ -65,36 +65,40 @@ public class ControllerPadre {
 		return null;
 	}
 
-	@RequestMapping(value = "/verificarDatosUsuario1", method = RequestMethod.POST)
-	public UsuarioDTO verificarDatosUsuario(@RequestBody UsuarioDTO usuarioDTO) throws Exception {
-
-		//UsuarioDTO usuarioDTO = new UsuarioDTO();;
-		Long numIdentificacion = usuarioDTO.getNumIdentificacion();	
-
+	@RequestMapping(value ="/verificarDatosUsuario/{id}", method=RequestMethod.GET)
+	public UsuarioDTO verificarDatosUsuario(@PathVariable("id") Long id) throws Exception {
+		
+		Long numIdentificacion = id;	
+		UsuarioDTO usuarioDTO = new UsuarioDTO();
+		
 		try {
-			Usuario user = padreLogica.consultarUsuarioPorIdentificacion(numIdentificacion);
 			
-			usuarioDTO = new UsuarioDTO();
+			Usuario user = padreLogica.consultarUsuarioPorIdentificacion(numIdentificacion);
+						
+			usuarioDTO.setId(user.getId());
 			usuarioDTO.setPrimerNombre(user.getPrimerNombre());
 			usuarioDTO.setSegundoNombre(user.getSegundoNombre());
 			usuarioDTO.setPrimerApellido(user.getPrimerApellido());
 			usuarioDTO.setSegundoApellido(user.getSegundoApellido());
-
+			usuarioDTO.setRol(user.getRol());
+			usuarioDTO.setNumIdentificacion(user.getNumIdentificacion());
+			usuarioDTO.setTipoIdentificacion(user.getTipoIdentificacion());
+						
 			usuarioDTO.setCodigoError(0);
 			usuarioDTO.setMensajeError("Operación Exitosa");
-
+		
 			return usuarioDTO;
 
 		} catch (Exception e) {
-
+			
 			usuarioDTO.setCodigoError(90);
 			usuarioDTO.setMensajeError(e.getMessage());
-
+		
 			return usuarioDTO;
 		}
 		
 	}
-	
+	/*
 	@RequestMapping(value = "/verificarDatosUsuario/{id}", method = RequestMethod.GET)
 	public UsuarioDTO verificarUsuario(@PathVariable("id")Long id) throws Exception {
 
@@ -123,6 +127,6 @@ public class ControllerPadre {
 			return usuarioDTO;
 		}
 		
-	}
+	}*/
 
 }

@@ -71,10 +71,7 @@ public class PadreLogica implements IPadreLogica {
 	@Transactional(readOnly=true,rollbackFor=Exception.class)
 	@Override
 	public Usuario consultarUsuarioPorIdentificacion(Long numIdentificacion) throws Exception {
-		// TODO Auto-generated method stub
-		Usuario usuario = new Usuario();
-		usuario = usuarioDAO.consultarPorIdentificacion(numIdentificacion);
-		return usuario;
+		return usuarioDAO.consultarPorIdentificacion(numIdentificacion);
 	}
 
 }

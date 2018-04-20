@@ -33,8 +33,8 @@ public class ControllerProducto {
 		clienteDTO.setTdocCodigo(clientes.getTiposDocumentos().getTdocCodigo());
 		
 		return clienteDTO;
-	}
-	*/
+	}*/
+	
 	@RequestMapping(value="/crear", method = RequestMethod.POST)
 	public ProductoDTO crearProductoRest(@RequestBody ProductoDTO productoDTO)throws Exception{
 		

@@ -41,10 +41,9 @@ public class UsuarioDAO implements IUsuarioDAO{
 	@Override
 	public Usuario consultarPorIdentificacion(Long numIdentificacion) {
 		
-		String hql ="SELECT u from Usuario u where u.numIdentificacion =:identificacion";
-		Usuario usuario = (Usuario) sessionFactory.getCurrentSession().createQuery(hql).setLong("identificacion", numIdentificacion).uniqueResult();
+		String hql ="SELECT u from Usuario u where u.numIdentificacion =:identificacion";		
 
-		return usuario;
+		return (Usuario) sessionFactory.getCurrentSession().createQuery(hql).setLong("identificacion", numIdentificacion).uniqueResult();
 	}
 
 	@Override
