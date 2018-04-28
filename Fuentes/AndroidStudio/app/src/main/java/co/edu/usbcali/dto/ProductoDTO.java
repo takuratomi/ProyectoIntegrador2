@@ -44,8 +44,15 @@ public class ProductoDTO {
 		super();
 	}
 
+	public ProductoDTO(int tipoProducto, BigDecimal id, String nombre, String estado) {
+		this.tipoProducto = tipoProducto;
+		this.id = id;
+		this.nombre = nombre;
+		this.estado = estado;
+	}
+
 	public ProductoDTO(int tipoProducto, BigDecimal id, String nombre, String descripcion, String usuario, Date fecha,
-			int codigoError, String mensajeError) {
+					   int codigoError, String mensajeError) {
 		super();
 		this.tipoProducto = tipoProducto;
 		this.id = id;

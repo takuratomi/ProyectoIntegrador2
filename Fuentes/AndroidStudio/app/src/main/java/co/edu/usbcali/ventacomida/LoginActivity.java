@@ -89,14 +89,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         // admi
         if(rol == 1)
         {
-            Intent intent = new Intent(LoginActivity.this,ConsultarProductosActivity.class);
-            startActivity(intent);
+//            Intent intent = new Intent(LoginActivity.this,VendedorActivity.class);
+//            startActivity(intent);
         }
         // cliente
         else if(rol == 2)
         {
-            Intent intent = new Intent(LoginActivity.this,ClienteActivity.class);
-            startActivity(intent);
+//            Intent intent = new Intent(LoginActivity.this,ClienteActivity.class);
+//            startActivity(intent);
         }
     }
 
