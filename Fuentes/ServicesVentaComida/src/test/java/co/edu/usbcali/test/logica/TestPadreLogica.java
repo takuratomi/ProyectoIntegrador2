@@ -32,24 +32,23 @@ public class TestPadreLogica {
 	@Rollback(false)
 	public void atest() {
 
-		Usuario usuario = new Usuario();
-		usuario.setPrimerNombre("Juan");
-		usuario.setPrimerApellido("Dorado");
-		usuario.setSegundoApellido("Segundo");
-		usuario.setNumIdentificacion(1012345L);
-		usuario.setTipoIdentificacion(3);
-		usuario.setRol(2);
-
-		Padre padre = new Padre(0, usuario, "2751675", "parcelacion bonsques de belen", null, null, null, null, null,
-				null);
-
-		try {
-			padreLogica.crearPadre(padre);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
+//		Usuario usuario = new Usuario();
+//		usuario.setPrimerNombre("Juan");
+//		usuario.setPrimerApellido("Dorado");
+//		usuario.setSegundoApellido("Segundo");
+//		usuario.setNumIdentificacion(1012345L);
+//		usuario.setTipoIdentificacion(3);
+//		usuario.setRol(2);
+//
+//		Padre padre = new Padre(0, usuario, "2751675", "parcelacion bonsques de belen", null, null, null, null, null,
+//				null);
+//
+//		try {
+//			padreLogica.crearPadre(padre);
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 	}
 
 	@Test

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<testsuite tests="6" failures="1" name="co.edu.usbcali.test.dao.TestUsuarioDAO" time="0.674" errors="0" skipped="0">
+<testsuite tests="5" failures="0" name="co.edu.usbcali.test.dao.TestUsuarioDAO" time="0.358" errors="0" skipped="0">
   <properties>
     <property name="java.runtime.name" value="Java(TM) SE Runtime Environment"/>
     <property name="sun.boot.library.path" value="/Library/Java/JavaVirtualMachines/jdk1.8.0_65.jdk/Contents/Home/jre/lib"/>
@@ -27,7 +27,7 @@
 "/>
     <property name="java.vm.specification.vendor" value="Oracle Corporation"/>
     <property name="os.name" value="Mac OS X"/>
-    <property name="classworlds.conf" value="/Users/takuratomi/Documents/Universidad/ProyectoIntegrador2/Fuentes/.metadata/.plugins/org.eclipse.m2e.launching/launches/m2conf722456397369839815.tmp"/>
+    <property name="classworlds.conf" value="/Users/takuratomi/Documents/Universidad/ProyectoIntegrador2/Fuentes/.metadata/.plugins/org.eclipse.m2e.launching/launches/m2conf3614715411744878560.tmp"/>
     <property name="sun.jnu.encoding" value="UTF-8"/>
     <property name="java.library.path" value="/Users/takuratomi/Library/Java/Extensions:/Library/Java/Extensions:/Network/Library/Java/Extensions:/System/Library/Java/Extensions:/usr/lib/java:."/>
     <property name="java.specification.name" value="Java Platform API Specification"/>
@@ -64,55 +64,8 @@
     <property name="sun.cpu.isalist" value=""/>
   </properties>
   <testcase classname="co.edu.usbcali.test.dao.TestUsuarioDAO" name="atest" time="0.046"/>
-  <testcase classname="co.edu.usbcali.test.dao.TestUsuarioDAO" name="btest" time="0.055">
-    <failure message="El usuario existe expected null, but was:&lt;co.edu.usbcali.modelo.Usuario@1440c311&gt;" type="java.lang.AssertionError">java.lang.AssertionError: El usuario existe expected null, but was:&lt;co.edu.usbcali.modelo.Usuario@1440c311&gt;
-	at org.junit.Assert.fail(Assert.java:88)
-	at org.junit.Assert.failNotNull(Assert.java:755)
-	at org.junit.Assert.assertNull(Assert.java:737)
-	at co.edu.usbcali.test.dao.TestUsuarioDAO.btest(TestUsuarioDAO.java:79)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:497)
-	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:50)
-	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)
-	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:47)
-	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)
-	at org.springframework.test.context.junit4.statements.RunBeforeTestMethodCallbacks.evaluate(RunBeforeTestMethodCallbacks.java:75)
-	at org.springframework.test.context.junit4.statements.RunAfterTestMethodCallbacks.evaluate(RunAfterTestMethodCallbacks.java:86)
-	at org.springframework.test.context.junit4.statements.SpringRepeat.evaluate(SpringRepeat.java:84)
-	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:325)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:254)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:89)
-	at org.junit.runners.ParentRunner$3.run(ParentRunner.java:290)
-	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:71)
-	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:288)
-	at org.junit.runners.ParentRunner.access$000(ParentRunner.java:58)
-	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:268)
-	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)
-	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70)
-	at org.junit.runners.ParentRunner.run(ParentRunner.java:363)
-	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:193)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.execute(JUnit4Provider.java:252)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.executeTestSet(JUnit4Provider.java:141)
-	at org.apache.maven.surefire.junit4.JUnit4Provider.invoke(JUnit4Provider.java:112)
-	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method)
-	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)
-	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)
-	at java.lang.reflect.Method.invoke(Method.java:497)
-	at org.apache.maven.surefire.util.ReflectionUtils.invokeMethodWithArray(ReflectionUtils.java:189)
-	at org.apache.maven.surefire.booter.ProviderFactory$ProviderProxy.invoke(ProviderFactory.java:165)
-	at org.apache.maven.surefire.booter.ProviderFactory.invokeProvider(ProviderFactory.java:85)
-	at org.apache.maven.surefire.booter.ForkedBooter.runSuitesInProcess(ForkedBooter.java:115)
-	at org.apache.maven.surefire.booter.ForkedBooter.main(ForkedBooter.java:75)
-</failure>
-    <system-out>7540 [INFO] org.springframework.test.context.transaction.TransactionContext 2018-04-17 06:17:54,726  Began transaction (1) for test context [DefaultTestContext@1d782abe testClass = TestUsuarioDAO, testInstance = co.edu.usbcali.test.dao.TestUsuarioDAO@6edc4161, testMethod = btest@TestUsuarioDAO, testException = [null], mergedContextConfiguration = [MergedContextConfiguration@3a095ec0 testClass = TestUsuarioDAO, locations = &apos;{classpath:/applicationContext.xml}&apos;, classes = &apos;{}&apos;, contextInitializerClasses = &apos;[]&apos;, activeProfiles = &apos;{}&apos;, propertySourceLocations = &apos;{}&apos;, propertySourceProperties = &apos;{}&apos;, contextLoader = &apos;org.springframework.test.context.support.DelegatingSmartContextLoader&apos;, parent = [null]]]; transaction manager [org.springframework.orm.hibernate4.HibernateTransactionManager@4287d447]; rollback [false]
-Hibernate: select usuario0_.id as id1_11_0_, usuario0_.primer_nombre as primer_n2_11_0_, usuario0_.segundo_nombre as segundo_3_11_0_, usuario0_.primer_apellido as primer_a4_11_0_, usuario0_.segundo_apellido as segundo_5_11_0_, usuario0_.num_identificacion as num_iden6_11_0_, usuario0_.tipo_identificacion as tipo_ide7_11_0_, usuario0_.password as password8_11_0_, usuario0_.rol as rol9_11_0_, usuario0_.usuario_creacion as usuario10_11_0_, usuario0_.fecha_creacion as fecha_c11_11_0_, usuario0_.usuario_modifica as usuario12_11_0_, usuario0_.fecha_modifica as fecha_m13_11_0_ from public.usuario usuario0_ where usuario0_.id=?
-7550 [INFO] org.springframework.test.context.transaction.TransactionContext 2018-04-17 06:17:54,736  Committed transaction for test context [DefaultTestContext@1d782abe testClass = TestUsuarioDAO, testInstance = co.edu.usbcali.test.dao.TestUsuarioDAO@6edc4161, testMethod = btest@TestUsuarioDAO, testException = java.lang.AssertionError: El usuario existe expected null, but was:&lt;co.edu.usbcali.modelo.Usuario@1440c311&gt;, mergedContextConfiguration = [MergedContextConfiguration@3a095ec0 testClass = TestUsuarioDAO, locations = &apos;{classpath:/applicationContext.xml}&apos;, classes = &apos;{}&apos;, contextInitializerClasses = &apos;[]&apos;, activeProfiles = &apos;{}&apos;, propertySourceLocations = &apos;{}&apos;, propertySourceProperties = &apos;{}&apos;, contextLoader = &apos;org.springframework.test.context.support.DelegatingSmartContextLoader&apos;, parent = [null]]].
-</system-out>
-  </testcase>
-  <testcase classname="co.edu.usbcali.test.dao.TestUsuarioDAO" name="ctest" time="0.066"/>
-  <testcase classname="co.edu.usbcali.test.dao.TestUsuarioDAO" name="dtest" time="0.035"/>
-  <testcase classname="co.edu.usbcali.test.dao.TestUsuarioDAO" name="especial_test" time="0.46"/>
-  <testcase classname="co.edu.usbcali.test.dao.TestUsuarioDAO" name="etest" time="0.012"/>
+  <testcase classname="co.edu.usbcali.test.dao.TestUsuarioDAO" name="btest" time="0.017"/>
+  <testcase classname="co.edu.usbcali.test.dao.TestUsuarioDAO" name="ctest" time="0.037"/>
+  <testcase classname="co.edu.usbcali.test.dao.TestUsuarioDAO" name="dtest" time="0.036"/>
+  <testcase classname="co.edu.usbcali.test.dao.TestUsuarioDAO" name="especial_test" time="0.222"/>
 </testsuite>

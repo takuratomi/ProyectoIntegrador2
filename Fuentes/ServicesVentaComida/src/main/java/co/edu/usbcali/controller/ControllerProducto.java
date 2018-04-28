@@ -1,5 +1,7 @@
 package co.edu.usbcali.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,6 +42,17 @@ public class ControllerProducto {
 		
 		return productoLogica.crearProducto(productoDTO);		
 	}
+	
+	
+	@RequestMapping(value="/consultarTodos",method=RequestMethod.GET)
+	public List<ProductoDTO> consultarClientePorId()throws Exception{
+		
+		List<ProductoDTO> losProductosDTO = null;		
+		losProductosDTO = productoLogica.consultarTodosProducto();		
+		
+		return losProductosDTO;
+	}
+	
 	/*
 	@RequestMapping(value="/modificar", method = RequestMethod.PUT)
 	public void modificarCliente(@RequestBody ClienteDTO clienteDTO)throws Exception{

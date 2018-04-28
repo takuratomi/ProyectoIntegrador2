@@ -64,6 +64,51 @@ public class ControllerPadre {
 		}
 		return null;
 	}
+	
+	
+	@RequestMapping(value = "/modificarProducto", method = RequestMethod.POST)
+	public PadreDTO modificarPadreRest(@RequestBody PadreDTO padreDTO) throws Exception {
+
+		Usuario usuario = new Usuario();
+		Padre padre = new Padre();
+		String usuario_ = "";
+		Date fecha = null;
+
+		if (padreDTO != null) {
+			usuario_ = padreDTO.getUsuario();
+			fecha = padreDTO.getFecha();
+			usuario.setPrimerNombre(padreDTO.getPrimerNombre());
+			usuario.setSegundoNombre(padreDTO.getSegundoNombre());
+			usuario.setPrimerApellido(padreDTO.getPrimerApellido());
+			usuario.setSegundoApellido(padreDTO.getSegundoApellido());
+			usuario.setNumIdentificacion(padreDTO.getNumIdentificacion());
+			usuario.setTipoIdentificacion(padreDTO.getTipoIdentificacion());
+			usuario.setPassword(padreDTO.getPassword());
+			usuario.setRol(padreDTO.getRol());
+			usuario.setUsuarioCreacion(padreDTO.getUsuario());
+			usuario.setFechaCreacion(padreDTO.getFecha());
+
+			padre.setId(padreDTO.getId_padre());
+			padre.setTelefono(padreDTO.getTelefono());
+			padre.setDireccion(padreDTO.getDireccion());
+			padre.setUsuario(usuario);
+			padre.setUsuarioCreacion(usuario_);
+			padre.setFechaCreacion(fecha);
+
+			try {
+				padreLogica.modificarPadre(padre);
+				padreDTO.setCodigoError(0);
+				padreDTO.setMensajeError("Operación Exitosa");
+
+				return padreDTO;
+			} catch (Exception e) {
+				padreDTO.setCodigoError(9);
+				padreDTO.setMensajeError(e.getMessage());
+				return padreDTO;
+			}
+		}
+		return null;
+	}
 
 	@RequestMapping(value ="/verificarDatosUsuario/{id}", method=RequestMethod.GET)
 	public UsuarioDTO verificarDatosUsuario(@PathVariable("id") Long id) throws Exception {

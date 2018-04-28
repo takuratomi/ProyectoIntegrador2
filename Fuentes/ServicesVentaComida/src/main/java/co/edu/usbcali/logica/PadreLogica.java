@@ -19,41 +19,81 @@ public class PadreLogica implements IPadreLogica {
 
 	@Autowired
 	private IPadreDAO padreDAO;
-	
+
 	@Autowired
 	private IUsuarioDAO usuarioDAO;
-	
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)	
+
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	@Override
 	public void crearPadre(Padre padre) throws Exception {
-		
+
 		String mensaje = "EL campo $ es obligatorio";
-		
+
 		padre.setId(padreDAO.getConsecutivo());
 		padre.getUsuario().setId(usuarioDAO.getConsecutivo());
-		
-		if(padre == null) throw new Exception("El padre no puede ser nulo");
-		if(padre.getUsuario() == null) throw new Exception("El usuario no puede ser nulo");		
-		if(padre.getUsuario().getPrimerNombre() == null || padre.getUsuario().getPrimerNombre().equals("")) throw new Exception("EL primero nombre es obligatorio");
-		if(padre.getUsuario().getPrimerApellido() == null || padre.getUsuario().getPrimerApellido().equals("")) throw new Exception("El primer apellido es obligatorio");
-		if(padre.getUsuario().getSegundoApellido() == null || padre.getUsuario().getSegundoApellido().equals("")) throw new Exception("El segundo apellido es obligatorio");
-		if(padre.getUsuario().getTipoIdentificacion() <=0 ) throw new Exception("El tipo de identificacion es obligatorio");
-		if(padre.getUsuario().getNumIdentificacion() <=0 ) throw new Exception("El numero de identificacion es obligatorio");
-		if(padre.getUsuario().getRol() <= 0 && padre.getUsuario().getRol() >= 3) throw new Exception("El rol es obligatorio");
-		
+
+		if (padre == null)
+			throw new Exception("El padre no puede ser nulo");
+		if (padre.getUsuario() == null)
+			throw new Exception("El usuario no puede ser nulo");
+		if (padre.getUsuario().getPrimerNombre() == null || padre.getUsuario().getPrimerNombre().equals(""))
+			throw new Exception("EL primero nombre es obligatorio");
+		if (padre.getUsuario().getPrimerApellido() == null || padre.getUsuario().getPrimerApellido().equals(""))
+			throw new Exception("El primer apellido es obligatorio");
+		if (padre.getUsuario().getSegundoApellido() == null || padre.getUsuario().getSegundoApellido().equals(""))
+			throw new Exception("El segundo apellido es obligatorio");
+		if (padre.getUsuario().getTipoIdentificacion() <= 0)
+			throw new Exception("El tipo de identificacion es obligatorio");
+		if (padre.getUsuario().getNumIdentificacion() <= 0)
+			throw new Exception("El numero de identificacion es obligatorio");
+		if (padre.getUsuario().getRol() <= 0 && padre.getUsuario().getRol() >= 3)
+			throw new Exception("El rol es obligatorio");
+
 		// validacion de que el usuario con numero de identificacion no exista.
-		
-		if(padre.getDireccion() == null || padre.getDireccion().equals("")) throw new Exception(mensaje.replace("$", "direccion"));
-		if(padre.getTelefono() == null || padre.getTelefono().equals("")) throw new Exception(mensaje.replace("$", "telefono"));
-		
+
+		if (padre.getDireccion() == null || padre.getDireccion().equals(""))
+			throw new Exception(mensaje.replace("$", "direccion"));
+		if (padre.getTelefono() == null || padre.getTelefono().equals(""))
+			throw new Exception(mensaje.replace("$", "telefono"));
+
 		usuarioDAO.crear(padre.getUsuario());
 		padreDAO.crear(padre);
 	}
 
 	@Override
 	public void modificarPadre(Padre padre) throws Exception {
-		// TODO Auto-generated method stub
-		
+
+		String mensaje = "EL campo $ es obligatorio";
+
+		padre.setId(padreDAO.getConsecutivo());		
+
+		if (padre == null)
+			throw new Exception("El padre no puede ser nulo");
+		if (padre.getUsuario() == null)
+			throw new Exception("El usuario no puede ser nulo");
+		if (padre.getUsuario().getPrimerNombre() == null || padre.getUsuario().getPrimerNombre().equals(""))
+			throw new Exception("EL primero nombre es obligatorio");
+		if (padre.getUsuario().getPrimerApellido() == null || padre.getUsuario().getPrimerApellido().equals(""))
+			throw new Exception("El primer apellido es obligatorio");
+		if (padre.getUsuario().getSegundoApellido() == null || padre.getUsuario().getSegundoApellido().equals(""))
+			throw new Exception("El segundo apellido es obligatorio");
+		if (padre.getUsuario().getTipoIdentificacion() <= 0)
+			throw new Exception("El tipo de identificacion es obligatorio");
+		if (padre.getUsuario().getNumIdentificacion() <= 0)
+			throw new Exception("El numero de identificacion es obligatorio");
+		if (padre.getUsuario().getRol() <= 0 && padre.getUsuario().getRol() >= 3)
+			throw new Exception("El rol es obligatorio");
+
+		// validacion de que el usuario con numero de identificacion no exista.
+
+		if (padre.getDireccion() == null || padre.getDireccion().equals(""))
+			throw new Exception(mensaje.replace("$", "direccion"));
+		if (padre.getTelefono() == null || padre.getTelefono().equals(""))
+			throw new Exception(mensaje.replace("$", "telefono"));
+
+		usuarioDAO.modificar(padre.getUsuario());
+		padreDAO.modificar(padre);
+
 	}
 
 	@Override
@@ -67,8 +107,8 @@ public class PadreLogica implements IPadreLogica {
 		// TODO Auto-generated method stub
 		return null;
 	}
-	
-	@Transactional(readOnly=true,rollbackFor=Exception.class)
+
+	@Transactional(readOnly = true, rollbackFor = Exception.class)
 	@Override
 	public Usuario consultarUsuarioPorIdentificacion(Long numIdentificacion) throws Exception {
 		return usuarioDAO.consultarPorIdentificacion(numIdentificacion);

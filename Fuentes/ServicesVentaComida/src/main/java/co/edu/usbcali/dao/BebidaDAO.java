@@ -46,7 +46,8 @@ public class BebidaDAO implements IBebidaDAO{
 
 	@Override
 	public List<Bebida> consultarTodos() {
-		return sessionFactory.getCurrentSession().createCriteria(Bebida.class).list();
+		List<Bebida> lst = sessionFactory.getCurrentSession().createCriteria(Bebida.class).list();
+		return lst;
 	}
 	
 	@Override

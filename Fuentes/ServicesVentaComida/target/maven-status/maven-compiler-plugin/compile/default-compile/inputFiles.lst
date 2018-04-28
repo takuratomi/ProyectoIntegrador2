@@ -30,7 +30,6 @@
 /Users/takuratomi/Documents/Universidad/ProyectoIntegrador2/Fuentes/ServicesVentaComida/src/main/java/co/edu/usbcali/modelo/Almuerzo.java
 /Users/takuratomi/Documents/Universidad/ProyectoIntegrador2/Fuentes/ServicesVentaComida/src/main/java/co/edu/usbcali/dao/IPagoDAO.java
 /Users/takuratomi/Documents/Universidad/ProyectoIntegrador2/Fuentes/ServicesVentaComida/src/main/java/co/edu/usbcali/logica/IPadreLogica.java
-/Users/takuratomi/Documents/Universidad/ProyectoIntegrador2/Fuentes/ServicesVentaComida/src/main/java/co/edu/usbcali/controller/UsuarioController.java
 /Users/takuratomi/Documents/Universidad/ProyectoIntegrador2/Fuentes/ServicesVentaComida/src/main/java/co/edu/usbcali/modelo/Parametros.java
 /Users/takuratomi/Documents/Universidad/ProyectoIntegrador2/Fuentes/ServicesVentaComida/src/main/java/co/edu/usbcali/modelo/Padre.java
 /Users/takuratomi/Documents/Universidad/ProyectoIntegrador2/Fuentes/ServicesVentaComida/src/main/java/co/edu/usbcali/dao/IMenuSemanaDAO.java

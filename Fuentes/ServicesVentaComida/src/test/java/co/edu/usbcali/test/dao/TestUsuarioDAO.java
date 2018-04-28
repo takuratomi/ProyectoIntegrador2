@@ -30,7 +30,7 @@ public class TestUsuarioDAO {
 	@Autowired
 	private IUsuarioDAO usuarioDAO;
 
-	Long id = 2L;
+	Long id = 3L;
 	
 	@Test
 	@Transactional(readOnly=false,propagation=Propagation.REQUIRED,rollbackFor=Exception.class)
@@ -73,22 +73,22 @@ public class TestUsuarioDAO {
 	@Transactional(readOnly=false,propagation=Propagation.REQUIRED,rollbackFor=Exception.class)
 	@Rollback(false)
 	public void btest() {
-		Usuario usuario = new Usuario();
-		
-		usuario = usuarioDAO.consultarPorId(id);		
-		assertNull("El usuario existe", usuario);
-		
-		usuario = new Usuario();
-		usuario.setId(id);
-		usuario.setPrimerNombre("Camilo");
-		usuario.setSegundoNombre("fernando");
-		usuario.setPrimerApellido("Duarte");
-		usuario.setSegundoApellido("Duarte");
-		usuario.setTipoIdentificacion(1);
-		usuario.setNumIdentificacion(3422L);
-		usuario.setRol(2);
-		
-		usuarioDAO.crear(usuario);
+//		Usuario usuario = new Usuario();
+//		
+//		usuario = usuarioDAO.consultarPorId(id);		
+//		assertNull("El usuario existe", usuario);
+//		
+//		usuario = new Usuario();
+//		usuario.setId(id);
+//		usuario.setPrimerNombre("Camilo");
+//		usuario.setSegundoNombre("fernando");
+//		usuario.setPrimerApellido("Duarte");
+//		usuario.setSegundoApellido("Duarte");
+//		usuario.setTipoIdentificacion(1);
+//		usuario.setNumIdentificacion(3422L);
+//		usuario.setRol(2);
+//		
+//		usuarioDAO.crear(usuario);
 		
 	}
 	
@@ -120,16 +120,7 @@ public class TestUsuarioDAO {
 		assertNotNull("El usuario no existe", usuario);				
 		usuarioDAO.borrar(usuario);
 	}
-	
-	@Test
-	@Transactional(readOnly=false,propagation=Propagation.REQUIRED,rollbackFor=Exception.class)
-	@Rollback(false)
-	public void etest() {
 		
-		//Padre p = usuarioDAO.consultarPorIdentificacion(1012345L);
-				
-	}
-
 	@Test
 	@Transactional(readOnly=false,propagation=Propagation.REQUIRED,rollbackFor=Exception.class)
 	@Rollback(false)

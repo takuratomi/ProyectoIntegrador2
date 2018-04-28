@@ -1,7 +1,10 @@
 package co.edu.usbcali.test.logica;
 
+import static org.junit.Assert.assertNotNull;
+
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -47,6 +50,35 @@ public class TestProductoLogica {
 
 		try {
 			productoLogica.crearProducto(productoDTO);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+	
+	@Test
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	@Rollback(false)
+	public void ConsultaProductosDTOtest() {
+
+		List<ProductoDTO> lstProductosDTO;
+
+		try {
+			lstProductosDTO = productoLogica.consultarTodosProducto();
+			
+			assertNotNull("Los productos son nulos",lstProductosDTO);
+			
+			for (ProductoDTO productoDTO : lstProductosDTO) {
+				log.info("id "+productoDTO.getId());
+				log.info("nombre "+productoDTO.getNombre());
+				log.info("estado "+productoDTO.getEstado());
+				log.info("tipoProducto "+productoDTO.getTipoProducto());
+				
+			}
+			
+			
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

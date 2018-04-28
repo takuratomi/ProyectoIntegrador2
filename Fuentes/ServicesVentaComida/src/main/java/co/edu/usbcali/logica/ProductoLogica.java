@@ -1,6 +1,7 @@
 package co.edu.usbcali.logica;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -100,16 +101,13 @@ public class ProductoLogica implements IProductoLogica {
 			bebida.setFechaCreacion(producto.getFecha());
 			bebidaDAO.crear(bebida);
 			flag_ = true;
-			break;			
+			break;
 		}
-		
-		if(flag_)
-		{
+
+		if (flag_) {
 			producto.setCodigoError(0);
 			producto.setMensajeError("Operacion exitosa");
-		}
-		else
-		{
+		} else {
 			producto.setCodigoError(99);
 			producto.setMensajeError("Ocurrio un error inesperado,comunicarse con el proveedor");
 		}
@@ -133,8 +131,74 @@ public class ProductoLogica implements IProductoLogica {
 	@Transactional(readOnly = true, rollbackFor = Exception.class)
 	@Override
 	public List<ProductoDTO> consultarTodosProducto() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		List<ProductoDTO> losProductosDTO = new ArrayList<ProductoDTO>();
+
+		// OBTENER BEBIDAS
+		List<Bebida> lasBebidas = bebidaDAO.consultarTodos();
+		// OBTENER SOPAS
+		List<Sopa> lasSopas = sopaDAO.consultarTodos();
+		// OBTENER PRINCIPIOS
+		List<Principio> losPrincipios = principioDAO.consultarTodos();
+		// OBTENER PROTEINAS
+		List<Proteina> lasProteinas = proteinaDAO.consultarTodos();
+
+		// CREACION DEL PRODUCTODTO PARA SOPAS
+		if (lasSopas != null || lasSopas.size() > 0) {
+			for (Sopa sopa : lasSopas) {
+				ProductoDTO productoDTO = new ProductoDTO();
+				productoDTO.setId(sopa.getId());
+				productoDTO.setNombre(sopa.getNombre());
+				productoDTO.setDescripcion(sopa.getDescripcion());
+				productoDTO.setEstado(sopa.getEstado());
+				productoDTO.setTipoProducto(1);
+				losProductosDTO.add(productoDTO);
+			}
+		}
+
+		// CREACION DEL PRODUCTODTO PARA PRINCIPIOS
+		if (losPrincipios != null || losPrincipios.size() > 0) {
+			for (Principio principio : losPrincipios) {
+				ProductoDTO productoDTO = new ProductoDTO();
+				productoDTO.setId(principio.getId());
+				productoDTO.setNombre(principio.getNombre());
+				productoDTO.setDescripcion(principio.getDescripcion());
+				productoDTO.setEstado(principio.getEstado());
+				productoDTO.setTipoProducto(2);
+				losProductosDTO.add(productoDTO);
+			}
+		}
+
+		// CREACION DEL PRODUCTODTO PARA PROTEINAS
+		if (lasProteinas != null || lasProteinas.size() > 0) {
+			for (Proteina proteina : lasProteinas) {
+				ProductoDTO productoDTO = new ProductoDTO();
+				productoDTO.setId(proteina.getId());
+				productoDTO.setNombre(proteina.getNombre());
+				productoDTO.setDescripcion(proteina.getDescripcion());
+				productoDTO.setEstado(proteina.getEstado());
+				productoDTO.setTipoProducto(3);
+				losProductosDTO.add(productoDTO);
+			}
+		}
+
+		// CREACION DEL PRODUCTODTO PARA BEBIDAS
+		if (lasBebidas != null || lasBebidas.size() > 0) {
+			for (Bebida bebida : lasBebidas) {
+				ProductoDTO productoDTO = new ProductoDTO();
+				productoDTO.setId(bebida.getId());
+				productoDTO.setNombre(bebida.getNombre());
+				productoDTO.setDescripcion(bebida.getDescripcion());
+				productoDTO.setEstado(bebida.getEstado());
+				productoDTO.setTipoProducto(4);
+				losProductosDTO.add(productoDTO);
+			}
+		}
+
+		if (losProductosDTO == null || losProductosDTO.size() == 0) {
+			losProductosDTO = null;
+		}
+
+		return losProductosDTO;
 	}
 
 }
