@@ -26,8 +26,6 @@ Fuentes/.*
 
 Fuentes/serviceRestDemo/*
 
-Fuentes/AndroidStudio/*
-
 Fuentes/RemoteSystemsTempFiles/*
 
 Fuentes/ServicesVentaComida/.*
@@ -39,4 +37,6 @@ Fuentes/Servers/.*
 Fuentes/Servers copia/*
 
 Fuentes/Servers/Pivotal tc Server Developer Edition v3.1-config/*
+
+Fuentes/AndroidStudio/*
 

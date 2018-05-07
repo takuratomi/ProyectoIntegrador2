@@ -1,0 +1,75 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="co.edu.usbcali.ventacomida.RegistrarHijoFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="8dp"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Registrar Hijo" />
+        <EditText
+            android:id="@+id/inText_primer_nombre_hijo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Primer Nombre"
+            />
+        <EditText
+            android:id="@+id/inText_segundo_nombre_hijo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Segundo Nombre"
+            />
+        <EditText
+            android:id="@+id/inText_primer_apellido_hijo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Primer Apellido"
+            />
+        <EditText
+            android:id="@+id/inText_segundo_apellido_hijo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Segundo Apellido"
+            />
+        <Spinner
+            android:id="@+id/inSpinner_tipo_identificacion_hijo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp"
+            android:paddingTop="5dp">
+        </Spinner>
+        <EditText
+            android:id="@+id/inText_num_identificacion_hijo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Número Identificación"
+            />
+        <EditText
+            android:id="@+id/inText_fecha_nacimiento_hijo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Fecha De Nacimiento"
+            />
+        <EditText
+            android:id="@+id/inText_curso_hijo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Curso"
+            />
+        <Button
+            android:id="@+id/btn_guardar_hijo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="GUARDAR"
+            />
+    </LinearLayout>
+
+
+</FrameLayout>
