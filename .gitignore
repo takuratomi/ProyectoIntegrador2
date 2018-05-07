@@ -20,23 +20,18 @@ Fuentes/.metadata/*
 
 *.log
 
-Fuentes/.metadata/.lock
-
 Fuentes/.*
+
+Fuentes/ServicesVentaComida/*
+Fuentes/ServicesVentaComida/.*
+
 
 Fuentes/serviceRestDemo/*
 
 Fuentes/RemoteSystemsTempFiles/*
 
-Fuentes/ServicesVentaComida/.*
-
-visualParadigm/*.bak_*
-
 Fuentes/Servers/.*
-
-Fuentes/Servers copia/*
 
 Fuentes/Servers/Pivotal tc Server Developer Edition v3.1-config/*
 
 Fuentes/AndroidStudio/*
-
