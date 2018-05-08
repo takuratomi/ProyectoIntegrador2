@@ -13,5 +13,7 @@ public interface IPadreLogica {
 	public List<Padre>consultarPadreTodos() throws Exception;
 	
 	public Usuario consultarUsuarioPorIdentificacion(Long numIdentificacion) throws Exception;
+	
+	public Padre consultarPadrePorIdentificacion(long numIdentificacion) throws Exception;
 
 }

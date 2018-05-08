@@ -16,33 +16,13 @@ import co.edu.usbcali.logica.IProductoLogica;
 public class ControllerProducto {
 
 	@Autowired
-	private IProductoLogica productoLogica;	
-	
-	/*
-	@RequestMapping(value="/consultarPorId/{id}",method=RequestMethod.GET)
-	public ClienteDTO consultarClientePorId(@PathVariable("id")Long id)throws Exception{
-		Clientes clientes=clienteLogica.consultarPorId(id);
-		if(clientes==null){
-			return null;
-		}
-		
-		ClienteDTO clienteDTO=new ClienteDTO();
-		clienteDTO.setCliDireccion(clientes.getCliDireccion());
-		clienteDTO.setCliId(clientes.getCliId());
-		clienteDTO.setCliMail(clientes.getCliMail());
-		clienteDTO.setCliNombre(clientes.getCliNombre());
-		clienteDTO.setCliTelefono(clientes.getCliTelefono());
-		clienteDTO.setTdocCodigo(clientes.getTiposDocumentos().getTdocCodigo());
-		
-		return clienteDTO;
-	}*/
+	private IProductoLogica productoLogica;
 	
 	@RequestMapping(value="/crear", method = RequestMethod.POST)
 	public ProductoDTO crearProductoRest(@RequestBody ProductoDTO productoDTO)throws Exception{
 		
 		return productoLogica.crearProducto(productoDTO);		
-	}
-	
+	}	
 	
 	@RequestMapping(value="/consultarTodos",method=RequestMethod.GET)
 	public List<ProductoDTO> consultarClientePorId()throws Exception{

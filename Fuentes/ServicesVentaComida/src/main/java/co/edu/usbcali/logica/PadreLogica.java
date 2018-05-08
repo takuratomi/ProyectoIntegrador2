@@ -65,7 +65,7 @@ public class PadreLogica implements IPadreLogica {
 
 		String mensaje = "EL campo $ es obligatorio";
 
-		padre.setId(padreDAO.getConsecutivo());		
+		padre.setId(padreDAO.getConsecutivo());
 
 		if (padre == null)
 			throw new Exception("El padre no puede ser nulo");
@@ -93,13 +93,12 @@ public class PadreLogica implements IPadreLogica {
 
 		usuarioDAO.modificar(padre.getUsuario());
 		padreDAO.modificar(padre);
-
 	}
 
 	@Override
 	public Padre consultarPadrePorId(long id) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		Padre padre = new Padre();
+		return padreDAO.consultarPorId(id);
 	}
 
 	@Override
@@ -112,6 +111,16 @@ public class PadreLogica implements IPadreLogica {
 	@Override
 	public Usuario consultarUsuarioPorIdentificacion(Long numIdentificacion) throws Exception {
 		return usuarioDAO.consultarPorIdentificacion(numIdentificacion);
+	}
+
+	@Transactional(readOnly = true, rollbackFor = Exception.class)
+	@Override
+	public Padre consultarPadrePorIdentificacion(long numIdentificacion) throws Exception {
+		Padre padre = null;
+
+		padre = padreDAO.consultarPorIdUsuario(numIdentificacion);
+
+		return padre;
 	}
 
 }

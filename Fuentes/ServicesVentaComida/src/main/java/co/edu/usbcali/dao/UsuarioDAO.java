@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Repository;
 
-import co.edu.usbcali.modelo.Padre;
 import co.edu.usbcali.modelo.Usuario;
 
 @Repository

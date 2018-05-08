@@ -10,6 +10,7 @@ public interface IPadreDAO {
 	public void modificar(Padre entity);
 	public void borrar(Padre entity);
 	public Padre consultarPorId(Long padreId);
+	public Padre consultarPorIdUsuario(long numIdentificacion_);
 	public List<Padre> consultarTodos();
 	
 	public Long getConsecutivo();
