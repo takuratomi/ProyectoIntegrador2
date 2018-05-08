@@ -22,16 +22,10 @@ Fuentes/.metadata/*
 
 Fuentes/.*
 
-Fuentes/ServicesVentaComida/*
 Fuentes/ServicesVentaComida/.*
-
 
 Fuentes/serviceRestDemo/*
 
-
-
 Fuentes/Servers/.*
 
-Fuentes/Servers/Pivotal tc Server Developer Edition v3.1-config/*
-
-Fuentes/AndroidStudio/*
+Fuentes/Servers/
