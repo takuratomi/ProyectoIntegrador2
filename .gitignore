@@ -24,7 +24,9 @@ Fuentes/.*
 
 Fuentes/ServicesVentaComida/.*
 
-Fuentes/ServicesVentaComida/*
+Fuentes/ServicesVentaComida/target/
+
+Fuentes/ServicesVentaComida/
 
 Fuentes/serviceRestDemo/*
 
@@ -33,3 +35,7 @@ Fuentes/Servers/.*
 Fuentes/Servers/
 
 Fuentes/RemoteSystemsTempFiles/
+
+Fuentes/ServicesVentaComida/target/m2e-wtp/web-resources/META-INF/maven/ServicesVentaComida/ServicesVentaComida/pom.properties
+
+Fuentes/apk/.idea/workspace.xml
