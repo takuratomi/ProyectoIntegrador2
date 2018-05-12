@@ -8,3 +8,7 @@
 (nextVal('seq_bebida'),'JUGO DE PIÑA','A'),
 (nextVal('seq_bebida'),'JUGO DE MANZANA','I'); */
 -- delete from bebida; -- delete
+
+
+-- RESTABLESER SECUENTA
+-- ALTER SEQUENCE [nombre del sequences] RESTART;

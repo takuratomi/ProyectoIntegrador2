@@ -54,15 +54,23 @@ public class HijoDAO implements IHijoDAO {
 		Padre padre = null;
 		List<Usuario> misHijosUsuario= null;
 		List<Hijo> misHijos = null;
-		String hql_subSelect = "SELECT u FROM Usuario u, Hijo h where h.padre.id =(SELECT p.id FROM Padre p, Usuario u WHERE p.usuario.id = u.id AND u.numIdentificacion =:numIdentificaicon) AND h.usuario.id=u.id ";
-		String hql_hijo = "SELECT h FROM Usuario u, Hijo h where h.usuario.id=:idUsuario  ";
-		misHijosUsuario = sessionFactory.getCurrentSession().createQuery(hql_subSelect).setLong("numIdentificaicon", numIdentificaicon).list();		
+		String hql_subSelect = "SELECT h FROM Usuario u, Hijo h  inner JOIN FETCH h.usuario where h.padre.id =(SELECT p.id FROM Padre p, Usuario u WHERE p.usuario.id = u.id AND u.numIdentificacion =:numIdentificaicon) AND h.usuario.id=u.id ";
+//		String hql_hijo = "SELECT h FROM Usuario u, Hijo h where h.usuario.id=:idUsuario  ";
 		
-		misHijos = new ArrayList<>();
-		for (Usuario usuario : misHijosUsuario) {
-			Hijo hijo = (Hijo)sessionFactory.getCurrentSession().createQuery(hql_hijo).setLong("idUsuario", usuario.getId()).uniqueResult();			
-			misHijos.add(hijo);
-		}
+//		try {
+		
+			misHijos = sessionFactory.getCurrentSession().createQuery(hql_subSelect).setLong("numIdentificaicon", numIdentificaicon).list();
+//		} catch (Exception e) {
+//			// TODO: handle exception
+//			e.getMessage();
+//		}
+				
+		
+//		misHijos = new ArrayList<>();
+//		for (Usuario usuario : misHijosUsuario) {
+//			Hijo hijo = (Hijo)sessionFactory.getCurrentSession().createQuery(hql_hijo).setLong("idUsuario", usuario.getId()).uniqueResult();			
+//			misHijos.add(hijo);
+//		}
 		
 		return misHijos;
 	}

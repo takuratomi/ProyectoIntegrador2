@@ -22,7 +22,7 @@ public class ControllerPadre {
 	@Autowired
 	private IPadreLogica padreLogica;
 
-	@RequestMapping(value = "/crearProducto", method = RequestMethod.POST)
+	@RequestMapping(value = "/crearPadre", method = RequestMethod.POST)
 	public PadreDTO crearPadreRest(@RequestBody PadreDTO padreDTO) throws Exception {
 
 		Usuario usuario = new Usuario();
@@ -66,7 +66,7 @@ public class ControllerPadre {
 	}
 	
 	
-	@RequestMapping(value = "/modificarProducto", method = RequestMethod.POST)
+	@RequestMapping(value = "/modificarPadre", method = RequestMethod.POST)
 	public PadreDTO modificarPadreRest(@RequestBody PadreDTO padreDTO) throws Exception {
 
 		Usuario usuario = new Usuario();
