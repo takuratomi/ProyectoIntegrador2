@@ -44,34 +44,34 @@ public class TestUsuarioDAO {
 	@Rollback(false)
 	public void atest() {
 	
-		Usuario usuario = new Usuario();
-		
-		usuario = usuarioDAO.consultarPorId(id);
-		
-		assertNull("El usuario existe", usuario);
-		
-		// creacion del usuario
-		usuario = new Usuario();
-		usuario.setId(id);
-		usuario.setPrimerNombre("Camilo");
-		usuario.setSegundoNombre("fernando");
-		usuario.setPrimerApellido("Duarte");
-		usuario.setSegundoApellido("Duarte");
-		usuario.setTipoIdentificacion(1);
-		usuario.setNumIdentificacion(123422L);
-		usuario.setRol(2);
-		
-		usuarioDAO.crear(usuario);
-		
-		
-		log.info("id "+usuario.getId());
-		log.info("nombre1 "+usuario.getPrimerNombre());
-		log.info("nombre2 "+usuario.getSegundoNombre());
-		log.info("apellido1 "+usuario.getPrimerApellido());
-		log.info("apellido2 "+usuario.getSegundoApellido());
-		log.info("tipoIdent "+usuario.getTipoIdentificacion());
-		log.info("numIdent "+usuario.getNumIdentificacion());
-		log.info("rol "+usuario.getRol());
+//		Usuario usuario = new Usuario();
+//		
+//		usuario = usuarioDAO.consultarPorId(id);
+//		
+//		assertNull("El usuario existe", usuario);
+//		
+//		// creacion del usuario
+//		usuario = new Usuario();
+//		usuario.setId(id);
+//		usuario.setPrimerNombre("Camilo");
+//		usuario.setSegundoNombre("fernando");
+//		usuario.setPrimerApellido("Duarte");
+//		usuario.setSegundoApellido("Duarte");
+//		usuario.setTipoIdentificacion(1);
+//		usuario.setNumIdentificacion(123422L);
+//		usuario.setRol(2);
+//		
+//		usuarioDAO.crear(usuario);
+//		
+//		
+//		log.info("id "+usuario.getId());
+//		log.info("nombre1 "+usuario.getPrimerNombre());
+//		log.info("nombre2 "+usuario.getSegundoNombre());
+//		log.info("apellido1 "+usuario.getPrimerApellido());
+//		log.info("apellido2 "+usuario.getSegundoApellido());
+//		log.info("tipoIdent "+usuario.getTipoIdentificacion());
+//		log.info("numIdent "+usuario.getNumIdentificacion());
+//		log.info("rol "+usuario.getRol());
 		
 	}
 
@@ -103,29 +103,29 @@ public class TestUsuarioDAO {
 	@Transactional(readOnly=false,propagation=Propagation.REQUIRED,rollbackFor=Exception.class)
 	@Rollback(false)
 	public void ctest() {
-		Usuario usuario = new Usuario();
-		
-		usuario = usuarioDAO.consultarPorId(id);		
-		assertNotNull("El usuario no existe", usuario);
-		
-		
-		usuario.setSegundoApellido("Gutierrez");
-		usuario.setTipoIdentificacion(1);
-		usuario.setNumIdentificacion(22L);
-		usuario.setRol(2);
-		
-		usuarioDAO.modificar(usuario);
+//		Usuario usuario = new Usuario();
+//		
+//		usuario = usuarioDAO.consultarPorId(id);		
+//		assertNotNull("El usuario no existe", usuario);
+//		
+//		
+//		usuario.setSegundoApellido("Gutierrez");
+//		usuario.setTipoIdentificacion(1);
+//		usuario.setNumIdentificacion(22L);
+//		usuario.setRol(2);
+//		
+//		usuarioDAO.modificar(usuario);
 	}
 	
 	@Test
 	@Transactional(readOnly=false,propagation=Propagation.REQUIRED,rollbackFor=Exception.class)
 	@Rollback(false)
 	public void dtest() {
-		Usuario usuario = new Usuario();
-		
-		usuario = usuarioDAO.consultarPorId(id);		
-		assertNotNull("El usuario no existe", usuario);				
-		usuarioDAO.borrar(usuario);
+//		Usuario usuario = new Usuario();
+//		
+//		usuario = usuarioDAO.consultarPorId(id);		
+//		assertNotNull("El usuario no existe", usuario);				
+//		usuarioDAO.borrar(usuario);
 	}
 		
 	@Test
@@ -133,7 +133,7 @@ public class TestUsuarioDAO {
 	@Rollback(false)
 	public void especial_test() {
 	
-		Object ob = usuarioDAO.consultarPorIdentificacion(1113648236L);
+//		Object ob = usuarioDAO.consultarPorIdentificacion(1113648236L);
 	}
 	
 	
@@ -146,10 +146,11 @@ public class TestUsuarioDAO {
 		
 		misHijos = hijoDAO.consultarMisHijo(2311234L);
 		log.info("Inicio la muestra");
+		log.info("--------------------");
 		for (Hijo hijo : misHijos) {
-			log.info(""+hijo.getUsuario().getPrimerNombre()+" "+hijo.getUsuario().getSegundoApellido());
+			log.info("-- "+hijo.getUsuario().getPrimerNombre()+" "+hijo.getUsuario().getSegundoApellido()+" --");
 		}
-		
+		log.info("--------------------");
 				
 	}
 }

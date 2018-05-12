@@ -39,22 +39,21 @@ public class TestProductoLogica {
 	@Rollback(false)
 	public void atest() {
 
-		ProductoDTO productoDTO = new ProductoDTO();
-		
-		//productoDTO.setId(id);
-		productoDTO.setNombre("Sopa de pastas");
-		productoDTO.setTipoProducto(1);
-		productoDTO.setDescripcion("Deliciosa sopa con pasta");
-		productoDTO.setUsuario("TOSHIRO");
-		productoDTO.setFecha(new Date());
-
-		try {
-			productoLogica.crearProducto(productoDTO);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
+//		ProductoDTO productoDTO = new ProductoDTO();
+//		
+//		//productoDTO.setId(id);
+//		productoDTO.setNombre("Sopa de pastas");
+//		productoDTO.setTipoProducto(1);
+//		productoDTO.setDescripcion("Deliciosa sopa con pasta");
+//		productoDTO.setUsuario("TOSHIRO");
+//		productoDTO.setFecha(new Date());
+//
+//		try {
+//			productoLogica.crearProducto(productoDTO);
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 	}
 	
 	@Test
@@ -62,27 +61,24 @@ public class TestProductoLogica {
 	@Rollback(false)
 	public void ConsultaProductosDTOtest() {
 
-		List<ProductoDTO> lstProductosDTO;
-
-		try {
-			lstProductosDTO = productoLogica.consultarTodosProducto();
-			
-			assertNotNull("Los productos son nulos",lstProductosDTO);
-			
-			for (ProductoDTO productoDTO : lstProductosDTO) {
-				log.info("id "+productoDTO.getId());
-				log.info("nombre "+productoDTO.getNombre());
-				log.info("estado "+productoDTO.getEstado());
-				log.info("tipoProducto "+productoDTO.getTipoProducto());
-				
-			}
-			
-			
-			
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		List<ProductoDTO> lstProductosDTO;
+//
+//		try {
+//			lstProductosDTO = productoLogica.consultarTodosProducto();
+//			
+//			assertNotNull("Los productos son nulos",lstProductosDTO);
+//			
+//			for (ProductoDTO productoDTO : lstProductosDTO) {
+//				log.info("id "+productoDTO.getId());
+//				log.info("nombre "+productoDTO.getNombre());
+//				log.info("estado "+productoDTO.getEstado());
+//				log.info("tipoProducto "+productoDTO.getTipoProducto());
+//				
+//			}
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 
 	}
 
@@ -111,20 +107,6 @@ public class TestProductoLogica {
 		assertNotNull("La bebida no existe", bebida);	
 		
 		bebidaDAO.borrar(bebida);
-	}
-
-	@Test
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	@Rollback(false)
-	public void etest() {
-
-	}
-
-	@Test
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	@Rollback(false)
-	public void especial_test() {
-
-	}
+	}	
 	*/
 }

@@ -42,21 +42,21 @@ public class TestSopaDAO {
 	@Rollback(false)
 	public void atest() {
 
-		Sopa sopa = sopaDAO.consultarPorId(id);
-
-		assertNull("La sopa existe", sopa);
-
-		// creacion de sopa
-		sopa = new Sopa();
-		sopa.setId(id);
-		sopa.setNombre("Crema");
-		// sopa.setDescripcion("rica crema");
-
-		sopaDAO.crear(sopa);
-
-		log.info("id " + sopa.getId());
-		log.info("nombre " + sopa.getNombre());
-		log.info("descripcion " + sopa.getDescripcion());
+//		Sopa sopa = sopaDAO.consultarPorId(id);
+//
+//		assertNull("La sopa existe", sopa);
+//
+//		// creacion de sopa
+//		sopa = new Sopa();
+//		sopa.setId(id);
+//		sopa.setNombre("Crema");
+//		// sopa.setDescripcion("rica crema");
+//
+//		sopaDAO.crear(sopa);
+//
+//		log.info("id " + sopa.getId());
+//		log.info("nombre " + sopa.getNombre());
+//		log.info("descripcion " + sopa.getDescripcion());
 
 	}
 
@@ -65,13 +65,13 @@ public class TestSopaDAO {
 	@Rollback(false)
 	public void ctest() {
 
-		Sopa sopa = sopaDAO.consultarPorId(id);
-
-		assertNotNull("La sopa existe", sopa);
-
-		sopa.setNombre("Pescado");
-		
-		sopaDAO.modificar(sopa);
+//		Sopa sopa = sopaDAO.consultarPorId(id);
+//
+//		assertNotNull("La sopa existe", sopa);
+//
+//		sopa.setNombre("Pescado");
+//		
+//		sopaDAO.modificar(sopa);
 		
 	}
 
@@ -80,24 +80,10 @@ public class TestSopaDAO {
 	@Rollback(false)
 	public void dtest() {
 
-		Sopa sopa = sopaDAO.consultarPorId(id);
-
-		assertNotNull("La sopa no existe", sopa);	
-		
-		sopaDAO.borrar(sopa);
-	}
-
-	@Test
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	@Rollback(false)
-	public void etest() {
-
-	}
-
-	@Test
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	@Rollback(false)
-	public void especial_test() {
-
+//		Sopa sopa = sopaDAO.consultarPorId(id);
+//
+//		assertNotNull("La sopa no existe", sopa);	
+//		
+//		sopaDAO.borrar(sopa);
 	}
 }

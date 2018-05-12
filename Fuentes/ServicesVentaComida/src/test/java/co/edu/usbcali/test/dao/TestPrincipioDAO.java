@@ -38,22 +38,22 @@ public class TestPrincipioDAO {
 	@Rollback(false)
 	public void atest() {		
 
-		Principio principio= principioDAO.consultarPorId(id);
-
-		assertNull("El principio existe", principio);
-
-		// creacion de principio
-		principio = new Principio();	
-		
-		principio.setId(id);
-		principio.setNombre("Frijoles");
-		principio.setDescripcion("Frijoles al gusto ...");
-
-		principioDAO.crear(principio);
-
-		log.info("id: "+principio.getId());
-		log.info("nombre: "+principio.getNombre());
-		log.info("descripcion: "+principio.getDescripcion());
+//		Principio principio= principioDAO.consultarPorId(id);
+//
+//		assertNull("El principio existe", principio);
+//
+//		// creacion de principio
+//		principio = new Principio();	
+//		
+//		principio.setId(id);
+//		principio.setNombre("Frijoles");
+//		principio.setDescripcion("Frijoles al gusto ...");
+//
+//		principioDAO.crear(principio);
+//
+//		log.info("id: "+principio.getId());
+//		log.info("nombre: "+principio.getNombre());
+//		log.info("descripcion: "+principio.getDescripcion());
 		
 	}
 
@@ -61,39 +61,25 @@ public class TestPrincipioDAO {
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	@Rollback(false)
 	public void ctest() {
-		Principio principio= principioDAO.consultarPorId(id);
-
-		assertNotNull("El principio existe", principio);
-
-		principio.setNombre("Pasta");
-		principio.setDescripcion("pasta napolitana...");
-		
-		principioDAO.modificar(principio);
+//		Principio principio= principioDAO.consultarPorId(id);
+//
+//		assertNotNull("El principio existe", principio);
+//
+//		principio.setNombre("Pasta");
+//		principio.setDescripcion("pasta napolitana...");
+//		
+//		principioDAO.modificar(principio);
 	}
 
 	@Test
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	@Rollback(false)
 	public void dtest() {
-		
-		Principio principio= principioDAO.consultarPorId(id);
-
-		assertNotNull("El principio existe", principio);		
-		
-		principioDAO.borrar(principio);
-	}
-
-	@Test
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	@Rollback(false)
-	public void etest() {
-
-	}
-
-	@Test
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	@Rollback(false)
-	public void especial_test() {
-
-	}
+//		
+//		Principio principio= principioDAO.consultarPorId(id);
+//
+//		assertNotNull("El principio existe", principio);		
+//		
+//		principioDAO.borrar(principio);
+	}	
 }

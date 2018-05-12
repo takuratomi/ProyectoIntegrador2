@@ -20,11 +20,14 @@ Fuentes/.metadata/*
 
 *.log
 
+Fuentes/
 Fuentes/.*
 
 Fuentes/ServicesVentaComida/.*
 
 Fuentes/ServicesVentaComida/target/
+
+Fuentes/ServicesVentaComida/target
 
 Fuentes/ServicesVentaComida/
 

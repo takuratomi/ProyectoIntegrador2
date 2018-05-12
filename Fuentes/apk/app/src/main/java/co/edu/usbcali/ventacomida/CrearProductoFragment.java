@@ -118,8 +118,6 @@ public class CrearProductoFragment extends Fragment {
         //        AdapterProductos adapterProductos = new AdapterProductos(getActivity().getApplicationContext(),losProducto);
         //        listViewProdcutos.setAdapter(adapterProductos);
 
-
-
         View view = inflater.inflate(R.layout.fragment_crear_producto, container, false);
         createProdcutoFormView = view.findViewById(R.id.form_create_producto);
         mProgressView = view.findViewById(R.id.spinner_tipo_producto);
@@ -351,12 +349,17 @@ public class CrearProductoFragment extends Fragment {
         @Override
         protected ProductoDTO doInBackground(Void... voids) {
             try {
+
                 String url_ = "http://192.168.1.5:8080/ServicesVentaComida/controller/ProductoRest/crear";
                 restTemplate = new RestTemplate();
                 restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+
                 HttpEntity<ProductoDTO> request = new HttpEntity<ProductoDTO>(productoDTO);
+
                 try {
+
                     Object response = restTemplate.postForEntity(url, productoDTO, ProductoDTO.class);
+
                 }catch (Exception e)
                 {
                     String mensjea = e.getMessage();

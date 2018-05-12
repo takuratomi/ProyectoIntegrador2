@@ -31,6 +31,7 @@ import java.util.List;
 
 import co.edu.usbcali.ventacomida.alertas.AlertaServicio;
 import co.edu.usbcali.ventacomida.dto.UsuarioDTO;
+import co.edu.usbcali.ventacomida.services.ServiceRest;
 
 /**
  * A login screen that offers login via email/password.
@@ -290,9 +291,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         @Override
         protected Boolean doInBackground(Void... params) {
 
-            String url = "http://192.168.1.5:8080/ServicesVentaComida/controller/PadreRest/verificarDatosUsuario/"+mEmail.trim();
+            ServiceRest serviceRest = new ServiceRest();
+            String url = serviceRest.VERIFICARDATOSUSUARIO_GET_LONG_USUARIODTO+mEmail.trim();
             int rol = 0;
             RestTemplate restTemplate = new RestTemplate();
+
             restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
 
             try {

@@ -40,7 +40,7 @@ public class AdapterProductos extends BaseAdapter {
 
     @Override
     public long getItemId(int i) {
-        return listaProductos.get(i).getId().longValue();
+        return Long.parseLong(listaProductos.get(i).getId().toString());
     }
 
     @Override
@@ -53,10 +53,12 @@ public class AdapterProductos extends BaseAdapter {
         TextView txtView_nombre = (TextView) vista.findViewById(R.id.textView_nombre);
 
         int tamano = listaProductos.size();
+        String id = listaProductos.get(i).getId().toString();
+        String nombre = listaProductos.get(i).getNombre().toString();
 
 
-        txtView_id.setText(listaProductos.get(i).getId().toString());
-        txtView_nombre.setText(listaProductos.get(i).getNombre().toString());
+        txtView_id.setText(id);
+        txtView_nombre.setText(nombre);
 
         return vista;
 //        return null;

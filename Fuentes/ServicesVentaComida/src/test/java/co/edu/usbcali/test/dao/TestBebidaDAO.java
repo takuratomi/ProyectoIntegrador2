@@ -38,23 +38,23 @@ public class TestBebidaDAO {
 	@Rollback(false)
 	public void atest() {
 
-		Bebida bebida = bebidaDAO.consultarPorId(id);
-
-		assertNull("La bebida existe", bebida);
-
-		// creacion de bebida
-		bebida = new Bebida();
-				
-		bebida.setId(id);
-		bebida.setNombre("Jugo de mora");
-		bebida.setDescripcion("rica bebida");
-		bebida.setEstado("A");
-
-		bebidaDAO.crear(bebida);
-
-		log.info("id " + bebida.getId());
-		log.info("nombre " + bebida.getNombre());
-		log.info("descripcion " + bebida.getDescripcion());
+//		Bebida bebida = bebidaDAO.consultarPorId(id);
+//
+//		assertNull("La bebida existe", bebida);
+//
+//		// creacion de bebida
+//		bebida = new Bebida();
+//				
+//		bebida.setId(id);
+//		bebida.setNombre("Jugo de mora");
+//		bebida.setDescripcion("rica bebida");
+//		bebida.setEstado("A");
+//
+//		bebidaDAO.crear(bebida);
+//
+//		log.info("id " + bebida.getId());
+//		log.info("nombre " + bebida.getNombre());
+//		log.info("descripcion " + bebida.getDescripcion());
 
 	}
 
@@ -63,12 +63,12 @@ public class TestBebidaDAO {
 	@Rollback(false)
 	public void ctest() {
 
-		Bebida bebida = bebidaDAO.consultarPorId(id);
-
-		assertNotNull("La bebida existe", bebida);
-		bebida.setNombre("Jugo de naranja");
-		
-		bebidaDAO.modificar(bebida);
+//		Bebida bebida = bebidaDAO.consultarPorId(id);
+//
+//		assertNotNull("La bebida existe", bebida);
+//		bebida.setNombre("Jugo de naranja");
+//		
+//		bebidaDAO.modificar(bebida);
 		
 	}
 
@@ -77,24 +77,11 @@ public class TestBebidaDAO {
 	@Rollback(false)
 	public void dtest() {
 
-		Bebida bebida = bebidaDAO.consultarPorId(id);
-
-		assertNotNull("La bebida no existe", bebida);	
-		
-		bebidaDAO.borrar(bebida);
+//		Bebida bebida = bebidaDAO.consultarPorId(id);
+//
+//		assertNotNull("La bebida no existe", bebida);	
+//		
+//		bebidaDAO.borrar(bebida);
 	}
-
-	@Test
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	@Rollback(false)
-	public void etest() {
-
-	}
-
-	@Test
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	@Rollback(false)
-	public void especial_test() {
-
-	}
+	
 }

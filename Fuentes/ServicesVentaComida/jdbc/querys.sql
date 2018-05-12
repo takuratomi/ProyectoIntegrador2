@@ -12,3 +12,6 @@
 
 -- RESTABLESER SECUENTA
 -- ALTER SEQUENCE [nombre del sequences] RESTART;
+
+
+select * from principio;

@@ -5,12 +5,14 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -26,6 +28,7 @@ import java.util.List;
 
 import co.edu.usbcali.ventacomida.adapters.AdapterProductos;
 import co.edu.usbcali.ventacomida.dto.ProductoDTO;
+import co.edu.usbcali.ventacomida.services.ServiceRest;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -99,17 +102,17 @@ public class ConsultarProductoFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_consultar_producto, container, false);
 
         listViewProdcutos = view.findViewById(R.id.losProductos);
-//        losProducto = generateDatos();
+        losProducto = generateDatos();
         serviceConsultarProductos = new ServiceConsultarProductos();
         serviceConsultarProductos.execute();
-        List<ProductoDTO> lista = serviceConsultarProductos.getLosProductos();
+        losProducto = serviceConsultarProductos.getLosProductos();
         try {
             Thread.sleep(3000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-        AdapterProductos adapterProductos = new AdapterProductos(getActivity().getApplicationContext(),lista);
+        AdapterProductos adapterProductos = new AdapterProductos(getActivity().getApplicationContext(),losProducto);
         listViewProdcutos.setAdapter(adapterProductos);
 
         return view;
@@ -172,7 +175,7 @@ public class ConsultarProductoFragment extends Fragment {
 //        lst.add(new ProductoDTO(1,new BigDecimal("9"),"bebida9","A"));
 //        lst.add(new ProductoDTO(1,new BigDecimal("10"),"bebida10","A"));
 //        lst.add(new ProductoDTO(1,new BigDecimal("11"),"bebida11","A"));
-
+//
         List<ProductoDTO> lst = new ArrayList<ProductoDTO>();
         serviceConsultarProductos = new ServiceConsultarProductos();
         serviceConsultarProductos.execute();
@@ -183,13 +186,13 @@ public class ConsultarProductoFragment extends Fragment {
             e.printStackTrace();
         }
 
-        if(lst != null ) {
-            for (ProductoDTO produtoDto : lst) {
-                Log.d("Error",produtoDto.getId().toString());
-                Log.d("Error",produtoDto.getNombre().toString());
-                Log.d("Error",produtoDto.getDescripcion().toString());
-            }
-        }
+//        if(lst != null ) {
+//            for (ProductoDTO produtoDto : lst) {
+//                Log.d("Error",produtoDto.getId().toString());
+//                Log.d("Error",produtoDto.getNombre().toString());
+//                Log.d("Error",produtoDto.getDescripcion().toString());
+//            }
+//        }
 
 
         return lst;
@@ -198,7 +201,9 @@ public class ConsultarProductoFragment extends Fragment {
     public class ServiceConsultarProductos extends AsyncTask<Void,Void,List<ProductoDTO>>
     {
         // VARS
-        private String url = "http://192.168.1.8:8080/ServicesVentaComida/controller/ProductoRest/consultarTodos";
+        ServiceRest serviceRest = new ServiceRest();
+
+        //private String url = "http://192.168.1.8:8080/ServicesVentaComida/controller/ProductoRest/consultarTodos";
         private List<ProductoDTO> losProductos;
         private RestTemplate restTemplate;
 
@@ -206,19 +211,19 @@ public class ConsultarProductoFragment extends Fragment {
         public ServiceConsultarProductos() {}
 
         public ServiceConsultarProductos(String url, List<ProductoDTO> losProductos) {
-            this.url = url;
+            //this.url = url;
             this.losProductos = losProductos;
         }
 
         // GETTER AND SETTER
 
-        public String getUrl() {
-            return url;
-        }
-
-        public void setUrl(String url) {
-            this.url = url;
-        }
+//        public String getUrl() {
+//            return url;
+//        }
+//
+//        public void setUrl(String url) {
+//            this.url = url;
+//        }
 
         public List<ProductoDTO> getLosProductos() {
             return losProductos;
@@ -264,14 +269,17 @@ public class ConsultarProductoFragment extends Fragment {
             try {
                 restTemplate = new RestTemplate();
                 restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
-                ProductoDTO[] losProductosDTO = restTemplate.getForObject(url, ProductoDTO[].class);
+                String temporal_url = serviceRest.CONSULTARPRODCUTOS_POST_NULL_LISTAPRODUCTOS;
+
+                ProductoDTO[] losProductosDTO = restTemplate.getForObject(serviceRest.CONSULTARPRODCUTOS_POST_NULL_LISTAPRODUCTOS, ProductoDTO[].class);
+
                 losProductos = Arrays.asList(losProductosDTO);
 
             }catch (Exception ex)
             {
                 String e = ex.getMessage();
             }
-            return losProductos ;
+            return losProductos;
         }
     }
 

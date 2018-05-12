@@ -119,19 +119,27 @@ public class ControllerPadre {
 		try {
 			
 			Usuario user = padreLogica.consultarUsuarioPorIdentificacion(numIdentificacion);
-						
-			usuarioDTO.setId(user.getId());
-			usuarioDTO.setPrimerNombre(user.getPrimerNombre());
-			usuarioDTO.setSegundoNombre(user.getSegundoNombre());
-			usuarioDTO.setPrimerApellido(user.getPrimerApellido());
-			usuarioDTO.setSegundoApellido(user.getSegundoApellido());
-			usuarioDTO.setRol(user.getRol());
-			usuarioDTO.setNumIdentificacion(user.getNumIdentificacion());
-			usuarioDTO.setTipoIdentificacion(user.getTipoIdentificacion());
-						
-			usuarioDTO.setCodigoError(0);
-			usuarioDTO.setMensajeError("Operación Exitosa");
-		
+					
+			if(user != null)
+			{
+				usuarioDTO.setId(user.getId());
+				usuarioDTO.setPrimerNombre(user.getPrimerNombre());
+				usuarioDTO.setSegundoNombre(user.getSegundoNombre());
+				usuarioDTO.setPrimerApellido(user.getPrimerApellido());
+				usuarioDTO.setSegundoApellido(user.getSegundoApellido());
+				usuarioDTO.setRol(user.getRol());
+				usuarioDTO.setNumIdentificacion(user.getNumIdentificacion());
+				usuarioDTO.setTipoIdentificacion(user.getTipoIdentificacion());
+							
+				usuarioDTO.setCodigoError(0);
+				usuarioDTO.setMensajeError("Operación Exitosa");
+			}
+			else
+			{
+				usuarioDTO.setCodigoError(91);
+				usuarioDTO.setMensajeError("El usuario no existe");
+			}
+			
 			return usuarioDTO;
 
 		} catch (Exception e) {
@@ -140,8 +148,7 @@ public class ControllerPadre {
 			usuarioDTO.setMensajeError(e.getMessage());
 		
 			return usuarioDTO;
-		}
-		
+		}		
 	}
 	/*
 	@RequestMapping(value = "/verificarDatosUsuario/{id}", method = RequestMethod.GET)

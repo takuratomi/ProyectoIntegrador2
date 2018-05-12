@@ -40,23 +40,23 @@ public class TestProteinaDAO {
 	@Rollback(false)
 	public void atest() {
 
-		Proteina proteina = new Proteina();
-
-		proteina = proteinaDAO.consultarPorId(id);
-
-		assertNull("La proteina existe", proteina);
-
-		// creacion de proteina
-		proteina = new Proteina();
-		proteina.setId(id);
-		proteina.setNombre("Carne desmechada");
-		proteina.setDescripcion("carne rica en ...");
-
-		proteinaDAO.crear(proteina);
-
-		log.info("id " + proteina.getId());
-		log.info("nombre " + proteina.getNombre());
-		log.info("descripcion " + proteina.getDescripcion());
+//		Proteina proteina = new Proteina();
+//
+//		proteina = proteinaDAO.consultarPorId(id);
+//
+//		assertNull("La proteina existe", proteina);
+//
+//		// creacion de proteina
+//		proteina = new Proteina();
+//		proteina.setId(id);
+//		proteina.setNombre("Carne desmechada");
+//		proteina.setDescripcion("carne rica en ...");
+//
+//		proteinaDAO.crear(proteina);
+//
+//		log.info("id " + proteina.getId());
+//		log.info("nombre " + proteina.getNombre());
+//		log.info("descripcion " + proteina.getDescripcion());
 
 	}
 
@@ -64,15 +64,15 @@ public class TestProteinaDAO {
 	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
 	@Rollback(false)
 	public void ctest() {
-		Proteina proteina = new Proteina();
-
-		proteina = proteinaDAO.consultarPorId(id);
-
-		assertNotNull("La proteina no existe", proteina);
-
-		proteina.setNombre("Pescado");
-		proteina.setDescripcion("");
-		proteinaDAO.modificar(proteina);
+//		Proteina proteina = new Proteina();
+//
+//		proteina = proteinaDAO.consultarPorId(id);
+//
+//		assertNotNull("La proteina no existe", proteina);
+//
+//		proteina.setNombre("Pescado");
+//		proteina.setDescripcion("");
+//		proteinaDAO.modificar(proteina);
 	}
 
 	@Test
@@ -80,24 +80,10 @@ public class TestProteinaDAO {
 	@Rollback(false)
 	public void dtest() {
 		
-		Proteina proteina = new Proteina();
-		proteina = proteinaDAO.consultarPorId(id);
-		
-		assertNotNull("La proteina no existe", proteina);
-		proteinaDAO.borrar(proteina);
-	}
-
-	@Test
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	@Rollback(false)
-	public void etest() {
-
-	}
-
-	@Test
-	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-	@Rollback(false)
-	public void especial_test() {
-
+//		Proteina proteina = new Proteina();
+//		proteina = proteinaDAO.consultarPorId(id);
+//		
+//		assertNotNull("La proteina no existe", proteina);
+//		proteinaDAO.borrar(proteina);
 	}
 }
