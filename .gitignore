@@ -24,8 +24,12 @@ Fuentes/.*
 
 Fuentes/ServicesVentaComida/.*
 
+Fuentes/ServicesVentaComida/*
+
 Fuentes/serviceRestDemo/*
 
 Fuentes/Servers/.*
 
 Fuentes/Servers/
+
+Fuentes/RemoteSystemsTempFiles/
