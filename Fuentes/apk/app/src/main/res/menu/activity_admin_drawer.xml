@@ -11,14 +11,14 @@
             android:id="@+id/nav_consultar_producto"
             android:icon="@drawable/ic_menu_gallery"
             android:title="Consultar Productos" />
-        <item
-            android:id="@+id/nav_consultar_ninos"
-            android:icon="@drawable/ic_menu_slideshow"
-            android:title="Consultar Niños" />
-        <item
-            android:id="@+id/nav_consultar_pedidos"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Consultar Pedidos" />
+        <!--<item-->
+            <!--android:id="@+id/nav_consultar_ninos"-->
+            <!--android:icon="@drawable/ic_menu_slideshow"-->
+            <!--android:title="Consultar Niños" />-->
+        <!--<item-->
+            <!--android:id="@+id/nav_consultar_pedidos"-->
+            <!--android:icon="@drawable/ic_menu_manage"-->
+            <!--android:title="Consultar Pedidos" />-->
         <item
             android:id="@+id/nav_registrar_padre"
             android:icon="@drawable/ic_menu_manage"

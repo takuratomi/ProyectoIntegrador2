@@ -4,6 +4,11 @@
     android:layout_height="match_parent"
     tools:context="co.edu.usbcali.ventacomida.ConsultarProductoFragment">
 
+    <ProgressBar
+        android:id="@+id/progresbar_consultar_producto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"/>
     <ListView
         android:id="@+id/losProductos"
         android:layout_width="match_parent"

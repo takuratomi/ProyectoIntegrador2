@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item
-        android:id="@+id/action_crear_producto"
-        android:orderInCategory="100"
-        android:title="Crear Producto"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/action_consultar_productos"
-        android:orderInCategory="100"
-        android:title="Consultar Producto"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/action_consultar_ninos"
-        android:orderInCategory="100"
-        android:title="Consultar Niños"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/action_pedidos"
-        android:orderInCategory="100"
-        android:title="Consultar pedidos"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/action_registrar_padre"
-        android:orderInCategory="100"
-        android:title="Registrar Padre"
-        app:showAsAction="never" />
+    <!--<item-->
+        <!--android:id="@+id/action_crear_producto"-->
+        <!--android:orderInCategory="100"-->
+        <!--android:title="Crear Producto"-->
+        <!--app:showAsAction="never" />-->
+    <!--<item-->
+        <!--android:id="@+id/action_consultar_productos"-->
+        <!--android:orderInCategory="100"-->
+        <!--android:title="Consultar Producto"-->
+        <!--app:showAsAction="never" />-->
+    <!--<item-->
+        <!--android:id="@+id/action_consultar_ninos"-->
+        <!--android:orderInCategory="100"-->
+        <!--android:title="Consultar Niños"-->
+        <!--app:showAsAction="never" />-->
+    <!--<item-->
+        <!--android:id="@+id/action_pedidos"-->
+        <!--android:orderInCategory="100"-->
+        <!--android:title="Consultar pedidos"-->
+        <!--app:showAsAction="never" />-->
+    <!--<item-->
+        <!--android:id="@+id/action_registrar_padre"-->
+        <!--android:orderInCategory="100"-->
+        <!--android:title="Registrar Padre"-->
+        <!--app:showAsAction="never" />-->
 </menu>

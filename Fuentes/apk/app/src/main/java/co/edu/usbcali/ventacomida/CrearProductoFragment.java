@@ -27,6 +27,7 @@ import java.util.Date;
 
 import co.edu.usbcali.ventacomida.alertas.AlertaServicio;
 import co.edu.usbcali.ventacomida.dto.ProductoDTO;
+import co.edu.usbcali.ventacomida.services.ServiceRest;
 
 //import android.widget.AdapterView;
 
@@ -350,7 +351,7 @@ public class CrearProductoFragment extends Fragment {
         protected ProductoDTO doInBackground(Void... voids) {
             try {
 
-                String url_ = "http://192.168.1.5:8080/ServicesVentaComida/controller/ProductoRest/crear";
+                ServiceRest serviceRest = new ServiceRest();
                 restTemplate = new RestTemplate();
                 restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
 
@@ -358,7 +359,7 @@ public class CrearProductoFragment extends Fragment {
 
                 try {
 
-                    Object response = restTemplate.postForEntity(url, productoDTO, ProductoDTO.class);
+                    Object response = restTemplate.postForEntity(serviceRest.CREARPRODUCTO_POST_PRODUCTODTO_PRODUCTODTO, productoDTO, ProductoDTO.class);
 
                 }catch (Exception e)
                 {

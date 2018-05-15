@@ -26,6 +26,7 @@ import co.edu.usbcali.ventacomida.alertas.AlertaServicio;
 import co.edu.usbcali.ventacomida.dto.PadreDTO;
 import co.edu.usbcali.ventacomida.dto.ProductoDTO;
 import co.edu.usbcali.ventacomida.dto.UsuarioDTO;
+import co.edu.usbcali.ventacomida.services.ServiceRest;
 
 
 /**
@@ -372,14 +373,14 @@ public class RegistrarPadreFragment extends Fragment {
 
         @Override
         protected Boolean doInBackground(Boolean... booleans) {
+            ServiceRest serviceRest = new ServiceRest();
 
-            String url = "http://192.168.1.5:8080/ServicesVentaComida/controller/PadreRest/crearPadre" ;
             int rol = 0;
             restTemplate = new RestTemplate();
             restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
             HttpEntity<PadreDTO> request = new HttpEntity<PadreDTO>(padreDTO);
             try {
-                request = restTemplate.postForEntity(url,padreDTO,PadreDTO.class);
+                request = restTemplate.postForEntity(serviceRest.REGISTRARPADRE_POST_PADREDTO_PADREDTO,padreDTO,PadreDTO.class);
                 return true;
             }catch (Exception e)
             {

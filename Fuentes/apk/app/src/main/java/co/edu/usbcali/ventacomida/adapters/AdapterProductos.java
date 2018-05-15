@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.CheckBox;
 import android.widget.TextView;
 
 import java.util.List;
@@ -45,23 +46,23 @@ public class AdapterProductos extends BaseAdapter {
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        View vista ;
+
         LayoutInflater inflater = LayoutInflater.from(context);
-        vista = inflater.inflate(R.layout.list_consultar_producto,null);
+        View vista = inflater.inflate(R.layout.list_consultar_producto,null);
 
         TextView txtView_id = (TextView) vista.findViewById(R.id.textView_id);
         TextView txtView_nombre = (TextView) vista.findViewById(R.id.textView_nombre);
+        CheckBox checkBox_selected = (CheckBox) vista.findViewById(R.id.checkbox_estatus);
 
-        int tamano = listaProductos.size();
+//        int tamano = listaProductos.size();
         String id = listaProductos.get(i).getId().toString();
         String nombre = listaProductos.get(i).getNombre().toString();
 
-
-        txtView_id.setText(id);
-        txtView_nombre.setText(nombre);
+        txtView_id.setText(listaProductos.get(i).getId().toString());
+        txtView_nombre.setText(listaProductos.get(i).getNombre().toString());
+        checkBox_selected.setChecked(true);
 
         return vista;
-//        return null;
     }
 
     @Nullable

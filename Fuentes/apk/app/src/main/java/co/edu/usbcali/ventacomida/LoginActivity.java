@@ -17,11 +17,13 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
+import android.widget.Toast;
 
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
@@ -43,6 +45,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private View mProgressView;
     private View mLoginFormView;
     private AlertaServicio alertaServicio;
+    private boolean responseService = false;
 
     // VARS
     private UserLoginTask mAuthTask = null;
@@ -67,7 +70,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             @Override
             public void onClick(View view) {
                 attemptLogin();
-                showProgress(false);
             }
         });
     }
@@ -80,32 +82,44 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
         // for very easy animations. If available, use these APIs to fade-in
         // the progress spinner.
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
-            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
 
-            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-            mLoginFormView.animate().setDuration(shortAnimTime).alpha(
-                    show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-                }
-            });
-
-            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-            mProgressView.animate().setDuration(shortAnimTime).alpha(
-                    show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-                }
-            });
-        } else {
-            // The ViewPropertyAnimator APIs are not available, so simply show
-            // and hide the relevant UI components.
-            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+        if(show)
+        {
+            mProgressView.setVisibility(View.VISIBLE);
+            mLoginFormView.setVisibility(View.GONE);
         }
+        else
+        {
+            mProgressView.setVisibility(View.GONE);
+            mLoginFormView.setVisibility(View.VISIBLE);
+        }
+
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
+//            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
+//
+//            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+//            mLoginFormView.animate().setDuration(shortAnimTime).alpha(
+//                    show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
+//                @Override
+//                public void onAnimationEnd(Animator animation) {
+//                    mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+//                }
+//            });
+//
+//            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+//            mProgressView.animate().setDuration(shortAnimTime).alpha(
+//                    show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
+//                @Override
+//                public void onAnimationEnd(Animator animation) {
+//                    mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+//                }
+//            });
+//        } else {
+//            // The ViewPropertyAnimator APIs are not available, so simply show
+//            // and hide the relevant UI components.
+//            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+//            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+//        }
     }
 
     @Override
@@ -166,9 +180,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             mIdentificacionlView.setError(getString(R.string.error_field_required));
             focusView = mIdentificacionlView;
             cancel = true;
-        }
-        else if(!TextUtils.isDigitsOnly(email))
-        {
+        } else if (!TextUtils.isDigitsOnly(email)) {
             mIdentificacionlView.setError("Solo se aceptan valores numericos");
             focusView = mIdentificacionlView;
             cancel = true;
@@ -185,44 +197,108 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             mAuthTask = new UserLoginTask(email);
             mAuthTask.execute((Void) null);
 
-            try {
-                Thread.sleep(3500);
+//            Log.d("temporal", "Salida del bucle del servicio");
+//
+//            showProgress(true);
+//            try {
+//                Thread.sleep(4000);
+//
+//            } catch (InterruptedException e) {
+//            }
 
-            }catch (InterruptedException e) {}
-
-            usuarioDTO = mAuthTask.getUsuarioDTO();
-            mAuthTask = null;
-
-            // para pruebas
-            if(email.equals("1"))
-            {
-                gotoActivity(1);
-            }
-            else if (email.equals("2"))
-            {
-                gotoActivity(2);
-            }
-            else if(usuarioDTO != null  && usuarioDTO.getCodigoError() == 0)
-            {
-                gotoActivity(usuarioDTO.getRol());
-            }
-            else if(usuarioDTO != null && usuarioDTO.getCodigoError() == 91)
-            {
-                mIdentificacionlView.setError(usuarioDTO.getMensajeError());
-                mIdentificacionlView.findFocus();
-            }
-            else if(usuarioDTO != null  && usuarioDTO.getCodigoError() != 0 && usuarioDTO.getCodigoError() != 91)
-            {
-                alertaServicio = new AlertaServicio("Alerta De Servicio","Ocurrio Un error en conexion volver a intentarlo");
-                alertaServicio.show(getSupportFragmentManager(),"tagAlerta");
-            }
-            else if (usuarioDTO == null)
-            {
-                alertaServicio = new AlertaServicio("Alerta De Servicio","Ocurrio Un error en conexion volver a intentarlo");
-                alertaServicio.show(getSupportFragmentManager(),"tagAlerta");
-            }
+//            usuarioDTO = mAuthTask.getUsuarioDTO();
+//
+//
+//            // servicio funciono de forma satisfactoria
+//            if (mAuthTask.statusServices) {
+//                usuarioDTO = mAuthTask.getUsuarioDTO();
+//                mAuthTask = null;
+//
+//                // para pruebas
+//                if (email.equals("1")) {
+//                    gotoActivity(1);
+//                } else if (email.equals("2")) {
+//                    gotoActivity(2);
+//                } else if (usuarioDTO == null) {
+//                    mIdentificacionlView.findFocus();
+//                    showProgress(false);
+//                    Toast toast = Toast.makeText(getApplicationContext(), "Ocurrio un error en la conexión", Toast.LENGTH_SHORT);
+//                    toast.show();
+//                }
+//                //  inicio de activity correspondiente segun el rol
+//                else if (usuarioDTO != null && usuarioDTO.getCodigoError() == 0) {
+//                    gotoActivity(usuarioDTO.getRol());
+//                } else if (usuarioDTO != null && usuarioDTO.getCodigoError() == 91) {
+//                    mIdentificacionlView.findFocus();
+//                    showProgress(false);
+//                    Toast toast = Toast.makeText(getApplicationContext(), usuarioDTO.getMensajeError(), Toast.LENGTH_SHORT);
+//                    toast.show();
+//                }
+//            } else // servicio fallo
+//            {
+//                usuarioDTO = mAuthTask.getUsuarioDTO();
+//                mAuthTask = null;
+//                showProgress(false);
+//
+//                alertaServicio = new AlertaServicio("Alerta De Servicio", "Ocurrio Un error en conexion volver a intentarlo");
+//                alertaServicio.show(getSupportFragmentManager(), "tagAlerta");
+//            }
         }
     }
+
+    /**
+     *
+     *
+     *
+     * @param
+     */
+    public void  selectedUser(String email){
+    // servicio funciono de forma satisfactoria
+            if(mAuthTask.statusServices)
+
+    {
+        usuarioDTO = mAuthTask.getUsuarioDTO();
+        mAuthTask = null;
+
+        // para pruebas
+        if (email.equals("1")) {
+            gotoActivity(1);
+        } else if (email.equals("2")) {
+            gotoActivity(2);
+        } else if (usuarioDTO == null) {
+            mIdentificacionlView.findFocus();
+            showProgress(false);
+            Toast toast = Toast.makeText(getApplicationContext(), "Ocurrio un error en la conexión", Toast.LENGTH_SHORT);
+            toast.show();
+        }
+        //  inicio de activity correspondiente segun el rol
+        else if (usuarioDTO != null && usuarioDTO.getCodigoError() == 0) {
+            gotoActivity(usuarioDTO.getRol());
+        } else if (usuarioDTO != null && usuarioDTO.getCodigoError() == 91) {
+            mIdentificacionlView.findFocus();
+            showProgress(false);
+            Toast toast = Toast.makeText(getApplicationContext(), usuarioDTO.getMensajeError(), Toast.LENGTH_SHORT);
+            toast.show();
+        }
+    }
+            else // servicio fallo
+
+    {
+        usuarioDTO = mAuthTask.getUsuarioDTO();
+        mAuthTask = null;
+        showProgress(false);
+
+        alertaServicio = new AlertaServicio("Alerta De Servicio", "Ocurrio Un error en conexion volver a intentarlo");
+        alertaServicio.show(getSupportFragmentManager(), "tagAlerta");
+    }
+}
+
+    /**
+     *
+     * Function para validar el proceso del servicio
+     * @param
+     */
+
 
     /*
      * cambio de activity
@@ -273,10 +349,13 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         private final String mEmail;
         private UsuarioDTO usuarioDTO;
+        ServiceRest serviceRest;
+        int time = 0;
+
+        public boolean statusServices = false;
 
         UserLoginTask(String email) {
             mEmail = email;
-
         }
 
         public UsuarioDTO getUsuarioDTO() {
@@ -291,45 +370,93 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         @Override
         protected Boolean doInBackground(Void... params) {
 
-            ServiceRest serviceRest = new ServiceRest();
+            serviceRest = new ServiceRest();
             String url = serviceRest.VERIFICARDATOSUSUARIO_GET_LONG_USUARIODTO+mEmail.trim();
-            int rol = 0;
             RestTemplate restTemplate = new RestTemplate();
 
             restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
 
             try {
-                usuarioDTO = restTemplate.getForObject(url, UsuarioDTO.class);
-                usuarioDTO.setCodigoError(0);
-                usuarioDTO.setMensajeError("Operacion Exitosa");
+
+
+                if(mEmail.equals("1") || mEmail.equals("2"))
+                {
+                    statusServices = true;
+                }
+                else {
+                    usuarioDTO = restTemplate.getForObject(url, UsuarioDTO.class);
+
+                    if(usuarioDTO != null && usuarioDTO.getCodigoError() != 0)
+                    {
+                        statusServices = false;
+                    }
+                    else if(usuarioDTO != null && usuarioDTO.getCodigoError() == 0)
+                    {
+                        statusServices = true;
+                    }
+                }
+
+
             }catch (Exception e)
             {
-                usuarioDTO = new UsuarioDTO();
-                usuarioDTO.setCodigoError(91);
-                usuarioDTO.setMensajeError("Error desconocido, consultar con el proveedor");
-                return false;
+                statusServices = false;
+                serviceRest = null;
             }
-            return true;
+            return statusServices;
         }
 
         @Override
         protected void onPostExecute(final Boolean success) {
-//            mAuthTask = null;
-            showProgress(false);
 
-            if (success) {
-//               finish();
-                gotoActivity(usuarioDTO.getRol());
-            } else {
-                mIdentificacionlView.setError(usuarioDTO.getMensajeError());
-                mIdentificacionlView.requestFocus();
+            if(success)
+            {
+                nn(mEmail);
             }
+            else{
+                showProgress(false);
+                if(usuarioDTO != null && usuarioDTO.getMensajeError() != null && !usuarioDTO.getMensajeError().equals(""))
+                {
+                    alertaServicio = new AlertaServicio("Alerta De Servicio", ""+usuarioDTO.getMensajeError());
+                    alertaServicio.show(getSupportFragmentManager(), "tagAlerta");
+                }
+                else
+                {
+                    alertaServicio = new AlertaServicio("Alerta De Servicio", "Ocurrio Un error en conexion volver a intentarlo. ");
+                    alertaServicio.show(getSupportFragmentManager(), "tagAlerta");
+                }
+            }
+
         }
 
         @Override
         protected void onCancelled() {
             mAuthTask = null;
             showProgress(false);
+        }
+
+
+        public void nn(String email)
+        {
+            // para pruebas
+            if (email.equals("1")) {
+                gotoActivity(1);
+            } else if (email.equals("2")) {
+                gotoActivity(2);
+            } else if (usuarioDTO == null) {
+                mIdentificacionlView.findFocus();
+                showProgress(false);
+                Toast toast = Toast.makeText(getApplicationContext(), "Ocurrio un error en la conexión", Toast.LENGTH_SHORT);
+                toast.show();
+            }
+            //  inicio de activity correspondiente segun el rol
+            else if (usuarioDTO != null && usuarioDTO.getCodigoError() == 0) {
+                gotoActivity(usuarioDTO.getRol());
+            } else if (usuarioDTO != null && usuarioDTO.getCodigoError() == 91) {
+                mIdentificacionlView.findFocus();
+                showProgress(false);
+                Toast toast = Toast.makeText(getApplicationContext(), usuarioDTO.getMensajeError(), Toast.LENGTH_SHORT);
+                toast.show();
+            }
         }
 
     }
