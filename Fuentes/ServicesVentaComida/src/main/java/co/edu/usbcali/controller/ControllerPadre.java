@@ -1,6 +1,8 @@
 package co.edu.usbcali.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import co.edu.usbcali.dto.HijoDTO;
 import co.edu.usbcali.dto.PadreDTO;
 import co.edu.usbcali.dto.UsuarioDTO;
 import co.edu.usbcali.logica.IPadreLogica;
@@ -136,6 +139,8 @@ public class ControllerPadre {
 			}
 			else
 			{
+				usuarioDTO = new UsuarioDTO();
+				
 				usuarioDTO.setCodigoError(91);
 				usuarioDTO.setMensajeError("El usuario no existe");
 			}
@@ -150,35 +155,40 @@ public class ControllerPadre {
 			return usuarioDTO;
 		}		
 	}
-	/*
-	@RequestMapping(value = "/verificarDatosUsuario/{id}", method = RequestMethod.GET)
-	public UsuarioDTO verificarUsuario(@PathVariable("id")Long id) throws Exception {
-
-		UsuarioDTO usuarioDTO = new UsuarioDTO();;
-		Long numIdentificacion = id;	
-
-		try {
-			Usuario user = padreLogica.consultarUsuarioPorIdentificacion(numIdentificacion);
+	
+	@RequestMapping(value ="/consultarPadres", method=RequestMethod.GET)
+	public List<PadreDTO> consultarPadres() throws Exception
+	{
+		List<Padre> losPadres = null;
+		List<PadreDTO> losPadresDTO = null;
+		PadreDTO padreDTO = null;
+		losPadres = padreLogica.consultarPadreTodos();
+		
+		if(losPadres != null)
+		{
+			losPadresDTO = new ArrayList<PadreDTO>();
 			
+			for (Padre padre : losPadres) {
+				padreDTO = new PadreDTO();
+				
+				padreDTO.setId_padre(padre.getId());
+				padreDTO.setId_usuario(padre.getUsuario().getId());
+				padreDTO.setPrimerNombre(padre.getUsuario().getPrimerNombre());
+				padreDTO.setSegundoNombre(padre.getUsuario().getSegundoNombre());
+				padreDTO.setPrimerApellido(padre.getUsuario().getPrimerApellido());
+				padreDTO.setSegundoApellido(padre.getUsuario().getSegundoApellido());
+				padreDTO.setNumIdentificacion(padre.getUsuario().getNumIdentificacion());
+				padreDTO.setTipoIdentificacion(padre.getUsuario().getTipoIdentificacion());
+				padreDTO.setRol(padre.getUsuario().getRol());
+				padreDTO.setTelefono(padre.getTelefono());
+				padreDTO.setDireccion(padre.getDireccion());
+				
+				losPadresDTO.add(padreDTO);
+			}
 			
-			usuarioDTO.setPrimerNombre(user.getPrimerNombre());
-			usuarioDTO.setSegundoNombre(user.getSegundoNombre());
-			usuarioDTO.setPrimerApellido(user.getPrimerApellido());
-			usuarioDTO.setSegundoApellido(user.getSegundoApellido());
-
-			usuarioDTO.setCodigoError(0);
-			usuarioDTO.setMensajeError("Operación Exitosa");
-
-			return usuarioDTO;
-
-		} catch (Exception e) {
-
-			usuarioDTO.setCodigoError(90);
-			usuarioDTO.setMensajeError(e.getMessage());
-
-			return usuarioDTO;
 		}
 		
-	}*/
+		return losPadresDTO;
+	}
 
 }

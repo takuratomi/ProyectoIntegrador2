@@ -1,5 +1,7 @@
 package co.edu.usbcali.test.logica;
 
+import java.util.List;
+
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -66,52 +68,37 @@ public class TestPadreLogica {
 		}
 
 	}
-	/*
-	 * @Test
-	 * 
-	 * @Transactional(readOnly = false, propagation = Propagation.REQUIRED,
-	 * rollbackFor = Exception.class)
-	 * 
-	 * @Rollback(false) public void ctest() {
-	 * 
-	 * Bebida bebida = bebidaDAO.consultarPorId(id);
-	 * 
-	 * assertNotNull("La bebida existe", bebida);
-	 * bebida.setNombre("Jugo de naranja");
-	 * 
-	 * bebidaDAO.modificar(bebida);
-	 * 
-	 * }
-	 * 
-	 * @Test
-	 * 
-	 * @Transactional(readOnly = false, propagation = Propagation.REQUIRED,
-	 * rollbackFor = Exception.class)
-	 * 
-	 * @Rollback(false) public void dtest() {
-	 * 
-	 * Bebida bebida = bebidaDAO.consultarPorId(id);
-	 * 
-	 * assertNotNull("La bebida no existe", bebida);
-	 * 
-	 * bebidaDAO.borrar(bebida); }
-	 * 
-	 * @Test
-	 * 
-	 * @Transactional(readOnly = false, propagation = Propagation.REQUIRED,
-	 * rollbackFor = Exception.class)
-	 * 
-	 * @Rollback(false) public void etest() {
-	 * 
-	 * }
-	 * 
-	 * @Test
-	 * 
-	 * @Transactional(readOnly = false, propagation = Propagation.REQUIRED,
-	 * rollbackFor = Exception.class)
-	 * 
-	 * @Rollback(false) public void especial_test() {
-	 * 
-	 * }
-	 */
+	
+	@Test
+	@Transactional(readOnly = true, rollbackFor = Exception.class)
+	@Rollback(false)
+	public void consultarTodosPadreTest() {
+
+		log.info("---------------------------------");
+		log.info("------- FUNCIONA LOG  ----------");
+		try
+		{
+			List<Padre> listPadre = padreLogica.consultarPadreTodos();
+			
+			for (Padre padre : listPadre) {
+				
+				log.info(padre.getUsuario().getPrimerApellido());
+				log.info(padre.getUsuario().getPrimerNombre());
+				log.info(""+padre.getUsuario().getTipoIdentificacion());
+				log.info(""+padre.getUsuario().getNumIdentificacion());
+				log.info(""+padre.getUsuario().getRol());
+				log.info("---------------------------------");	
+			}
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		
+		
+		
+		
+		
+		
+	}
+	
 }

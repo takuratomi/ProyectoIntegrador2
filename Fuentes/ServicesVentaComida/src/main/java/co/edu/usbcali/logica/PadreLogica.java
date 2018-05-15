@@ -101,10 +101,11 @@ public class PadreLogica implements IPadreLogica {
 		return padreDAO.consultarPorId(id);
 	}
 
+	@Transactional(readOnly = true, rollbackFor = Exception.class)
 	@Override
 	public List<Padre> consultarPadreTodos() throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return padreDAO.consultarTodos();
 	}
 
 	@Transactional(readOnly = true, rollbackFor = Exception.class)

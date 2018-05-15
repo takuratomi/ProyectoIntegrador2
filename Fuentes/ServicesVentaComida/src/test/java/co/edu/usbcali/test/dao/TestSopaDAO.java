@@ -1,5 +1,6 @@
 package co.edu.usbcali.test.dao;
 
+
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 

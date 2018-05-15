@@ -54,7 +54,7 @@ public class HijoDAO implements IHijoDAO {
 		Padre padre = null;
 		List<Usuario> misHijosUsuario= null;
 		List<Hijo> misHijos = null;
-		String hql_subSelect = "SELECT h FROM Usuario u, Hijo h  inner JOIN FETCH h.usuario where h.padre.id =(SELECT p.id FROM Padre p, Usuario u WHERE p.usuario.id = u.id AND u.numIdentificacion =:numIdentificaicon) AND h.usuario.id=u.id ";
+		String hql_subSelect = "SELECT h FROM Usuario u, Hijo h inner JOIN FETCH h.usuario where h.padre.id =(SELECT p.id FROM Padre p, Usuario u WHERE p.usuario.id = u.id AND u.numIdentificacion =:numIdentificaicon) AND h.usuario.id=u.id ";
 //		String hql_hijo = "SELECT h FROM Usuario u, Hijo h where h.usuario.id=:idUsuario  ";
 		
 //		try {

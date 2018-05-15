@@ -45,7 +45,12 @@ public class PadreDAO implements IPadreDAO {
 
 	@Override
 	public List<Padre> consultarTodos() {
-		return sessionFactory.getCurrentSession().createCriteria(Padre.class).list();
+		
+		String hql = "SELECT p FROM Padre p, Usuario u INNER JOIN FETCH p.usuario WHERE p.usuario.id = u.id AND u.rol=2";
+		
+		List<Padre> listPadre = sessionFactory.getCurrentSession().createQuery(hql).list();
+		
+		return listPadre;
 	}
 
 	@Override
