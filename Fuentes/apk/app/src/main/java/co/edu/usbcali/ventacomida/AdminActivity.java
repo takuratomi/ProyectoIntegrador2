@@ -59,9 +59,9 @@ public class AdminActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_consultar_ninos) {
-            return true;
-        }
+//        if (id == R.id.action_consultar_ninos) {
+//            return true;
+//        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -74,11 +74,12 @@ public class AdminActivity extends AppCompatActivity
         Fragment fragment = null;
         boolean fragmentSelection = false;
 
-        if (id == R.id.nav_consultar_ninos) {
-
-        } else if (id == R.id.nav_consultar_pedidos) {
-
-        } else if (id == R.id.nav_create_producto) {
+//        if (id == R.id.nav_consultar_ninos) {
+//
+//        } else if (id == R.id.nav_consultar_pedidos) {
+//
+//        }
+        if (id == R.id.nav_create_producto) {
 
             fragment =  new CrearProductoFragment();
             fragmentSelection = true;

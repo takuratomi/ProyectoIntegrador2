@@ -71,19 +71,19 @@
         android:textSize="16sp" />
 
 
-        <CheckBox
-            android:id="@+id/checkbox_estatus"
-            style="@style/Widget.AppCompat.CompoundButton.CheckBox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="190dp"
-            android:backgroundTint="@color/colorPrimary"
-            android:checked="false"
-            android:focusable="auto"
-            android:fontFamily="monospace"
-            android:lineSpacingExtra="10sp"
-            android:textAlignment="center"
-            android:textSize="18sp" />
+        <!--<CheckBox-->
+            <!--android:id="@+id/checkbox_estatus"-->
+            <!--style="@style/Widget.AppCompat.CompoundButton.CheckBox"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginLeft="190dp"-->
+            <!--android:backgroundTint="@color/colorPrimary"-->
+            <!--android:checked="false"-->
+            <!--android:focusable="auto"-->
+            <!--android:fontFamily="monospace"-->
+            <!--android:lineSpacingExtra="10sp"-->
+            <!--android:textAlignment="center"-->
+            <!--android:textSize="18sp" />-->
 
     </GridLayout>
 </LinearLayout>

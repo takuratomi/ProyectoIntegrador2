@@ -43,6 +43,9 @@
     <string-array name="tipoIdentificacion">
         <item id="1">Cedula</item>
     </string-array>
+    <string-array name="tipoIdentificacion_hijo">
+        <item id="1">Tarjeta De Identidad</item>
+    </string-array>
 
 
     <!-- hints -->

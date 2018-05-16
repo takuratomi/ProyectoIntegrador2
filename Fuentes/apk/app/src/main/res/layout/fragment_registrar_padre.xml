@@ -70,31 +70,6 @@
                 android:layout_height="wrap_content"
                 android:hint="Segundo Apellido"/>
         </android.support.design.widget.TextInputLayout>
-
-        <!--<EditText-->
-            <!--android:id="@+id/inText_primer_nombre"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:hint=""-->
-            <!--/>-->
-        <!--<EditText-->
-            <!--android:id="@+id/inText_segundo_nombre"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:hint="Segundo Nombre"-->
-            <!--/>-->
-        <!--<EditText-->
-            <!--android:id="@+id/inText_primer_apellido"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:hint="Primer Apellido"-->
-            <!--/>-->
-        <!--<EditText-->
-            <!--android:id="@+id/inText_segundo_apellido"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:hint="Segundo Apellido"-->
-            <!--/>-->
         <Spinner
             android:id="@+id/inSpinner_tipo_identificacion"
             android:layout_width="match_parent"

@@ -449,13 +449,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
                 toast.show();
             }
             //  inicio de activity correspondiente segun el rol
-            else if (usuarioDTO != null && usuarioDTO.getCodigoError() == 0) {
-                gotoActivity(usuarioDTO.getRol());
-            } else if (usuarioDTO != null && usuarioDTO.getCodigoError() == 91) {
+            else if (usuarioDTO.getCodigoError() == 91) {
                 mIdentificacionlView.findFocus();
                 showProgress(false);
-                Toast toast = Toast.makeText(getApplicationContext(), usuarioDTO.getMensajeError(), Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(getApplicationContext(),""+usuarioDTO.getMensajeError(), Toast.LENGTH_SHORT);
                 toast.show();
+            }
+            else if (usuarioDTO != null && usuarioDTO.getCodigoError() == 0) {
+                gotoActivity(usuarioDTO.getRol());
             }
         }
 

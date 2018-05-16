@@ -140,7 +140,9 @@ public class ControllerPadre {
 			else
 			{
 				usuarioDTO = new UsuarioDTO();
-				
+				usuarioDTO.setId(0);
+				usuarioDTO.setNumIdentificacion(0L);
+				usuarioDTO.setRol(0);
 				usuarioDTO.setCodigoError(91);
 				usuarioDTO.setMensajeError("El usuario no existe");
 			}
