@@ -12,10 +12,11 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 public class AdminActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, CrearProductoFragment.OnFragmentInteractionListener, ConsultarProductoFragment.OnFragmentInteractionListener,
-                    RegistrarPadreFragment.OnFragmentInteractionListener{
+                    RegistrarPadreFragment.OnFragmentInteractionListener, AboutFragment.OnFragmentInteractionListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +33,14 @@ public class AdminActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        AboutFragment aboutFragment = new AboutFragment();
+
+        getFragmentManager().beginTransaction().replace(R.id.contenedor,aboutFragment).commit();
+
+
+
+
     }
 
     @Override
@@ -84,16 +93,25 @@ public class AdminActivity extends AppCompatActivity
             fragment =  new CrearProductoFragment();
             fragmentSelection = true;
 
-        } else if (id == R.id.nav_consultar_producto) {
+        }
+        else if (id == R.id.nav_consultar_producto) {
 
             fragment =  new ConsultarProductoFragment();
             fragmentSelection = true;
         }
-         else if (id == R.id.nav_registrar_padre) {
+        else if (id == R.id.nav_registrar_padre) {
 
         fragment =  new RegistrarPadreFragment();
         fragmentSelection = true;
         }
+        else if (id == R.id.nav_salir) {
+
+            Intent intent = new Intent(AdminActivity.this,LoginActivity.class);
+            startActivity(intent);
+            fragmentSelection = false;
+            finish();
+        }
+
 
 
         if(fragmentSelection)

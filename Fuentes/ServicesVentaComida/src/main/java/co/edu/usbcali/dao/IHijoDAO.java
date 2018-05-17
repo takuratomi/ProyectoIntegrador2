@@ -16,4 +16,6 @@ public interface IHijoDAO {
 	// permite consultar mis hijos con el numero de identificacion
 	public List<Hijo> consultarMisHijo(long numIdentificaicon);
 	
+	public Long getConsecutivo();
+	
 }

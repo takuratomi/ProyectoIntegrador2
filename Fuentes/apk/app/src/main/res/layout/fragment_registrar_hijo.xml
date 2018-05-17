@@ -74,6 +74,7 @@
                         android:id="@+id/inText_num_identificacion_hijo"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:inputType="number"
                         android:hint="Número Identificación"/>
                 </android.support.design.widget.TextInputLayout>
                 <android.support.design.widget.TextInputLayout
@@ -85,7 +86,6 @@
                         android:layout_height="match_parent"
                         android:inputType="date"
                         android:hint="Fecha De Nacimiento" />
-
                 </android.support.design.widget.TextInputLayout>
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"

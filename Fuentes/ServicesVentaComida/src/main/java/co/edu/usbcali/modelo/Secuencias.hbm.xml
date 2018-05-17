@@ -39,5 +39,11 @@
 	    SELECT nextval('seq_usuario');
 	  ]]>
 	  </sql-query>
+	  <sql-query name="HIJO_SEQ">
+		<return-scalar column="nextval" type="java.lang.Long" />
+	  <![CDATA[
+	    SELECT nextval('seq_hijo');
+	  ]]>
+	  </sql-query>
 	  	
 </hibernate-mapping>

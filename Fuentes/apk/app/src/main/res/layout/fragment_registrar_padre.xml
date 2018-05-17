@@ -9,8 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="8dp"
-        >
+        android:padding="8dp">
         <!-- Login progress -->
         <ProgressBar
             android:id="@+id/create_padre_progress"
@@ -24,9 +23,7 @@
             android:layout_height="match_parent"
             android:text="Registrar Padre"
             android:textColor="@android:color/holo_blue_bright"
-            android:textSize="18dp"
-            />
-
+            android:textSize="18dp"/>
         <!--PRIMER NOMBRE -->
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
@@ -37,7 +34,6 @@
                 android:layout_height="wrap_content"
                 android:hint="Primer Nombre"/>
         </android.support.design.widget.TextInputLayout>
-
         <!-- SEGUNDO NOMBRE -->
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
@@ -48,7 +44,6 @@
                 android:layout_height="wrap_content"
                 android:hint="Segundo Nombre"/>
         </android.support.design.widget.TextInputLayout>
-
         <!-- PRIMER APELLIDO -->
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
@@ -59,7 +54,6 @@
                 android:layout_height="wrap_content"
                 android:hint="Primer Apellido"/>
         </android.support.design.widget.TextInputLayout>
-
         <!-- SEGUNDO APELLIDO -->
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
@@ -97,6 +91,7 @@
                 android:id="@+id/inText_num_telefono"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="phone"
                 android:hint="Teléfono"/>
         </android.support.design.widget.TextInputLayout>
         <!-- DIRECCION -->
@@ -107,26 +102,9 @@
                 android:id="@+id/inText_num_direccion"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="textPostalAddress"
                 android:hint="Dirección"/>
         </android.support.design.widget.TextInputLayout>
-        <!--<EditText-->
-            <!--android:id="@+id/inText_num_identificacion"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:hint="Número Identificación"-->
-            <!--/>-->
-        <!--<EditText-->
-            <!--android:id="@+id/inText_num_telefono"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:hint="Teléfono"-->
-            <!--/>-->
-        <!--<EditText-->
-            <!--android:id="@+id/inText_num_direccion"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:hint="Dirección"-->
-            <!--/>-->
         <Button
             android:id="@+id/btn_guardar_padre"
             android:layout_width="match_parent"

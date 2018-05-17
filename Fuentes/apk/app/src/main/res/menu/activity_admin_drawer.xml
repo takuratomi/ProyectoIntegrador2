@@ -23,5 +23,9 @@
             android:id="@+id/nav_registrar_padre"
             android:icon="@drawable/ic_menu_manage"
             android:title="Registrar Padre" />
+        <item
+            android:id="@+id/nav_salir"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Login Out" />
     </group>
 </menu>

@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.design.widget.TextInputEditText;
 import android.support.v4.app.Fragment;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,8 @@ import android.widget.Spinner;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
+
+import java.sql.Date;
 
 import co.edu.usbcali.ventacomida.alertas.AlertaServicio;
 import co.edu.usbcali.ventacomida.dto.HijoDTO;
@@ -45,22 +48,23 @@ public class RegistrarHijoFragment extends Fragment {
     private String segundoApellido;
     private String numIdentificacion;
     private String tipoIdentificacion;
-    private String direccion;
-    private String telefono;
+    private String fechaNacimiento;
+    private String curso;
 
     // UI REFERENCES
     private ProgressBar progressBar;
     private View mProgressView;
-    private View createPadreFormView;
+    private View createHijoFormView;
     private TextInputEditText txtPrimerNombre;
     private TextInputEditText txtSegundoNombre;
     private TextInputEditText txtPrimerApellido;
     private TextInputEditText txtSegundoApellido;
     private TextInputEditText txtnumIdentificacion;
+    private TextInputEditText txtFechaNacimiento;
     private TextInputEditText txtCurso;
-    private TextInputEditText txtDireccion;
+
     private Spinner spinnerTipoIdentificacion;
-    private Button btnCrearPadre;
+    private Button btnCrearHijo;
 
 
     // TODO: Rename and change types of parameters
@@ -106,19 +110,20 @@ public class RegistrarHijoFragment extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_registrar_hijo, container, false);
 
-        createPadreFormView = view.findViewById(R.id.form_create_hijo);
+        createHijoFormView = view.findViewById(R.id.form_create_hijo);
         txtPrimerNombre = view.findViewById(R.id.inText_primer_nombre_hijo);
         txtSegundoNombre = view.findViewById(R.id.inText_segundo_nombre_hijo);
         txtPrimerApellido = view.findViewById(R.id.inText_primer_apellido_hijo);
         txtSegundoApellido = view.findViewById(R.id.inText_segundo_apellido_hijo);
         txtnumIdentificacion = view.findViewById(R.id.inText_num_identificacion_hijo);
+        txtFechaNacimiento = view.findViewById(R.id.inText_fecha_nacimiento_hijo);
         txtCurso = view.findViewById(R.id.inText_curso_hijo);
 
         spinnerTipoIdentificacion = view.findViewById(R.id.inSpinner_tipo_identificacion_hijo);
-        btnCrearPadre = view.findViewById(R.id.btn_guardar_hijo);
+        btnCrearHijo= view.findViewById(R.id.btn_guardar_hijo);
 
         // action listener for botton create padre
-        btnCrearPadre.setOnClickListener(new View.OnClickListener() {
+        btnCrearHijo.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View view) {
@@ -127,8 +132,7 @@ public class RegistrarHijoFragment extends Fragment {
                 boolean flagValidateServicesExecute = false;
                 HijoDTO hijoDTO= null;
                 // validacion de campos
-                if(validateInField())
-                {
+                if(validateInField()) {
                     flagValidateServicesExecute = true;
                     hijoDTO = new HijoDTO();
                     hijoDTO.setPrimerNombre(primerNombre);
@@ -138,55 +142,47 @@ public class RegistrarHijoFragment extends Fragment {
                     try {
                         Long identificacion = Long.parseLong(numIdentificacion);
                         hijoDTO.setNumIdentificacion(identificacion);
-                    }catch (Exception e)
-                    {
+                    } catch (Exception e) {
                         e.getMessage();
                     }
-//                    Long identificacion = Long.parseLong(numIdentificacion);
-//                    HijoDTO.setNumIdentificacion(Long.parseLong());
-                    hijoDTO.setTipoIdentificacion(3);
-//                    HijoDTO.setPassword();
+
+                    hijoDTO.setTipoIdentificacion(Integer.parseInt(tipoIdentificacion));
                     hijoDTO.setRol(2);
                     hijoDTO.setUsuario("TAKURATOMI");
                     hijoDTO.setFecha(new java.util.Date());
-//                    hijoDTO.setCurso();
-//                    hijoDTO.setFechaNacimiento();
+                    hijoDTO.setCurso(curso);
+                    // para la prueba
+                    if(hijoDTO.getNumIdentificacionPadre() == 0)
+                    {
+                        hijoDTO.setNumIdentificacionPadre(1012345);
+                    }
+                    try {
+                        hijoDTO.setFechaNacimiento(new java.util.Date(fechaNacimiento));
+                    } catch (Exception e) {
+                        Log.d("asignHijoBorn", e.getMessage());
+                        hijoDTO.setFechaNacimiento(new java.util.Date());
+                    }
+
                     ServiceSaveHijo serviceSaveHijo = new ServiceSaveHijo();
                     serviceSaveHijo.setHijoDTO(hijoDTO);
-                    serviceSaveHijo.setHijoDTO(hijoDTO);
                     //execute service save padre.
-                    if(flagValidateServicesExecute)
-                    {
-//                        serviceSavePadre.execute();
-//                        try {
-//                            Thread.sleep(2500);
-//                        }catch (Exception e)
-//                        {
-//
-//                        }
-//                        HijoDTO = serviceSavePadre.getHijoDTO();
-//                        if(HijoDTO.getCodigoError() == 0)
-//                        {
+                    if (flagValidateServicesExecute) {
+                        serviceSaveHijo.execute();
+                        try {
+                            Thread.sleep(2500);
+                        } catch (Exception e) {
+                        }
+//                        HijoDTO response = serviceSaveHijo.getHijoDTO();
+//                        if (response.getCodigoError() == 0) {
 //                            AlertaServicio alertaServicio = new AlertaServicio();
 //                            alertaServicio.setBarTitle("Venta De Comida");
 //                            alertaServicio.setMessage("Se guardo Satisfactoriamente");
-//                            alertaServicio.show(getFragmentManager(),"Alert1");
+//                            alertaServicio.show(getFragmentManager(), "Alert1");
+//                        } else {
+//                            AlertaServicio alertaServicio = new AlertaServicio("Alerta Servicio", response.getMensajeError());
+//                            alertaServicio.show(getFragmentManager(), "AlertSer");
 //                        }
-//                        else
-//                        {
-//                            AlertaServicio alertaServicio = new AlertaServicio("Alerta Servicio",HijoDTO.getMensajeError());
-//                            alertaServicio.show(getFragmentManager(),"AlertSer");
-//                        }
-
                     }
-                    else{
-
-
-                    }
-
-                }else
-                {
-
                 }
             }
         });
@@ -222,15 +218,28 @@ public class RegistrarHijoFragment extends Fragment {
             txtnumIdentificacion.requestFocus();
             return false;
         }
-
-        // pendiente de validacion de los atributos del objeto hijo
-
+        if(TextUtils.isEmpty(txtFechaNacimiento.getText().toString()))
+        {
+            txtFechaNacimiento.setError(mensajeError.replace("$","Fecha De Nacimiento"));
+            txtFechaNacimiento.requestFocus();
+            return false;
+        }
+        if(TextUtils.isEmpty(txtFechaNacimiento.getText().toString()))
+        {
+            txtFechaNacimiento.setError(mensajeError.replace("$","Fecha De Nacimiento"));
+            txtFechaNacimiento.requestFocus();
+            return false;
+        }
 
         primerNombre = txtPrimerNombre.getText().toString().trim().toUpperCase();
         segundoNombre = txtSegundoNombre.getText().toString().trim().toUpperCase();
         primerApellido = txtPrimerApellido.getText().toString().trim().toUpperCase();
         segundoApellido = txtSegundoApellido.getText().toString().trim().toUpperCase();
         numIdentificacion = txtnumIdentificacion.getText().toString().trim();
+        // PENDIENTE POR AGREGAR IDENTIFICADOR ID A SPINNERS ARRAYS
+        tipoIdentificacion = "1"; // SE DEJA POR DEFAULT TARJETA DE IDENTIDAD
+        fechaNacimiento = txtFechaNacimiento.getText().toString().trim().toUpperCase();
+        curso = txtCurso.getText().toString().trim().toUpperCase();
 
         return true;
     }
@@ -317,7 +326,33 @@ public class RegistrarHijoFragment extends Fragment {
 
         @Override
         protected void onPostExecute(Boolean aBoolean) {
+
             super.onPostExecute(aBoolean);
+
+            if(aBoolean)
+            {
+                if(hijoDTO != null && hijoDTO.getCodigoError() == 0)
+                {
+                    AlertaServicio alertaServicio = new AlertaServicio();
+                    alertaServicio.setBarTitle("Venta De Comida");
+                    alertaServicio.setMessage("Se guardo satisfactoriamente.");
+                    alertaServicio.show(getFragmentManager(),"alerTag");
+                }
+                else if(hijoDTO != null && hijoDTO.getCodigoError() != 0)
+                {
+                    AlertaServicio alertaServicio = new AlertaServicio();
+                    alertaServicio.setBarTitle("Venta De Comida");
+                    alertaServicio.setMessage("Error: "+hijoDTO.getMensajeError());
+                    alertaServicio.show(getFragmentManager(),"alerTag");
+                }
+            }
+            else {
+                AlertaServicio alertaServicio = new AlertaServicio();
+                alertaServicio.setBarTitle("Venta De Comida");
+                alertaServicio.setMessage("Error desconocido, consultar con el proveedor");
+                alertaServicio.show(getFragmentManager(),"alerTag");
+
+            }
         }
 
         @Override
@@ -337,18 +372,21 @@ public class RegistrarHijoFragment extends Fragment {
 
         @Override
         protected Boolean doInBackground(Boolean... booleans) {
-            ServiceRest serviceRest = new ServiceRest();
 
-            int rol = 0;
+            ServiceRest serviceRest = new ServiceRest();
             restTemplate = new RestTemplate();
             restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
             HttpEntity<HijoDTO> request = new HttpEntity<HijoDTO>(hijoDTO);
             try {
                 request = restTemplate.postForEntity(serviceRest.REGISTRARHIJO_POST_HIJODTO_HIJODTO, hijoDTO, HijoDTO.class);
+                hijoDTO = request.getBody();
                 return true;
             } catch (Exception e) {
                 hijoDTO = new HijoDTO();
-                hijoDTO.setCodigoError(91);
+                hijoDTO.setNumIdentificacion(0L);
+                hijoDTO.setRol(0);
+                hijoDTO.setTipoIdentificacion(0);
+                hijoDTO.setCodigoError(92);
                 hijoDTO.setMensajeError("Error desconocido, consultar con el proveedor");
                 return false;
             }

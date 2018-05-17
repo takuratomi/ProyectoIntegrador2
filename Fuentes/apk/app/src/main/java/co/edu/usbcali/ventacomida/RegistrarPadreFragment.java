@@ -87,15 +87,6 @@ public class RegistrarPadreFragment extends Fragment {
             txtPrimerNombre.requestFocus();
             return false;
         }
-//        --------------------------------------------------------------------------------------------
-//        se omite la validacion del segundo nombre ya que algunas personas solo disponen de un unico
-//        nombre
-//        if(TextUtils.isEmpty(txtSegundoNombre.getText().toString()))
-//        {
-//            txtSegundoNombre.setError(mensajeError.replace("$","Segundo Nombre"));
-//            txtSegundoNombre.requestFocus();
-//            return false;
-//        }
         if(TextUtils.isEmpty(txtPrimerApellido.getText().toString()))
         {
             txtPrimerApellido.setError(mensajeError.replace("$","Primer Apellido"));
@@ -207,8 +198,7 @@ public class RegistrarPadreFragment extends Fragment {
                 boolean flagValidateServicesExecute = false;
                 PadreDTO padreDTO = null;
                 // validacion de campos
-                if(validateInField())
-                {
+                if(validateInField()) {
                     flagValidateServicesExecute = true;
                     padreDTO = new PadreDTO();
                     padreDTO.setPrimerNombre(primerNombre);
@@ -218,14 +208,10 @@ public class RegistrarPadreFragment extends Fragment {
                     try {
                         Long identificacion = Long.parseLong(numIdentificacion);
                         padreDTO.setNumIdentificacion(identificacion);
-                    }catch (Exception e)
-                    {
+                    } catch (Exception e) {
                         e.getMessage();
                     }
-//                    Long identificacion = Long.parseLong(numIdentificacion);
-//                    padreDTO.setNumIdentificacion(Long.parseLong());
                     padreDTO.setTipoIdentificacion(3);
-//                    padreDTO.setPassword();
                     padreDTO.setRol(2);
                     padreDTO.setUsuario("TAKURATOMI");
                     padreDTO.setFecha(new java.util.Date());
@@ -234,38 +220,15 @@ public class RegistrarPadreFragment extends Fragment {
                     ServiceSavePadre serviceSavePadre = new ServiceSavePadre();
                     serviceSavePadre.setPadreDTO(padreDTO);
                     //execute service save padre.
-                    if(flagValidateServicesExecute)
-                    {
+                    if (flagValidateServicesExecute) {
                         serviceSavePadre.execute();
                         try {
                             Thread.sleep(2500);
-                        }catch (Exception e)
-                        {
+                        } catch (Exception e) {
 
                         }
                         padreDTO = serviceSavePadre.getPadreDTO();
-                        if(padreDTO.getCodigoError() == 0)
-                        {
-                            AlertaServicio alertaServicio = new AlertaServicio();
-                            alertaServicio.setBarTitle("Venta De Comida");
-                            alertaServicio.setMessage("Se guardo Satisfactoriamente");
-                            alertaServicio.show(getFragmentManager(),"Alert1");
-                        }
-                        else
-                        {
-                            AlertaServicio alertaServicio = new AlertaServicio("Alerta Servicio",padreDTO.getMensajeError());
-                            alertaServicio.show(getFragmentManager(),"AlertSer");
-                        }
-
                     }
-                    else{
-
-
-                    }
-
-                }else
-                {
-
                 }
             }
         });
@@ -353,7 +316,32 @@ public class RegistrarPadreFragment extends Fragment {
 
         @Override
         protected void onPostExecute(Boolean aBoolean) {
+
             super.onPostExecute(aBoolean);
+
+            if(aBoolean)
+            {
+                if(padreDTO != null && padreDTO.getCodigoError() == 0)
+                {
+                    AlertaServicio alertaServicio = new AlertaServicio();
+                    alertaServicio.setBarTitle("Venta De Comida");
+                    alertaServicio.setMessage("Se guardo satisfactoriamente.");
+                    alertaServicio.show(getFragmentManager(),"alerTag");
+                }
+                else if(padreDTO != null && padreDTO.getCodigoError() != 0)
+                {
+                    AlertaServicio alertaServicio = new AlertaServicio();
+                    alertaServicio.setBarTitle("Venta De Comida");
+                    alertaServicio.setMessage("Error: "+padreDTO.getMensajeError());
+                    alertaServicio.show(getFragmentManager(),"alerTag");
+                }
+            }
+            else {
+                AlertaServicio alertaServicio = new AlertaServicio();
+                alertaServicio.setBarTitle("Venta De Comida");
+                alertaServicio.setMessage("Error desconocido, consultar con el proveedor");
+                alertaServicio.show(getFragmentManager(),"alerTag");
+            }
         }
 
         @Override
@@ -375,12 +363,13 @@ public class RegistrarPadreFragment extends Fragment {
         protected Boolean doInBackground(Boolean... booleans) {
             ServiceRest serviceRest = new ServiceRest();
 
-            int rol = 0;
             restTemplate = new RestTemplate();
             restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
             HttpEntity<PadreDTO> request = new HttpEntity<PadreDTO>(padreDTO);
             try {
                 request = restTemplate.postForEntity(serviceRest.REGISTRARPADRE_POST_PADREDTO_PADREDTO,padreDTO,PadreDTO.class);
+                padreDTO = request.getBody();
+
                 return true;
             }catch (Exception e)
             {

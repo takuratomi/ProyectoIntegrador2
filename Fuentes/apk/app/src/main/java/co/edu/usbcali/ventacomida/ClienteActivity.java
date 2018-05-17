@@ -1,5 +1,6 @@
 package co.edu.usbcali.ventacomida;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -90,6 +91,13 @@ public class ClienteActivity extends AppCompatActivity
             fragment =  new RegistrarHijoFragment();
             fragmentSelection = true;
 
+        }
+        else if (id == R.id.nav_salir) {
+
+            Intent intent = new Intent(ClienteActivity.this,LoginActivity.class);
+            startActivity(intent);
+            fragmentSelection = false;
+            finish();
         }
 //        else if (id == R.id.nav_gallery) {
 //
