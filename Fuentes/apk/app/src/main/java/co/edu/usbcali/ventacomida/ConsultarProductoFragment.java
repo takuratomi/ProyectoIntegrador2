@@ -4,25 +4,17 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
-
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
-import org.springframework.http.HttpEntity;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
-import java.lang.reflect.Array;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -55,8 +47,6 @@ public class ConsultarProductoFragment extends Fragment {
     public ConsultarProductoFragment() {
         // Required empty public constructor
     }
-
-
 
     // MEHOD PUBLIC
     public void showProgress(boolean show)
@@ -120,20 +110,9 @@ public class ConsultarProductoFragment extends Fragment {
         progressBar = (ProgressBar) view.findViewById(R.id.progresbar_consultar_producto);
 
         context = getActivity().getApplicationContext();
-
-//        losProducto = generateDatos(); -- modelo viejo
         serviceConsultarProductos = new ServiceConsultarProductos();
         showProgress(true);
         serviceConsultarProductos.execute();
-//        losProducto = serviceConsultarProductos.getLosProductos();
-//        try {
-//            Thread.sleep(3000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//
-//        AdapterProductos adapterProductos = new AdapterProductos(getActivity().getApplicationContext(),losProducto);
-//        listViewProdcutos.setAdapter(adapterProductos);
 
         return view;
     }
@@ -176,34 +155,6 @@ public class ConsultarProductoFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
-
-    /* EJEMPLO VIEJO  de array adapteer
-        losProductos = findViewById(R.id.losProductos);
-        ArrayAdapter<CharSequence> adaptador = ArrayAdapter.createFromResource(this,R.array.lstProductos, android.R.layout.simple_list_item_1);
-        losProductos.setAdapter(adaptador);*/
-    public List<ProductoDTO> generateDatos() {
-
-        List<ProductoDTO> lst = new ArrayList<ProductoDTO>();
-        serviceConsultarProductos = new ServiceConsultarProductos();
-        serviceConsultarProductos.execute();
-        lst = serviceConsultarProductos.getLosProductos();
-        try {
-            Thread.sleep(3000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-//        if(lst != null ) {
-//            for (ProductoDTO produtoDto : lst) {
-//                Log.d("Error",produtoDto.getId().toString());
-//                Log.d("Error",produtoDto.getNombre().toString());
-//                Log.d("Error",produtoDto.getDescripcion().toString());
-//            }
-//        }
-        return lst;
-    }
-
-
-
 
     /****************************************************************************/
     /**
@@ -296,61 +247,6 @@ public class ConsultarProductoFragment extends Fragment {
 
             return  statusServices;
         }
-
-
-        /**
-         *
-         * old
-         *
-
-         @Override
-         protected void onPreExecute() {
-         super.onPreExecute();
-         }
-
-         @Override
-         protected void onPostExecute(List<ProductoDTO> productoDTOS) {
-         super.onPostExecute(productoDTOS);
-         }
-
-         @Override
-         protected void onProgressUpdate(Void... values) {
-         super.onProgressUpdate(values);
-         }
-
-         @Override
-         protected void onCancelled(List<ProductoDTO> productoDTOS) {
-         super.onCancelled(productoDTOS);
-         }
-
-         @Override
-         protected void onCancelled() {
-         super.onCancelled();
-         }
-
-         @Override
-         protected List<ProductoDTO> doInBackground(Void... voids) {
-         try {
-         restTemplate = new RestTemplate();
-         restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
-         String temporal_url = serviceRest.CONSULTARPRODCUTOS_POST_NULL_LISTAPRODUCTOS;
-
-         ProductoDTO[] losProductosDTO = restTemplate.getForObject(serviceRest.CONSULTARPRODCUTOS_POST_NULL_LISTAPRODUCTOS, ProductoDTO[].class);
-
-         if(losProductosDTO != null)
-         {
-         losProductos = Arrays.asList(losProductosDTO);
-         }
-
-
-
-
-         }catch (Exception ex)
-         {
-         String e = ex.getMessage();
-         }
-         return losProductos;
-         }*/
     }
 
 }

@@ -54,10 +54,6 @@ public class AdapterProductos extends BaseAdapter {
         TextView txtView_nombre = (TextView) vista.findViewById(R.id.textView_nombre);
 //        CheckBox checkBox_selected = (CheckBox) vista.findViewById(R.id.checkbox_estatus);
 
-//        int tamano = listaProductos.size();
-//        String id = listaProductos.get(i).getId().toString();
-//        String nombre = listaProductos.get(i).getNombre().toString();
-
         txtView_id.setText(listaProductos.get(i).getId().toString());
         txtView_nombre.setText(listaProductos.get(i).getNombre().toString());
 //        checkBox_selected.setChecked(true);

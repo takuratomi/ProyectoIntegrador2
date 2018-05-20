@@ -6,11 +6,15 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_registrar_hijo"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@android:drawable/ic_menu_view"
             android:title="Registrar Hijo" />
         <item
+            android:id="@+id/nav_consultar_hijo"
+            android:icon="@android:drawable/ic_menu_view"
+            android:title="Consultar Hijos" />
+        <item
             android:id="@+id/nav_salir"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="@android:drawable/ic_delete"
             android:title="Login Out" />
         <!--<item-->
             <!--android:id="@+id/nav_gallery"-->

@@ -111,9 +111,6 @@ public class AdminActivity extends AppCompatActivity
             fragmentSelection = false;
             finish();
         }
-
-
-
         if(fragmentSelection)
         {
             getSupportFragmentManager().beginTransaction().replace(R.id.contenedor,fragment).commit();

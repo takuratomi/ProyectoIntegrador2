@@ -5,11 +5,11 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_create_producto"
-            android:icon="@drawable/ic_menu_camera"
+            android:icon="@android:drawable/ic_menu_view"
             android:title="Crear Producto" />
         <item
             android:id="@+id/nav_consultar_producto"
-            android:icon="@drawable/ic_menu_gallery"
+            android:icon="@android:drawable/ic_menu_view"
             android:title="Consultar Productos" />
         <!--<item-->
             <!--android:id="@+id/nav_consultar_ninos"-->
@@ -21,11 +21,11 @@
             <!--android:title="Consultar Pedidos" />-->
         <item
             android:id="@+id/nav_registrar_padre"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="@android:drawable/ic_menu_view"
             android:title="Registrar Padre" />
         <item
             android:id="@+id/nav_salir"
-            android:icon="@drawable/ic_menu_manage"
+            android:icon="@android:drawable/ic_delete"
             android:title="Login Out" />
     </group>
 </menu>

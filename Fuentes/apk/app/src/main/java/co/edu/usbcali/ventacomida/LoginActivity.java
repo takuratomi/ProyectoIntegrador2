@@ -1,10 +1,6 @@
 package co.edu.usbcali.ventacomida;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
-import android.app.AlertDialog;
-import android.app.FragmentManager;
 import android.app.LoaderManager.LoaderCallbacks;
 import android.content.CursorLoader;
 import android.content.Intent;
@@ -17,7 +13,6 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.ArrayAdapter;
@@ -50,6 +45,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     // VARS
     private UserLoginTask mAuthTask = null;
     private UsuarioDTO usuarioDTO = null;
+    private static String NUMIDENTIFICACION ="";
 
     // CONSTRUCTORS
 
@@ -93,33 +89,6 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             mProgressView.setVisibility(View.GONE);
             mLoginFormView.setVisibility(View.VISIBLE);
         }
-
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
-//            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
-//
-//            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-//            mLoginFormView.animate().setDuration(shortAnimTime).alpha(
-//                    show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
-//                @Override
-//                public void onAnimationEnd(Animator animation) {
-//                    mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-//                }
-//            });
-//
-//            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-//            mProgressView.animate().setDuration(shortAnimTime).alpha(
-//                    show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
-//                @Override
-//                public void onAnimationEnd(Animator animation) {
-//                    mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-//                }
-//            });
-//        } else {
-//            // The ViewPropertyAnimator APIs are not available, so simply show
-//            // and hide the relevant UI components.
-//            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-//            mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-//        }
     }
 
     @Override
@@ -196,59 +165,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
             showProgress(true);
             mAuthTask = new UserLoginTask(email);
             mAuthTask.execute((Void) null);
-
-//            Log.d("temporal", "Salida del bucle del servicio");
-//
-//            showProgress(true);
-//            try {
-//                Thread.sleep(4000);
-//
-//            } catch (InterruptedException e) {
-//            }
-
-//            usuarioDTO = mAuthTask.getUsuarioDTO();
-//
-//
-//            // servicio funciono de forma satisfactoria
-//            if (mAuthTask.statusServices) {
-//                usuarioDTO = mAuthTask.getUsuarioDTO();
-//                mAuthTask = null;
-//
-//                // para pruebas
-//                if (email.equals("1")) {
-//                    gotoActivity(1);
-//                } else if (email.equals("2")) {
-//                    gotoActivity(2);
-//                } else if (usuarioDTO == null) {
-//                    mIdentificacionlView.findFocus();
-//                    showProgress(false);
-//                    Toast toast = Toast.makeText(getApplicationContext(), "Ocurrio un error en la conexión", Toast.LENGTH_SHORT);
-//                    toast.show();
-//                }
-//                //  inicio de activity correspondiente segun el rol
-//                else if (usuarioDTO != null && usuarioDTO.getCodigoError() == 0) {
-//                    gotoActivity(usuarioDTO.getRol());
-//                } else if (usuarioDTO != null && usuarioDTO.getCodigoError() == 91) {
-//                    mIdentificacionlView.findFocus();
-//                    showProgress(false);
-//                    Toast toast = Toast.makeText(getApplicationContext(), usuarioDTO.getMensajeError(), Toast.LENGTH_SHORT);
-//                    toast.show();
-//                }
-//            } else // servicio fallo
-//            {
-//                usuarioDTO = mAuthTask.getUsuarioDTO();
-//                mAuthTask = null;
-//                showProgress(false);
-//
-//                alertaServicio = new AlertaServicio("Alerta De Servicio", "Ocurrio Un error en conexion volver a intentarlo");
-//                alertaServicio.show(getSupportFragmentManager(), "tagAlerta");
-//            }
         }
     }
 
     /**
-     *
-     *
      *
      * @param
      */
@@ -315,7 +235,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         // cliente
         else if(rol == 2)
         {
+            Bundle args = new Bundle();
+            args.putString("numIdentificacion", NUMIDENTIFICACION);
             Intent intent = new Intent(LoginActivity.this,ClienteActivity.class);
+            intent.putExtra("_bundleUsuario",args);
             startActivity(intent);
             finish();
         }
@@ -407,6 +330,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
 
         @Override
         protected void onPostExecute(final Boolean success) {
+            if (usuarioDTO != null)
+            {
+                NUMIDENTIFICACION = ""+usuarioDTO.getNumIdentificacion();
+            }
 
             if(success)
             {

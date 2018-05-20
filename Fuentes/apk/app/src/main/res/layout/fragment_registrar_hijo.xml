@@ -30,6 +30,7 @@
                         android:id="@+id/inText_primer_nombre_hijo"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:maxLines="1"
                         android:hint="Primer Nombre" />
                 </android.support.design.widget.TextInputLayout>
                 <android.support.design.widget.TextInputLayout
@@ -39,6 +40,7 @@
                         android:id="@+id/inText_segundo_nombre_hijo"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:maxLines="1"
                         android:hint="Segundo Nombre"/>
                 </android.support.design.widget.TextInputLayout>
                 <android.support.design.widget.TextInputLayout
@@ -48,6 +50,7 @@
                         android:id="@+id/inText_primer_apellido_hijo"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:maxLines="1"
                         android:hint="Primer Apellido"/>
                 </android.support.design.widget.TextInputLayout>
                 <android.support.design.widget.TextInputLayout
@@ -57,6 +60,7 @@
                         android:id="@+id/inText_segundo_apellido_hijo"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:maxLines="1"
                         android:hint="Segundo Apellido"/>
                 </android.support.design.widget.TextInputLayout>
                 <Spinner
@@ -80,12 +84,15 @@
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
-                    <android.support.design.widget.TextInputEditText
+                    <EditText
                         android:id="@+id/inText_fecha_nacimiento_hijo"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:clickable="true"
+                        android:focusable="false"
+                        android:hint="Fecha De Nacimiento"
                         android:inputType="date"
-                        android:hint="Fecha De Nacimiento" />
+                        android:maxLines="1" />
                 </android.support.design.widget.TextInputLayout>
                 <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
@@ -94,6 +101,7 @@
                         android:id="@+id/inText_curso_hijo"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:maxLines="1"
                         android:hint="Curso"/>
                 </android.support.design.widget.TextInputLayout>
             </LinearLayout>

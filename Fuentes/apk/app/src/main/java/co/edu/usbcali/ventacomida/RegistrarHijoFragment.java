@@ -1,5 +1,6 @@
 package co.edu.usbcali.ventacomida;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -13,6 +14,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
 
@@ -26,6 +29,7 @@ import co.edu.usbcali.ventacomida.alertas.AlertaServicio;
 import co.edu.usbcali.ventacomida.dto.HijoDTO;
 import co.edu.usbcali.ventacomida.dto.HijoDTO;
 import co.edu.usbcali.ventacomida.services.ServiceRest;
+import co.edu.usbcali.ventacomida.uipersonal.DatePickerFragment;
 
 
 /**
@@ -60,7 +64,7 @@ public class RegistrarHijoFragment extends Fragment {
     private TextInputEditText txtPrimerApellido;
     private TextInputEditText txtSegundoApellido;
     private TextInputEditText txtnumIdentificacion;
-    private TextInputEditText txtFechaNacimiento;
+    private EditText txtFechaNacimiento;
     private TextInputEditText txtCurso;
 
     private Spinner spinnerTipoIdentificacion;
@@ -122,6 +126,20 @@ public class RegistrarHijoFragment extends Fragment {
         spinnerTipoIdentificacion = view.findViewById(R.id.inSpinner_tipo_identificacion_hijo);
         btnCrearHijo= view.findViewById(R.id.btn_guardar_hijo);
 
+        txtFechaNacimiento.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+//                showDatePickerDialog();
+                switch (view.getId())
+                {
+                    case R.id.inText_fecha_nacimiento_hijo:
+                        showDatePickerDialog();
+                        break;
+                }
+            }
+        });
+
         // action listener for botton create padre
         btnCrearHijo.setOnClickListener(new View.OnClickListener() {
 
@@ -149,7 +167,8 @@ public class RegistrarHijoFragment extends Fragment {
                     hijoDTO.setTipoIdentificacion(Integer.parseInt(tipoIdentificacion));
                     hijoDTO.setRol(2);
                     hijoDTO.setUsuario("TAKURATOMI");
-                    hijoDTO.setFecha(new java.util.Date());
+                    java.util.Date.from(fechaNacimiento);
+                    hijoDTO.setFecha(new Date(fechaNacimiento));
                     hijoDTO.setCurso(curso);
                     // para la prueba
                     if(hijoDTO.getNumIdentificacionPadre() == 0)
@@ -167,6 +186,7 @@ public class RegistrarHijoFragment extends Fragment {
                     serviceSaveHijo.setHijoDTO(hijoDTO);
                     //execute service save padre.
                     if (flagValidateServicesExecute) {
+                        btnCrearHijo.setClickable(false);
                         serviceSaveHijo.execute();
                         try {
                             Thread.sleep(2500);
@@ -190,6 +210,28 @@ public class RegistrarHijoFragment extends Fragment {
         return view;
     }
 
+    /*************
+    * show datepicker
+    */
+
+
+    private void showDatePickerDialog() {
+
+        DatePickerFragment newFragment = DatePickerFragment.newInstance(new DatePickerDialog.OnDateSetListener() {
+
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+
+                txtCurso.setText("SELECCIONANDO FECHA");
+                // +1 because january is zero
+                final String selectedDate = day + "/" + (month+1) + "/" + year;
+                Log.d("fechaNacimiento", selectedDate);
+                txtFechaNacimiento.setText(selectedDate);
+            }
+        });
+
+        newFragment.show(getActivity().getSupportFragmentManager(), "datePicker");
+    }
 
     private boolean validateInField()
     {
@@ -238,7 +280,7 @@ public class RegistrarHijoFragment extends Fragment {
         numIdentificacion = txtnumIdentificacion.getText().toString().trim();
         // PENDIENTE POR AGREGAR IDENTIFICADOR ID A SPINNERS ARRAYS
         tipoIdentificacion = "1"; // SE DEJA POR DEFAULT TARJETA DE IDENTIDAD
-        fechaNacimiento = txtFechaNacimiento.getText().toString().trim().toUpperCase();
+        fechaNacimiento = txtFechaNacimiento.getText().toString().trim();
         curso = txtCurso.getText().toString().trim().toUpperCase();
 
         return true;
@@ -328,7 +370,7 @@ public class RegistrarHijoFragment extends Fragment {
         protected void onPostExecute(Boolean aBoolean) {
 
             super.onPostExecute(aBoolean);
-
+            btnCrearHijo.setClickable(true);
             if(aBoolean)
             {
                 if(hijoDTO != null && hijoDTO.getCodigoError() == 0)

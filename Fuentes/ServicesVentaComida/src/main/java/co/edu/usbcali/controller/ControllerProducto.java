@@ -2,6 +2,8 @@ package co.edu.usbcali.controller;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,18 +17,23 @@ import co.edu.usbcali.logica.IProductoLogica;
 @RequestMapping("/ProductoRest")
 public class ControllerProducto {
 
+	private static final Logger log = LoggerFactory.getLogger(ControllerProducto.class);
+	
 	@Autowired
 	private IProductoLogica productoLogica;
 
 	@RequestMapping(value = "/crear", method = RequestMethod.POST)
 	public ProductoDTO crearProductoRest(@RequestBody ProductoDTO productoDTO) throws Exception {
 
+		log.info("** LLAMADO CONTROLLERPRODCUTO/CREARPRODCUTO");
+		
 		return productoLogica.crearProducto(productoDTO);
 	}
 
 	@RequestMapping(value = "/consultarTodos", method = RequestMethod.GET)
-	public List<ProductoDTO> consultarClientePorId() throws Exception {
-
+	public List<ProductoDTO> consultarProductos() throws Exception {
+		
+		log.info("** LLAMADO CONTROLLERPRODUCTO/CONSULTARPRODUCTOS");
 		List<ProductoDTO> losProductosDTO = null;
 		losProductosDTO = productoLogica.consultarTodosProducto();
 
