@@ -52,10 +52,14 @@ public class AdapterProductos extends BaseAdapter {
 
         TextView txtView_id = (TextView) vista.findViewById(R.id.textView_id);
         TextView txtView_nombre = (TextView) vista.findViewById(R.id.textView_nombre);
+        TextView txtView_descripcion = (TextView) vista.findViewById(R.id.textView_descripcion);
+        TextView txtView_estado = (TextView) vista.findViewById(R.id.textView_estado);
 //        CheckBox checkBox_selected = (CheckBox) vista.findViewById(R.id.checkbox_estatus);
 
         txtView_id.setText(listaProductos.get(i).getId().toString());
         txtView_nombre.setText(listaProductos.get(i).getNombre().toString());
+        txtView_descripcion.setText(listaProductos.get(i).getDescripcion());
+        txtView_estado.setText(listaProductos.get(i).getEstado());
 //        checkBox_selected.setChecked(true);
 
         return vista;

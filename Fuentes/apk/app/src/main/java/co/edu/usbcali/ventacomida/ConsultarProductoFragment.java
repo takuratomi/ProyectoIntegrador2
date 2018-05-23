@@ -6,7 +6,11 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
@@ -15,7 +19,6 @@ import android.widget.ProgressBar;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -41,6 +44,11 @@ public class ConsultarProductoFragment extends Fragment {
     private ProgressBar progressBar;
     private AlertaServicio alertaServicio;
     private Context context;
+
+    //constast
+    private static final String ACTIVAR_PRODUCTO   = "ACTIVAR";
+    private static final String INACTICAR_PRODUCTO = "INACTIVAR";
+
 
     private OnFragmentInteractionListener mListener;
 
@@ -70,10 +78,35 @@ public class ConsultarProductoFragment extends Fragment {
      */
     public void loadAdapter()
     {
-//      View view = inflater.inflate(R.layout.fragment_consultar_producto, container, false);
         losProducto = serviceConsultarProductos.getLosProductos();
         AdapterProductos adapterProducto = new AdapterProductos(context,losProducto);
         listViewProdcutos.setAdapter(adapterProducto);
+    }
+
+
+    public void changeStatusProduct(String change)
+    {
+        if(losProducto != null) {
+            if (change.equals(ACTIVAR_PRODUCTO)) {
+
+            } else if (change.equals(INACTICAR_PRODUCTO)) {
+
+            }
+
+        }
+        else
+        {
+            AlertaServicio alertaServicio = new AlertaServicio();
+            alertaServicio.setBarTitle("VentaComida");
+            alertaServicio.setMessage("No se dispone de productos para ser actualizados");
+            alertaServicio.show(getFragmentManager(),"alertNullListProduct");
+
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     /**
@@ -92,6 +125,31 @@ public class ConsultarProductoFragment extends Fragment {
     }
 
     @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+
+        MenuInflater menuInflanter = inflater;
+        menuInflanter.inflate(R.menu.menu_consultar_productos,menu);
+        super.onCreateOptionsMenu(menu, inflater);
+
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+
+        switch (item.getItemId())
+        {
+            case (R.id.item_consultarProducto_activar):
+                Log.d("log","Se presiono Activar prodcuto");
+                break;
+            case (R.id.item_consultarProducto_inactivar):
+                Log.d("log","Se presiono Inactivar prodcuto");
+                break;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
     }
@@ -105,7 +163,7 @@ public class ConsultarProductoFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_consultar_producto, container, false);
-
+        setHasOptionsMenu(true);
         listViewProdcutos = view.findViewById(R.id.losProductos);
         progressBar = (ProgressBar) view.findViewById(R.id.progresbar_consultar_producto);
 
@@ -155,6 +213,104 @@ public class ConsultarProductoFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+
+    /****************************************************************************/
+    /**
+     * Clase para ejecutar en segundo plano un servicio de modificar estad de un producto
+     *
+     */
+    public class ServiceCambiarEstadoProductos extends AsyncTask<Void,Void,Boolean> {
+        // VARS
+        ServiceRest serviceRest = new ServiceRest();
+
+        //private String url = "http://192.168.1.8:8080/ServicesVentaComida/controller/ProductoRest/consultarTodos";
+        private List<ProductoDTO> losProductosUpdateEstado;
+        private RestTemplate restTemplate;
+
+
+        // CONSTRUCTORS
+        public ServiceCambiarEstadoProductos() {
+        }
+
+        // GETTER AND SETTER
+
+        public List<ProductoDTO> getLosProductosUpdateEstado() {
+            return losProductosUpdateEstado;
+        }
+
+        public ServiceCambiarEstadoProductos setLosProductosUpdateEstado(List<ProductoDTO> losProductosUpdateEstado) {
+            this.losProductosUpdateEstado = losProductosUpdateEstado;
+            return this;
+        }
+
+
+        //METHOD PUBLIC
+        // OTHER METODS
+
+
+        // IMPLEMENTS
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected void onPostExecute(Boolean isSucces) {
+            super.onPostExecute(isSucces);
+
+            if (isSucces) {
+                //Call method to adapter
+                showProgress(false);
+                loadAdapter();
+            } else {
+                showProgress(false);
+//                alertaServicio = new AlertaServicio("Alerta De Servicio", "Ocurrio Un error en conexion volver a intentarlo");
+//                alertaServicio.show(getSupportFragmentManager(), "tagAlerta");
+
+            }
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... values) {
+            super.onProgressUpdate(values);
+        }
+
+        @Override
+        protected void onCancelled() {
+            super.onCancelled();
+        }
+
+        @Override
+        protected Boolean doInBackground(Void... voids) {
+            boolean statusServices = false;
+//            try {
+
+//                restTemplate = new RestTemplate();
+//                restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+
+//                ProductoDTO[] losProductosDTO = restTemplate.getForObject(serviceRest.CONSULTARPRODCUTOS_POST_NULL_LISTAPRODUCTOS, ProductoDTO[].class);
+
+//                if(losProductosDTO != null)
+//                {
+//                    losProductos = Arrays.asList(losProductosDTO);
+//                    statusServices = true;
+//                }
+//                else {
+//                    losProductos = null;
+//                    statusServices = false;
+//                }
+//            }catch (Exception ex)
+//            {
+//                statusServices = false;
+//            }
+
+                return statusServices;
+//            }
+        }
+    }
+
+
 
     /****************************************************************************/
     /**

@@ -23,7 +23,9 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
-import java.sql.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import co.edu.usbcali.ventacomida.alertas.AlertaServicio;
 import co.edu.usbcali.ventacomida.dto.HijoDTO;
@@ -167,41 +169,27 @@ public class RegistrarHijoFragment extends Fragment {
                     hijoDTO.setTipoIdentificacion(Integer.parseInt(tipoIdentificacion));
                     hijoDTO.setRol(2);
                     hijoDTO.setUsuario("TAKURATOMI");
-                    java.util.Date.from(fechaNacimiento);
-                    hijoDTO.setFecha(new Date(fechaNacimiento));
+                    hijoDTO.setFecha(getFormatDateBorn(fechaNacimiento));
                     hijoDTO.setCurso(curso);
                     // para la prueba
                     if(hijoDTO.getNumIdentificacionPadre() == 0)
                     {
                         hijoDTO.setNumIdentificacionPadre(1012345);
                     }
-                    try {
-                        hijoDTO.setFechaNacimiento(new java.util.Date(fechaNacimiento));
-                    } catch (Exception e) {
-                        Log.d("asignHijoBorn", e.getMessage());
-                        hijoDTO.setFechaNacimiento(new java.util.Date());
-                    }
 
+                    // CALL SERVICE TO SAVE
                     ServiceSaveHijo serviceSaveHijo = new ServiceSaveHijo();
                     serviceSaveHijo.setHijoDTO(hijoDTO);
                     //execute service save padre.
                     if (flagValidateServicesExecute) {
+
                         btnCrearHijo.setClickable(false);
                         serviceSaveHijo.execute();
+
                         try {
                             Thread.sleep(2500);
                         } catch (Exception e) {
                         }
-//                        HijoDTO response = serviceSaveHijo.getHijoDTO();
-//                        if (response.getCodigoError() == 0) {
-//                            AlertaServicio alertaServicio = new AlertaServicio();
-//                            alertaServicio.setBarTitle("Venta De Comida");
-//                            alertaServicio.setMessage("Se guardo Satisfactoriamente");
-//                            alertaServicio.show(getFragmentManager(), "Alert1");
-//                        } else {
-//                            AlertaServicio alertaServicio = new AlertaServicio("Alerta Servicio", response.getMensajeError());
-//                            alertaServicio.show(getFragmentManager(), "AlertSer");
-//                        }
                     }
                 }
             }
@@ -213,8 +201,6 @@ public class RegistrarHijoFragment extends Fragment {
     /*************
     * show datepicker
     */
-
-
     private void showDatePickerDialog() {
 
         DatePickerFragment newFragment = DatePickerFragment.newInstance(new DatePickerDialog.OnDateSetListener() {
@@ -231,6 +217,18 @@ public class RegistrarHijoFragment extends Fragment {
         });
 
         newFragment.show(getActivity().getSupportFragmentManager(), "datePicker");
+    }
+
+    public Date getFormatDateBorn(String dateToConvert)
+    {
+        Date date = null;
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/mm/YYYY");
+
+        try {
+            date = dateFormat.parse(dateToConvert);
+        } catch (ParseException e) {e.printStackTrace();}
+
+        return date;
     }
 
     private boolean validateInField()
