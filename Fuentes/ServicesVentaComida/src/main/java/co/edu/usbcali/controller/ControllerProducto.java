@@ -1,5 +1,6 @@
 package co.edu.usbcali.controller;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -18,7 +19,7 @@ import co.edu.usbcali.logica.IProductoLogica;
 public class ControllerProducto {
 
 	private static final Logger log = LoggerFactory.getLogger(ControllerProducto.class);
-	
+
 	@Autowired
 	private IProductoLogica productoLogica;
 
@@ -26,18 +27,37 @@ public class ControllerProducto {
 	public ProductoDTO crearProductoRest(@RequestBody ProductoDTO productoDTO) throws Exception {
 
 		log.info("** LLAMADO CONTROLLERPRODCUTO/CREARPRODCUTO");
-		
+
 		return productoLogica.crearProducto(productoDTO);
 	}
 
 	@RequestMapping(value = "/consultarTodos", method = RequestMethod.GET)
 	public List<ProductoDTO> consultarProductos() throws Exception {
-		
+
 		log.info("** LLAMADO CONTROLLERPRODUCTO/CONSULTARPRODUCTOS");
 		List<ProductoDTO> losProductosDTO = null;
 		losProductosDTO = productoLogica.consultarTodosProducto();
 
 		return losProductosDTO;
+	}
+
+	@RequestMapping(value = "/updateStatusProducto", method = RequestMethod.POST)
+	public ProductoDTO updateStatusProductoRest(@RequestBody ProductoDTO[] productoDTO) throws Exception {
+
+		log.info("** LLAMADO CONTROLLERPRODCUTO/updateStatusProducto");
+		ProductoDTO productodto = new ProductoDTO();
+		productodto.setId(new BigDecimal(0L));
+		productodto.setMensajeError("");
+		productodto.setCodigoError(0);
+
+		if (productoDTO == null) {
+			productodto.setCodigoError(91);
+			productodto.setMensajeError("No se envio ningun arreglo de productos");
+		}
+		{
+			productodto = productoLogica.updateStatusProducto(productoDTO);
+		}
+		return productodto;
 	}
 
 	/*

@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
@@ -24,6 +26,8 @@ import co.edu.usbcali.modelo.Sopa;
 @Service
 @Scope("singleton")
 public class ProductoLogica implements IProductoLogica {
+
+	private static final Logger log = LoggerFactory.getLogger(ProductoLogica.class);
 
 	@Autowired
 	private ISopaDAO sopaDAO;
@@ -199,6 +203,57 @@ public class ProductoLogica implements IProductoLogica {
 		}
 
 		return losProductosDTO;
+	}
+	
+	@Transactional(readOnly = false, propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+	@Override
+	public ProductoDTO updateStatusProducto(ProductoDTO[] productoDTOs) throws Exception {
+
+		ProductoDTO productodto = new ProductoDTO();
+		productodto.setId(new BigDecimal(0L));
+		productodto.setMensajeError("Operación Exitosa");
+		productodto.setCodigoError(0);
+
+		// productos
+		Sopa sopa;
+		Principio principio;
+		Proteina proteina;
+		Bebida bebida;
+
+		for (ProductoDTO productoDTO2 : productoDTOs) {
+
+			try {
+
+				switch (productoDTO2.getTipoProducto()) {
+				case 1:
+					sopa = sopaDAO.consultarPorId(productoDTO2.getId());
+					sopa.setEstado(productoDTO2.getEstado());
+					sopaDAO.modificar(sopa);
+					break;
+				case 2:
+					principio = principioDAO.consultarPorId(productoDTO2.getId());
+					principio.setEstado(productoDTO2.getEstado());					
+					principioDAO.modificar(principio);					
+					break;
+				case 3:
+					proteina = proteinaDAO.consultarPorId(productoDTO2.getId());
+					proteina.setEstado(productoDTO2.getEstado());					
+					proteinaDAO.modificar(proteina);					
+					break;					
+				case 4:
+					bebida = bebidaDAO.consultarPorId(productodto.getId());
+					bebida.setEstado(productoDTO2.getEstado());					
+					bebidaDAO.modificar(bebida);					
+					break;
+				}
+			} catch (Exception eupdateProduto) {
+				log.info("Error en logica updateStatusProducto: " + eupdateProduto.getMessage());
+				productodto.setCodigoError(92);
+				productodto.setMensajeError(eupdateProduto.getMessage());
+			}
+		}
+		
+		return productodto;
 	}
 
 }

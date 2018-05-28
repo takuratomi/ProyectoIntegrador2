@@ -15,8 +15,13 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 public class AdminActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener, CrearProductoFragment.OnFragmentInteractionListener, ConsultarProductoFragment.OnFragmentInteractionListener,
-                    RegistrarPadreFragment.OnFragmentInteractionListener, AboutFragment.OnFragmentInteractionListener{
+        implements NavigationView.OnNavigationItemSelectedListener,
+        CrearProductoFragment.OnFragmentInteractionListener,
+        ConsultarProductoFragment.OnFragmentInteractionListener,
+        RegistrarPadreFragment.OnFragmentInteractionListener,
+        AboutFragment.OnFragmentInteractionListener {
+
+    private boolean flagAboutFragment = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,11 +39,10 @@ public class AdminActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        AboutFragment aboutFragment = new AboutFragment();
-
-        getFragmentManager().beginTransaction().replace(R.id.contenedor,aboutFragment).commit();
-
-
+        // INICIALIZAR CON FRAGMENT ABOUT [se presento un conflicto con la tecnologia y por ende se cancelo]
+//        flagAboutFragment = true;
+//        Fragment  fragmentAbout = new AboutFragment();
+//        getFragmentManager().beginTransaction().replace(R.id.contenedor,fragmentAbout).commit();
 
 
     }
@@ -88,24 +92,24 @@ public class AdminActivity extends AppCompatActivity
 //        } else if (id == R.id.nav_consultar_pedidos) {
 //
 //        }
+        if (id == R.id.nav_about_admin) {
+            fragment =  new AboutFragment();
+            fragment.setArguments(getIntent().getBundleExtra("_bundleUsuario"));
+            fragmentSelection = true;
+        }
         if (id == R.id.nav_create_producto) {
-
             fragment =  new CrearProductoFragment();
             fragmentSelection = true;
-
         }
         else if (id == R.id.nav_consultar_producto) {
-
             fragment =  new ConsultarProductoFragment();
             fragmentSelection = true;
         }
         else if (id == R.id.nav_registrar_padre) {
-
-        fragment =  new RegistrarPadreFragment();
-        fragmentSelection = true;
+            fragment =  new RegistrarPadreFragment();
+            fragmentSelection = true;
         }
         else if (id == R.id.nav_salir) {
-
             Intent intent = new Intent(AdminActivity.this,LoginActivity.class);
             startActivity(intent);
             fragmentSelection = false;

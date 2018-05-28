@@ -17,7 +17,8 @@ import android.view.MenuItem;
 public class ClienteActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         RegistrarHijoFragment.OnFragmentInteractionListener,
-        ConsultarMisHijosFragment.OnFragmentInteractionListener {
+        ConsultarMisHijosFragment.OnFragmentInteractionListener,
+        AboutFragment.OnFragmentInteractionListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +35,7 @@ public class ClienteActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
     }
 
     @Override
@@ -83,6 +85,12 @@ public class ClienteActivity extends AppCompatActivity
             fragmentSelection = true;
 
         }
+        else if(id == R.id.nav_about_cliente)
+        {
+            fragment =  new AboutFragment();
+            fragment.setArguments(getIntent().getBundleExtra("_bundleUsuario"));
+            fragmentSelection = true;
+        }
         else if(id == R.id.nav_consultar_hijo)
         {
             fragment =  new ConsultarMisHijosFragment();
@@ -100,6 +108,7 @@ public class ClienteActivity extends AppCompatActivity
         // se remplaza el fragmant que se encuentra abierto por el seleccionado
         if(fragmentSelection)
         {
+
             getSupportFragmentManager().beginTransaction().replace(R.id.contenedor_cliente,fragment).commit();
         }
 

@@ -61,24 +61,24 @@ public class TestProductoLogica {
 	@Rollback(false)
 	public void ConsultaProductosDTOtest() {
 
-//		List<ProductoDTO> lstProductosDTO;
-//
-//		try {
-//			lstProductosDTO = productoLogica.consultarTodosProducto();
-//			
-//			assertNotNull("Los productos son nulos",lstProductosDTO);
-//			
-//			for (ProductoDTO productoDTO : lstProductosDTO) {
-//				log.info("id "+productoDTO.getId());
-//				log.info("nombre "+productoDTO.getNombre());
-//				log.info("estado "+productoDTO.getEstado());
-//				log.info("tipoProducto "+productoDTO.getTipoProducto());
-//				
-//			}
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		List<ProductoDTO> lstProductosDTO;
+
+		try {
+			lstProductosDTO = productoLogica.consultarTodosProducto();
+			
+			assertNotNull("Los productos son nulos",lstProductosDTO);
+			
+			for (ProductoDTO productoDTO : lstProductosDTO) {
+				log.info("id "+productoDTO.getId());
+				log.info("nombre "+productoDTO.getNombre());
+				log.info("estado "+productoDTO.getEstado());
+				log.info("tipoProducto "+productoDTO.getTipoProducto());
+				
+			}
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 

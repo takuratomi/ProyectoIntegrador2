@@ -46,6 +46,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
     private UserLoginTask mAuthTask = null;
     private UsuarioDTO usuarioDTO = null;
     private static String NUMIDENTIFICACION ="";
+    private static String PRIMER_NOMBRE ="";
+    private static String PRIMER_APELLIDO ="";
+    private static String TIPO_IDENTIFICACION ="";
 
     // CONSTRUCTORS
 
@@ -228,7 +231,14 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         // admi
         if(rol == 1)
         {
+            Bundle args = new Bundle();
+            args.putString("primerNombre", PRIMER_NOMBRE);
+            args.putString("primerApellido", PRIMER_APELLIDO);
+            TIPO_IDENTIFICACION = "CEDULA";
+            args.putString("tipoIdentificacion", TIPO_IDENTIFICACION);
+            args.putString("numIdentificacion", NUMIDENTIFICACION);
             Intent intent = new Intent(LoginActivity.this,AdminActivity.class);
+            intent.putExtra("_bundleUsuario",args);
             startActivity(intent);
             finish();
         }
@@ -236,6 +246,10 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         else if(rol == 2)
         {
             Bundle args = new Bundle();
+            args.putString("primerNombre", PRIMER_NOMBRE);
+            args.putString("primerApellido", PRIMER_APELLIDO);
+            TIPO_IDENTIFICACION = "CEDULA";
+            args.putString("tipoIdentificacion", TIPO_IDENTIFICACION);
             args.putString("numIdentificacion", NUMIDENTIFICACION);
             Intent intent = new Intent(LoginActivity.this,ClienteActivity.class);
             intent.putExtra("_bundleUsuario",args);
@@ -332,7 +346,11 @@ public class LoginActivity extends AppCompatActivity implements LoaderCallbacks<
         protected void onPostExecute(final Boolean success) {
             if (usuarioDTO != null)
             {
+                PRIMER_NOMBRE = usuarioDTO.getPrimerNombre();
+                PRIMER_APELLIDO = usuarioDTO.getPrimerApellido();
+                TIPO_IDENTIFICACION = usuarioDTO.getTipoIdentificacion().toString();
                 NUMIDENTIFICACION = ""+usuarioDTO.getNumIdentificacion();
+
             }
 
             if(success)

@@ -6,6 +6,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.ArrayMap;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -16,14 +17,20 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 
+import org.springframework.http.HttpEntity;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.client.RestTemplate;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import co.edu.usbcali.ventacomida.adapters.AdapterProductos;
 import co.edu.usbcali.ventacomida.alertas.AlertaServicio;
+import co.edu.usbcali.ventacomida.dto.HijoDTO;
 import co.edu.usbcali.ventacomida.dto.ProductoDTO;
 import co.edu.usbcali.ventacomida.services.ServiceRest;
 
@@ -44,6 +51,7 @@ public class ConsultarProductoFragment extends Fragment {
     private ProgressBar progressBar;
     private AlertaServicio alertaServicio;
     private Context context;
+    private Map<String, ProductoDTO> listSelected;
 
     //constast
     private static final String ACTIVAR_PRODUCTO   = "ACTIVAR";
@@ -79,34 +87,101 @@ public class ConsultarProductoFragment extends Fragment {
     public void loadAdapter()
     {
         losProducto = serviceConsultarProductos.getLosProductos();
-        AdapterProductos adapterProducto = new AdapterProductos(context,losProducto);
+        AdapterProductos adapterProducto = new AdapterProductos(context,losProducto,listSelected);
         listViewProdcutos.setAdapter(adapterProducto);
     }
 
 
     public void changeStatusProduct(String change)
     {
-        if(losProducto != null) {
-            if (change.equals(ACTIVAR_PRODUCTO)) {
+        ProductoDTO[] arrayProductos = new ProductoDTO[100];
+        ProductoDTO[] arrayProductos2 = null;
+        int positon = 0;
+        /**
+         * 1. Validar que la lista no sea nula
+         * 2. Validar que hayan productos seleccionados para realizar el cambio
+         * 3 recorrer los objetos productoDTO haciendo el cambio de estado para su update en base de datos.
+         * 4. LLamado del servicio que resive un array de productos a ser cambiados.
+         * 5. consumir nuevamente el servicio consultar para ser asignado al adapter de productos
+         * 6. llamar al metodo loadAdapter para cargar nuevamente los productos.
+         */
 
-            } else if (change.equals(INACTICAR_PRODUCTO)) {
+        try {
+
+            Log.d("logAdapter","size in fragment consultar: "+listSelected.size());
+            if(listSelected != null || listSelected.size() > 0)
+            {
+
+                if(change.equals("A"))
+                {
+                    for (Map.Entry<String, ProductoDTO> entry : listSelected.entrySet()) {
+                        entry.getValue().setEstado(change);
+
+                        if(positon < 100)
+                        {
+                            arrayProductos[positon] = entry.getValue();
+                            positon++;
+                        }
+
+                    }
+                    try
+                    {
+
+                                          List<Map<String, ProductoDTO>> temporal =   Arrays.asList(listSelected);
+                    }catch (Exception e )
+                    {
+                        e.getMessage();
+                    }
+
+
+                }
+                else if(change.equals("I"))
+                {
+                    for (Map.Entry<String, ProductoDTO> entry : listSelected.entrySet()) {
+                        entry.getValue().setEstado(change);
+                        arrayProductos[positon] = entry.getValue();
+                        positon++;
+                    }
+                }
+
+                // call service to update
+                ServiceCambiarEstadoProductos serviceCambiarEstadoProductos = new ServiceCambiarEstadoProductos(arrayProductos);
+                serviceCambiarEstadoProductos.execute();
+
+                // call load adapter.
+                loadAdapter();
 
             }
 
-        }
-        else
+
+
+        }catch (Exception e)
         {
-            AlertaServicio alertaServicio = new AlertaServicio();
-            alertaServicio.setBarTitle("VentaComida");
-            alertaServicio.setMessage("No se dispone de productos para ser actualizados");
-            alertaServicio.show(getFragmentManager(),"alertNullListProduct");
-
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            Log.d("logAdapter",e.getMessage());
         }
+
+
+//        if(losProducto != null) {
+//            if (change.equals(ACTIVAR_PRODUCTO)) {
+//
+//            } else if (change.equals(INACTICAR_PRODUCTO)) {
+//
+//            }
+//
+//        }
+//        else
+//        {
+//            AlertaServicio alertaServicio = new AlertaServicio();
+//            alertaServicio.setBarTitle("VentaComida");
+//            alertaServicio.setMessage("No se dispone de productos para ser actualizados");
+//            alertaServicio.show(getFragmentManager(),"alertNullListProduct");
+//
+//            try {
+//                Thread.sleep(2000);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
+//        }
     }
 
     /**
@@ -136,18 +211,55 @@ public class ConsultarProductoFragment extends Fragment {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
+        String ACTIVAR = "A";
+        String INACTIVAR = "I";
+
         switch (item.getItemId())
         {
             case (R.id.item_consultarProducto_activar):
                 Log.d("log","Se presiono Activar prodcuto");
+                changeStatusProduct(ACTIVAR);
+                // llamado del metodo para obtener los elementos a cambiar de estado
                 break;
             case (R.id.item_consultarProducto_inactivar):
                 Log.d("log","Se presiono Inactivar prodcuto");
+                changeStatusProduct(INACTIVAR);
+                // llamado del metodo para obtener los elementos a cambiar de estado.
+
                 break;
         }
 
         return super.onOptionsItemSelected(item);
     }
+
+
+//    public void optionChangeEstadoProductos(String cambio)
+//    {
+//        String ACTIVAR = "ACTIVAR";
+//        String INACTIVAR = "INACTIVAR";
+
+        /**
+         * 1. Validar que la lista no sea nula
+         * 2. Validar que hayan productos seleccionados para realizar el cambio
+         * 3 recorrer los objetos productoDTO haciendo el cambio de estado para su update en base de datos.
+         * 4. LLamado del servicio que resive un array de productos a ser cambiados.
+         * 5. consumir nuevamente el servicio consultar para ser asignado al adapter de productos
+         * 6. llamar al metodo loadAdapter para cargar nuevamente los productos.
+         */
+//
+//
+//        if(cambio.equals(ACTIVAR))
+//        {
+//
+//
+//        }
+//        else if(cambio.equals(INACTIVAR))
+//        {
+//
+//        }
+//
+//    }
+
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
@@ -162,6 +274,8 @@ public class ConsultarProductoFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        listSelected = new HashMap<String, ProductoDTO>();
+
         View view = inflater.inflate(R.layout.fragment_consultar_producto, container, false);
         setHasOptionsMenu(true);
         listViewProdcutos = view.findViewById(R.id.losProductos);
@@ -223,28 +337,17 @@ public class ConsultarProductoFragment extends Fragment {
     public class ServiceCambiarEstadoProductos extends AsyncTask<Void,Void,Boolean> {
         // VARS
         ServiceRest serviceRest = new ServiceRest();
-
-        //private String url = "http://192.168.1.8:8080/ServicesVentaComida/controller/ProductoRest/consultarTodos";
-        private List<ProductoDTO> losProductosUpdateEstado;
         private RestTemplate restTemplate;
-
+        private ProductoDTO []losProductosDTO;
 
         // CONSTRUCTORS
-        public ServiceCambiarEstadoProductos() {
+        public ServiceCambiarEstadoProductos() {}
+
+        public ServiceCambiarEstadoProductos(ProductoDTO[] productosDTO) {
+            this.losProductosDTO = productosDTO;
         }
 
         // GETTER AND SETTER
-
-        public List<ProductoDTO> getLosProductosUpdateEstado() {
-            return losProductosUpdateEstado;
-        }
-
-        public ServiceCambiarEstadoProductos setLosProductosUpdateEstado(List<ProductoDTO> losProductosUpdateEstado) {
-            this.losProductosUpdateEstado = losProductosUpdateEstado;
-            return this;
-        }
-
-
         //METHOD PUBLIC
         // OTHER METODS
 
@@ -265,9 +368,6 @@ public class ConsultarProductoFragment extends Fragment {
                 loadAdapter();
             } else {
                 showProgress(false);
-//                alertaServicio = new AlertaServicio("Alerta De Servicio", "Ocurrio Un error en conexion volver a intentarlo");
-//                alertaServicio.show(getSupportFragmentManager(), "tagAlerta");
-
             }
         }
 
@@ -284,26 +384,17 @@ public class ConsultarProductoFragment extends Fragment {
         @Override
         protected Boolean doInBackground(Void... voids) {
             boolean statusServices = false;
-//            try {
+            try {
 
-//                restTemplate = new RestTemplate();
-//                restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+                restTemplate = new RestTemplate();
+                restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+                HttpEntity<ProductoDTO[]> request = new HttpEntity<ProductoDTO[]>(losProductosDTO);
+                restTemplate.postForLocation(serviceRest.UPDATESTATUSPRODUCTO_POST_ARRAYPRODUCTODTO_PRODUCTODTO, request);
 
-//                ProductoDTO[] losProductosDTO = restTemplate.getForObject(serviceRest.CONSULTARPRODCUTOS_POST_NULL_LISTAPRODUCTOS, ProductoDTO[].class);
-
-//                if(losProductosDTO != null)
-//                {
-//                    losProductos = Arrays.asList(losProductosDTO);
-//                    statusServices = true;
-//                }
-//                else {
-//                    losProductos = null;
-//                    statusServices = false;
-//                }
-//            }catch (Exception ex)
-//            {
-//                statusServices = false;
-//            }
+            }catch (Exception ex)
+            {
+                statusServices = false;
+            }
 
                 return statusServices;
 //            }

@@ -13,4 +13,6 @@ public interface IProductoLogica {
 	public ProductoDTO consultarProductoPorID(BigDecimal id, int tipoProducto) throws Exception;	
 	public List<ProductoDTO> consultarTodosProducto() throws Exception;
 
+	public ProductoDTO updateStatusProducto(ProductoDTO[] productoDTOs) throws Exception;
+	
 }
