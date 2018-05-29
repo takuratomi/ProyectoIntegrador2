@@ -18,7 +18,9 @@ public class ClienteActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         RegistrarHijoFragment.OnFragmentInteractionListener,
         ConsultarMisHijosFragment.OnFragmentInteractionListener,
-        AboutFragment.OnFragmentInteractionListener{
+        AboutFragment.OnFragmentInteractionListener,
+        CrearPedido.OnFragmentInteractionListener
+        {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +96,12 @@ public class ClienteActivity extends AppCompatActivity
         else if(id == R.id.nav_consultar_hijo)
         {
             fragment =  new ConsultarMisHijosFragment();
+            fragment.setArguments(getIntent().getBundleExtra("_bundleUsuario"));
+            fragmentSelection = true;
+        }
+        else if(id == R.id.nav_crear_pedido_hijo)
+        {
+            fragment =  new CrearPedido();
             fragment.setArguments(getIntent().getBundleExtra("_bundleUsuario"));
             fragmentSelection = true;
         }
