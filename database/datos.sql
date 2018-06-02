@@ -1,5 +1,5 @@
 
--- DML
+-- DML  TAKUMO
 
 -- Insert de administrador con secuensias
 insert into usuario(id,primer_nombre,primer_apellido,segundo_apellido,num_identificacion,tipo_identificacion,rol ) values(nextval('seq_usuario'),'alejandro','kuratomi','nakamura',1113648236,3,1);
